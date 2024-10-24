@@ -1,0 +1,344 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+	margin: 0;
+	padding: 0;
+}
+
+nav {
+	background-color: #ffcc00;
+	padding: 10px;
+}
+
+.navBar {
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	display: flex;
+	max-width: 1200px;
+	margin: 20px auto;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.leftBar {
+	width: 250px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin-right: 20px;
+}
+
+.leftBar h2 {
+	color: #c0392b;
+	text-align: center;
+	margin-bottom: 15px;
+	font-size: 1.5em;
+}
+
+.leftBar ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.leftBar li {
+	margin-bottom: 10px;
+}
+
+.leftBar a {
+	text-decoration: none;
+	color: #333333;
+	padding: 10px;
+	display: block;
+	border-radius: 4px;
+	transition: background-color 0.3s;
+}
+
+.leftBar a:hover {
+	background-color: #ffcc00;
+	color: #c0392b;
+}
+
+.centerBar {
+	width: 80%;
+	padding: 20px;
+}
+
+h1 {
+	color: #c0392b;
+	text-align: center;
+}
+
+.formGroup {
+	margin: 15px 0;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #333;
+}
+
+.btnAdd {
+	background-color: #ff0000;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+}
+
+.btnAdd:hover {
+	background-color: #cc0000;
+}
+
+.loginContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.loginFormWrapper {
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	width: 300px;
+}
+
+.loginTitle {
+	text-align: center;
+	color: #c0392b;
+	margin-bottom: 20px;
+}
+
+.formGroup {
+	margin-bottom: 15px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	color: #333333;
+}
+
+.formActions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btnLogin, .btnRegister {
+	background-color: #ffcc00;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 16px;
+}
+
+.btnLogin:hover, .btnRegister:hover {
+	background-color: #f39c12;
+}
+
+.errorMsg {
+	color: #e74c3c;
+	text-align: center;
+	margin-top: 15px;
+}
+
+.registerContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.registerFormWrapper {
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+	padding: 40px;
+	width: 300px;
+}
+
+.registerTitle {
+	text-align: center;
+	color: #c0392b;
+	margin-bottom: 20px;
+}
+
+.formGroup {
+	margin-bottom: 15px;
+}
+
+.formActions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btnRegister {
+	background-color: #ffcc00;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 15px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	font-size: 16px;
+	flex: 1;
+	margin: 0 5px;
+}
+
+.btnRegister:hover, .btnLogin:hover {
+	background-color: #f39c12;
+}
+
+.ciurmaCard {
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	padding: 15px;
+	margin: 15px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ciurmaCard:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.ciurmaCard h2 {
+	color: #c0392b;
+	margin: 10px 0;
+	font-size: 1.5em;
+}
+
+.jollyRogerImage {
+	max-width: 100%;
+	height: auto;
+	border-radius: 4px;
+	margin-bottom: 15px;
+}
+
+.fruttoCard {
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+	border-radius: 8px;
+	padding: 15px;
+	margin: 15px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.fruttoCard:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.fruttoCard h2 {
+	color: #c0392b;
+	margin: 10px 0;
+	font-size: 1.5em;
+}
+
+.fruttoCard p {
+	color: #333333;
+	font-size: 1em;
+	margin: 5px 0;
+}
+
+input[type="text"], input[type="number"], textarea, select {
+	width: calc(100% - 20px);
+	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	transition: border-color 0.3s, box-shadow 0.3s;
+	font-size: 16px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, textarea:focus,
+	select:focus {
+	border-color: #ff0000;
+	box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+textarea {
+	resize: none;
+}
+
+input[type="checkbox"] {
+	margin-right: 10px;
+}
+
+input[type="submit"] {
+	background-color: #ff0000;
+	color: white;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s;
+	margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+	background-color: #cc0000;
+}
+
+.checkboxGroup {
+	margin-top: 10px;
+}
+
+/* Contenitore per il caricamento dell'immagine */
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Spazio tra gli elementi */
+}
+
+/* Etichetta per il caricamento */
+.upload-container label {
+    font-size: 1.2em; /* Dimensione del font */
+    margin-bottom: 5px; /* Spazio sotto l'etichetta */
+    color: #333; /* Colore del testo */
+}
+
+/* Stile per il campo di input del file */
+.upload-container input[type="file"] {
+    display: none; /* Nascondi l'input originale */
+}
+
+/* Pulsante personalizzato per caricare l'immagine */
+.upload-button {
+    background-color: #ffcc00; /* Colore di sfondo */
+    color: #fff; /* Colore del testo */
+    border: none; /* Rimuovi il bordo */
+    border-radius: 5px; /* Angoli arrotondati */
+    padding: 10px 20px; /* Spaziatura interna */
+    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
+    transition: background-color 0.3s; /* Transizione del colore */
+}
+
+/* Effetto hover sul pulsante */
+.upload-button:hover {
+    background-color: #e6b800; /* Colore di sfondo al passaggio del mouse */
+}
+
+/* Mostra il nome del file selezionato */
+.file-name {
+    margin-top: 10px; /* Spazio sopra il nome del file */
+    font-size: 1em; /* Dimensione del font */
+    color: #555; /* Colore del testo */
+}
