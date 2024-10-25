@@ -21,7 +21,7 @@ public class DettagliOggettoServlet extends HttpServlet {
         
         if (oggetto != null) {
             request.setAttribute("oggetto", oggetto);
-            request.getRequestDispatcher("WEB-INF/private_jsp/DettagliOggetto.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliOggetto.jsp").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "Oggetto non trovato");
         	request.getRequestDispatcher("ErrorServlet").forward(request, response);

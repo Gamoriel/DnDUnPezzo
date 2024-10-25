@@ -11,12 +11,12 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.StatusAlterati;
 
 
-@WebServlet("/AggiungiStatusAlteratiServlet")
+@WebServlet("/master/AggiungiStatusAlteratiServlet")
 public class AggiungiStatusAlteratiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiStatusAlterati.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiStatusAlterati.jsp").forward(request, response);
 	}
 
 

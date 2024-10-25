@@ -26,7 +26,7 @@ public class DettagliRazzaServlet extends HttpServlet {
 
 				if (razza != null) {
 					request.setAttribute("razza", razza);
-					request.getRequestDispatcher("WEB-INF/private_jsp/DettagliRazza.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliRazza.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("ErrorServlet?= Razza non trovata");
 				}

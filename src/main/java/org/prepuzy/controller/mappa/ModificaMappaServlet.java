@@ -21,7 +21,7 @@ import org.prepuzy.model.Personaggio;
 
 
 @MultipartConfig
-@WebServlet("/ModificaMappaServlet")
+@WebServlet("/master/ModificaMappaServlet")
 public class ModificaMappaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class ModificaMappaServlet extends HttpServlet {
 		request.setAttribute("mappeDisponibili", mappeDisponibili);
 		request.setAttribute("capitoliDisponibili", capitoliDisponibili);
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +54,7 @@ public class ModificaMappaServlet extends HttpServlet {
 	    Mappa mappa = BusinessLogic.cercaMappaConId(idMappa);
 	    if (mappa == null) {
 	        request.setAttribute("errorMessage", "Mappa non trovata.");
-	        request.getRequestDispatcher("WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -86,7 +86,7 @@ public class ModificaMappaServlet extends HttpServlet {
 	            mappa.setImmagine("uploads/" +  fileName);
 	        } catch (IOException e) {
 	            request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-	            request.getRequestDispatcher("WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
+	            request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
 	            throw e;
 	        }
 	    }

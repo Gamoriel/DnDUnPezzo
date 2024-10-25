@@ -15,7 +15,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaFrutto;
 
 
-@WebServlet("/AbilitaFruttoServlet")
+@WebServlet("/master/AbilitaFruttoServlet")
 public class AbilitaFruttoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class AbilitaFruttoServlet extends HttpServlet {
 			    }));
         
         request.setAttribute("abilitaPerFrutto", abilitaPerFrutto);
-        request.getRequestDispatcher("WEB-INF/private_jsp/AbilitaFrutto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/AbilitaFrutto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

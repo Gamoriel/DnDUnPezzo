@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.prepuzy.businesslogic.BusinessLogic;
 
-@WebServlet("/EliminaProfessioneServlet")
+@WebServlet("/master/EliminaProfessioneServlet")
 public class EliminaProfessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.prepuzy.businesslogic.BusinessLogic;
 
-@WebServlet("/EliminaMappaServlet")
+@WebServlet("/master/EliminaMappaServlet")
 public class EliminaMappaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

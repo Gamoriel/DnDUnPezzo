@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Ciurma;
 import org.prepuzy.model.Nave;
 
-@WebServlet("/ModificaNaveServlet")
+@WebServlet("/master/ModificaNaveServlet")
 public class ModificaNaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class ModificaNaveServlet extends HttpServlet {
 
 		if (nave != null) {
 			request.setAttribute("nave", nave);
-			request.getRequestDispatcher("WEB-INF/private_jsp/ModificaNave.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaNave.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Nave non trovata");
         	request.getRequestDispatcher("ErrorServlet").forward(request, response);

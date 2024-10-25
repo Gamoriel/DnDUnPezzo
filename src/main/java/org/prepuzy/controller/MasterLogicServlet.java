@@ -25,7 +25,7 @@ public class MasterLogicServlet extends HttpServlet {
 
 				if (capitolo != null) {
 					request.setAttribute("capitoloSelezionato", capitolo);
-					request.getRequestDispatcher("WEB-INF/private_jsp/DettagliCapitolo.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCapitolo.jsp").forward(request, response);
 				} else {
 					request.setAttribute("messaggio","Capitolo non trovato");
 					request.getRequestDispatcher("ErrorServlet").forward(request, response);

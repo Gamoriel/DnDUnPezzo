@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaProfessione;
 
-@WebServlet("/DettagliAbilitaProfessioneServlet")
+@WebServlet("/master/DettagliAbilitaProfessioneServlet")
 public class DettagliAbilitaProfessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class DettagliAbilitaProfessioneServlet extends HttpServlet {
 
 		if (abilita != null) {
 			request.setAttribute("abilita", abilita);
-			request.getRequestDispatcher("WEB-INF/private_jsp/DettagliAbilitaProfessione.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliAbilitaProfessione.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Abilita non trovata");
 			request.getRequestDispatcher("ErrorServlet").forward(request, response);

@@ -17,12 +17,12 @@ import org.prepuzy.model.Ciurma;
 
 
 @MultipartConfig
-@WebServlet("/AggiungiCiurmaServlet")
+@WebServlet("/master/AggiungiCiurmaServlet")
 public class AggiungiCiurmaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiCiurma.jsp").forward(request, response);
+		 request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiCiurma.jsp").forward(request, response);
 	}
 
 
@@ -53,7 +53,7 @@ public class AggiungiCiurmaServlet extends HttpServlet {
                 nuovaCiurma.setJollyRoger("uploads/" +  jollyRogerFileName);
             } catch (IOException e) {
                 request.setAttribute("errorMessage", "Errore durante il caricamento, controlla di aver popolato tutti i campi.");
-                request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiCiurma.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiCiurma.jsp").forward(request, response);
                 return;
             }
         }

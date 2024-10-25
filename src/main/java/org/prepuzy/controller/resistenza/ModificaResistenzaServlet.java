@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Resistenza;
 
 
-@WebServlet("/ModificaResistenzaServlet")
+@WebServlet("/master/ModificaResistenzaServlet")
 public class ModificaResistenzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

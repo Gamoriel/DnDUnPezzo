@@ -40,7 +40,7 @@ public class MappeServlet extends HttpServlet {
 			}
 
 			request.setAttribute("listaMappe", listaMappe);
-			request.getRequestDispatcher("WEB-INF/private_jsp/Mappe.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/Mappe.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.getRequestDispatcher("ErrorServlet?=Errore durante il recupero delle mappe.").forward(request, response);

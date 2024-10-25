@@ -15,7 +15,7 @@ import org.prepuzy.model.Inventario;
 import org.prepuzy.model.Nave;
 
 
-@WebServlet("/AggiungiNaveServlet")
+@WebServlet("/master/AggiungiNaveServlet")
 public class AggiungiNaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +23,7 @@ public class AggiungiNaveServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Ciurma> listaCiurme = BusinessLogic.listaCiurme();
         request.setAttribute("listaCiurme", listaCiurme);
-        request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiNave.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiNave.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class AggiungiNaveServlet extends HttpServlet {
 
 	    if (nome == null || descrizione == null || nome.isEmpty() || descrizione.isEmpty()) {
 	        request.setAttribute("errorMessage", "Devi riempire tutti i campi.");
-	        request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiNave.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiNave.jsp").forward(request, response);
 	        return;
 	    }
 	    Nave nave = new Nave();

@@ -34,7 +34,7 @@ public class DettagliProfessioneServlet extends HttpServlet {
             	
                 request.setAttribute("abilitaVisibili", abilitaProfessioneUtente);
                 request.setAttribute("professione", professione);
-                request.getRequestDispatcher("WEB-INF/private_jsp/DettagliProfessione.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliProfessione.jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("ErrorServlet?=Professione non trovata.").forward(request, response);
             }

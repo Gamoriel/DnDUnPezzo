@@ -21,7 +21,7 @@ import org.prepuzy.model.Tipologia;
 
 import jakarta.persistence.EntityManager;
 
-@WebServlet("/ModificaOggettoServlet")
+@WebServlet("/master/ModificaOggettoServlet")
 public class ModificaOggettoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +48,7 @@ public class ModificaOggettoServlet extends HttpServlet {
                     request.setAttribute("status", status);
                     request.setAttribute("tipologie", tipologie);
 
-                    request.getRequestDispatcher("WEB-INF/private_jsp/ModificaOggetto.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaOggetto.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("ErrorServlet?messaggio=Oggetto non trovato");
                 }

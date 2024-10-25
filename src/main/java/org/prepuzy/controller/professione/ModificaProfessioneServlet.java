@@ -14,7 +14,7 @@ import org.prepuzy.model.AbilitaProfessione;
 import org.prepuzy.model.Professione;
 
 
-@WebServlet("/ModificaProfessioneServlet")
+@WebServlet("/master/ModificaProfessioneServlet")
 public class ModificaProfessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,7 @@ public class ModificaProfessioneServlet extends HttpServlet {
         	List<AbilitaProfessione> abilita = BusinessLogic.listaAbilitaProfessione();
         	request.setAttribute("listaAbilita", abilita);
             request.setAttribute("professione", professione);
-            request.getRequestDispatcher("WEB-INF/private_jsp/ModificaProfessione.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaProfessione.jsp").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "Professione non trovata");
         	request.getRequestDispatcher("ErrorServlet").forward(request, response);

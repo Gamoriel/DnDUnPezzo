@@ -25,7 +25,7 @@ public class DettagliStatusAlteratiServlet extends HttpServlet {
                 StatusAlterati statusAlterato = BusinessLogic.statusById(id);
                 if (statusAlterato != null) {
                     request.setAttribute("statusAlterato", statusAlterato);
-                    request.getRequestDispatcher("WEB-INF/private_jsp/DettagliStatusAlterato.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliStatusAlterato.jsp").forward(request, response);
                 } else {
                 	request.setAttribute("ErrorServlet","Status Alterato non trovato");
                 	request.getRequestDispatcher("ErrorServlet").forward(request, response);

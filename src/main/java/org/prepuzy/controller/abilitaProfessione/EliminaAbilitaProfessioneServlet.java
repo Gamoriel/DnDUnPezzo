@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaProfessione;
 
 
-@WebServlet("/EliminaAbilitaProfessioneServlet")
+@WebServlet("/master/EliminaAbilitaProfessioneServlet")
 public class EliminaAbilitaProfessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

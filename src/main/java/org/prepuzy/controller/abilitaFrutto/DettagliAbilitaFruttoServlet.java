@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaFrutto;
 
-@WebServlet("/DettagliAbilitaFruttoServlet")
+@WebServlet("/master/DettagliAbilitaFruttoServlet")
 public class DettagliAbilitaFruttoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class DettagliAbilitaFruttoServlet extends HttpServlet {
 
 		if (abilita != null) {
 			request.setAttribute("abilita", abilita);
-			request.getRequestDispatcher("WEB-INF/private_jsp/DettagliAbilitaFrutto.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliAbilitaFrutto.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Abilita non trovata");
 			request.getRequestDispatcher("ErrorServlet").forward(request, response);

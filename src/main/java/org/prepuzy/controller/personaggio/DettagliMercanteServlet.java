@@ -26,7 +26,7 @@ public class DettagliMercanteServlet extends HttpServlet {
 			List<OggettiMercante> inventario = BusinessLogic.inventarioMercante(mercante);
 			request.setAttribute("mercante", mercante);
 			request.setAttribute("inventario", inventario);
-			request.getRequestDispatcher("WEB-INF/private_jsp/DettagliMercante.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMercante.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Mercante non trovato");
 			request.getRequestDispatcher("ErrorServlet").forward(request, response);

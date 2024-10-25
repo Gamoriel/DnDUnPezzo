@@ -36,7 +36,7 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 		request.setAttribute("listaCiurme", BusinessLogic.listaCiurme());
 		request.setAttribute("listaNavi", BusinessLogic.listaNavi());
 		request.setAttribute("listaMappe", BusinessLogic.listaMappe());
-		request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -77,7 +77,7 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 				personaggio.setUrlImmagine("uploads/" + immagineFileName);
 			} catch (IOException e) {
 				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-				request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
 				return;
 			}
 		}
@@ -100,7 +100,7 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 			personaggio.setMercante(isMercante);
 		} else {
 			request.setAttribute("errorMessage", "Devi riempire tutti i campi.");
-			request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
 		}
 
 		String razzaStr = request.getParameter("razza");

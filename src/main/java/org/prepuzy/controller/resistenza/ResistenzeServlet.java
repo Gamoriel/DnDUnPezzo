@@ -19,7 +19,7 @@ public class ResistenzeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Resistenza> resistenze = BusinessLogic.listaResistenze();
         request.setAttribute("resistenze", resistenze);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Resistenze.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/Resistenze.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

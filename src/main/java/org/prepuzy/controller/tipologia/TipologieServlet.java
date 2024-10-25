@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Tipologia;
 
-@WebServlet("/TipologieServlet")
+@WebServlet("/master/TipologieServlet")
 public class TipologieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +21,7 @@ public class TipologieServlet extends HttpServlet {
         try {
             List<Tipologia> listaTipologie = BusinessLogic.listTipologie();
             request.setAttribute("listaTipologie", listaTipologie);
-            request.getRequestDispatcher("WEB-INF/private_jsp/Tipologie.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/Tipologie.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.getRequestDispatcher("ErrorServlet?=Errore durante il recupero delle tipologie" + e.getMessage()).forward(request, response);

@@ -19,7 +19,7 @@ import org.prepuzy.model.StatusAlterati;
 import org.prepuzy.model.Tipologia;
 
 
-@WebServlet("/AggiungiOggettoServlet")
+@WebServlet("/master/AggiungiOggettoServlet")
 public class AggiungiOggettoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public class AggiungiOggettoServlet extends HttpServlet {
 		request.setAttribute("listaStatus", BusinessLogic.listaStatusAlterati());
 		request.setAttribute("listaTipologie", BusinessLogic.listTipologie());
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiOggetto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiOggetto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -66,7 +66,7 @@ public class AggiungiOggettoServlet extends HttpServlet {
 			oggetto.setVisibleToAll(isVisibleToAll);
 		} else {
             request.setAttribute("errorMessage", "Devi riempire tutti i campi.");
-            request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiOggetto.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiOggetto.jsp").forward(request, response);
 		}
 
 		String[] resistenzeIds = request.getParameterValues("resistenze");

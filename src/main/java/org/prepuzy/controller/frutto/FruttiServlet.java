@@ -39,7 +39,7 @@ public class FruttiServlet extends HttpServlet {
 		
 		request.setAttribute("listaFrutti", listaFrutti);
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/Frutti.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/Frutti.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

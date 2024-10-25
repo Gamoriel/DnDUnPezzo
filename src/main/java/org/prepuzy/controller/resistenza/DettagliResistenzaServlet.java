@@ -24,7 +24,7 @@ public class DettagliResistenzaServlet extends HttpServlet {
 				Resistenza resistenza = BusinessLogic.resistenzaById(idResistenza);
 				if (resistenza != null) {
 					request.setAttribute("resistenza", resistenza);
-					request.getRequestDispatcher("WEB-INF/private_jsp/DettagliResistenza.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliResistenza.jsp").forward(request, response);
 				} else {
 					response.sendRedirect("ErrorServlet?=Resistenza non trovata");
 				}

@@ -25,7 +25,7 @@ public class DettagliCiurmaServlet extends HttpServlet {
             List<Personaggio> membri = BusinessLogic.membriCiurma(idCiurma);
             request.setAttribute("ciurma", ciurma);
             request.setAttribute("membri", membri);
-            request.getRequestDispatcher("WEB-INF/private_jsp/DettagliCiurma.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCiurma.jsp").forward(request, response);
         } else {
             response.sendRedirect("CiurmaServlet");
         }

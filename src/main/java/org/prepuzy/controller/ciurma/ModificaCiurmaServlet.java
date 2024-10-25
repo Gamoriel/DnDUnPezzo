@@ -19,7 +19,7 @@ import org.prepuzy.model.Personaggio;
 
 
 @MultipartConfig
-@WebServlet("/ModificaCiurmaServlet")
+@WebServlet("/master/ModificaCiurmaServlet")
 public class ModificaCiurmaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class ModificaCiurmaServlet extends HttpServlet {
 		request.setAttribute("ciurma", ciurma);
 		request.setAttribute("allPersonaggi", allPersonaggi);
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/ModificaCiurma.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaCiurma.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -66,7 +66,7 @@ public class ModificaCiurmaServlet extends HttpServlet {
 				ciurma.setJollyRoger("uploads/" +  jollyRogerFileName);
 			} catch (IOException e) {
 				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-				request.getRequestDispatcher("WEB-INF/private_jsp/ModificaCiurma.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaCiurma.jsp").forward(request, response);
 				return;
 			}
 		}

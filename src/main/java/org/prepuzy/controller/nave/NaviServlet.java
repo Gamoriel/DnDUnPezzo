@@ -37,7 +37,7 @@ public class NaviServlet extends HttpServlet {
 	    }
 	    
 	        request.setAttribute("navi", navi);
-	        request.getRequestDispatcher("WEB-INF/private_jsp/Navi.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/private_jsp/Navi.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

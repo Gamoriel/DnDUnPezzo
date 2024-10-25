@@ -37,7 +37,7 @@ public class PersonaggiServlet extends HttpServlet {
 	    }
 
         request.setAttribute("personaggi", personaggi);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Personaggi.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/Personaggi.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

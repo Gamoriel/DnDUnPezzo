@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Qualita;
 
-@WebServlet("/QualitaServlet")
+@WebServlet("/master/QualitaServlet")
 public class QualitaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class QualitaServlet extends HttpServlet {
 
         List<Qualita> listaQualita = BusinessLogic.listaQualita();
         request.setAttribute("listaQualita", listaQualita);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Qualita.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/Qualita.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

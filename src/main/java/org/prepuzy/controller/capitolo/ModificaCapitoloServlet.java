@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Capitolo;
 import org.prepuzy.model.Mappa;
 
-@WebServlet("/ModificaCapitoloServlet")
+@WebServlet("/master/ModificaCapitoloServlet")
 public class ModificaCapitoloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,7 +25,7 @@ public class ModificaCapitoloServlet extends HttpServlet {
 
                 if (capitolo != null) {
                     request.setAttribute("capitolo", capitolo);
-                    request.getRequestDispatcher("WEB-INF/private_jsp/ModificaCapitolo.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaCapitolo.jsp").forward(request, response);
                 } else {
                     response.sendRedirect("ErrorServlet?messaggio=Capitolo non trovato");
                 }

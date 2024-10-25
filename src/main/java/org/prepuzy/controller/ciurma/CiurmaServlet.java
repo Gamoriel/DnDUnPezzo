@@ -38,8 +38,7 @@ public class CiurmaServlet extends HttpServlet {
 	    
 
 		request.setAttribute("listaCiurme", listaCiurme);
-
-		request.getRequestDispatcher("WEB-INF/private_jsp/Ciurme.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/Ciurme.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

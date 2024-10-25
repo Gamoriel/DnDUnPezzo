@@ -46,7 +46,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		request.setAttribute("navi", navi);
 		request.setAttribute("frutti", frutti);
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -110,7 +110,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 				personaggio.setUrlImmagine("uploads/" +  immagineFileName);
 			} catch (IOException e) {
 				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-				request.getRequestDispatcher("WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
 				return;
 			}
 		}
@@ -133,7 +133,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
 		} else {
 			request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-			request.getRequestDispatcher("WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
 		}
 	}
 

@@ -34,7 +34,7 @@ public class MasterPageServlet extends HttpServlet {
 			}
 		}
 		request.setAttribute("listaCapitoli", listaCapitoli);
-		request.getRequestDispatcher("WEB-INF/private_jsp/MasterHomePage.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/MasterHomePage.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

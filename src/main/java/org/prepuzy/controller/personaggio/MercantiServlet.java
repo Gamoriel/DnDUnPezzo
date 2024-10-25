@@ -20,7 +20,7 @@ public class MercantiServlet extends HttpServlet {
 		List<Personaggio> listaMercanti = BusinessLogic.listaMercanti();
 		if(listaMercanti != null && !listaMercanti.isEmpty()) {
 			request.setAttribute("mercanti", listaMercanti);
-			request.getRequestDispatcher("WEB-INF/private_jsp/Mercanti.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/Mercanti.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Nessun mercante presente");
 			request.getRequestDispatcher("ErrorServlet").forward(request, response);

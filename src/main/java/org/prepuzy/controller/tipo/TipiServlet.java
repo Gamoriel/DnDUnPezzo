@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Tipo;
 
-@WebServlet("/TipiServlet")
+@WebServlet("/master/TipiServlet")
 public class TipiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -20,7 +20,7 @@ public class TipiServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	        List<Tipo> tipi = BusinessLogic.listaTipi();      
 	        request.setAttribute("tipi", tipi);
-	        request.getRequestDispatcher("WEB-INF/private_jsp/Tipi.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/private_jsp/Tipi.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

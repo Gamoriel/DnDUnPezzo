@@ -19,7 +19,7 @@ import org.prepuzy.model.Resistenza;
 import org.prepuzy.model.StatusAlterati;
 import org.prepuzy.model.Tipo;
 
-@WebServlet("/AggiungiFruttoServlet")
+@WebServlet("/master/AggiungiFruttoServlet")
 public class AggiungiFruttoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class AggiungiFruttoServlet extends HttpServlet {
 		request.setAttribute("listaQualita", listaQualita);
 		request.setAttribute("listaStatus", listaStatus);
 		request.setAttribute("listaResistenze", listaResistenze);
-		request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiFrutto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiFrutto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

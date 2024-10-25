@@ -15,7 +15,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaProfessione;
 
 
-@WebServlet("/AbilitaProfessioneServlet")
+@WebServlet("/master/AbilitaProfessioneServlet")
 public class AbilitaProfessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -25,7 +25,7 @@ public class AbilitaProfessioneServlet extends HttpServlet {
         Map<String, List<AbilitaProfessione>> abilitaPerProfessione = abilitaList.stream().collect(Collectors.groupingBy(abilita -> abilita.getProfessione().getNome()));
         
         request.setAttribute("abilitaPerProfessione", abilitaPerProfessione);
-        request.getRequestDispatcher("WEB-INF/private_jsp/AbilitaProfessione.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/AbilitaProfessione.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

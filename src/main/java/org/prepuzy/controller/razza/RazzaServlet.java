@@ -20,7 +20,7 @@ public class RazzaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Razza> listaRazze = BusinessLogic.listaRazze();
         request.setAttribute("listaRazze", listaRazze);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Razze.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/Razze.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

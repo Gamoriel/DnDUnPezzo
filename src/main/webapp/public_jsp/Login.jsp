@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
-<link rel="stylesheet" href="resources/css/Style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 <style type="text/css">
 .bg-video {
 	position: fixed;
@@ -30,7 +30,7 @@
 	 </video>
 		<div class="loginContainer">
 			<div class="loginFormWrapper">
-				<h1 class="loginTitle">D&D OP</h1>
+				<h1 class="loginTitle">DnD OP</h1>
 				<form class="loginForm" action="LoginLogicServlet" method="post">
 					<div class="formGroup">
 						<label for="username">Username</label> <input type="text"

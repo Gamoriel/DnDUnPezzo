@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Razza;
 
-@WebServlet("/EliminaRazzaServlet")
+@WebServlet("/master/EliminaRazzaServlet")
 public class EliminaRazzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

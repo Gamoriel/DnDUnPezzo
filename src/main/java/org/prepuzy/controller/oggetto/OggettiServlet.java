@@ -40,7 +40,7 @@ public class OggettiServlet extends HttpServlet {
 
 		request.setAttribute("oggetti", oggetti);
 
-		request.getRequestDispatcher("WEB-INF/private_jsp/Oggetto.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/Oggetto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

@@ -20,7 +20,7 @@ public class StatusAlteratiServlet extends HttpServlet {
 
         List<StatusAlterati> listaStatusAlterati = BusinessLogic.listaStatusAlterati();
         request.setAttribute("statusAlterati", listaStatusAlterati);
-        request.getRequestDispatcher("WEB-INF/private_jsp/StatusAlterati.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/StatusAlterati.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

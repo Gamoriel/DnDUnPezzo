@@ -27,7 +27,7 @@ public class DettagliPersonaggioServlet extends HttpServlet {
         		request.setAttribute("tuttiOggetti", tuttiOggetti);
         	}
             request.setAttribute("personaggio", personaggio);
-            request.getRequestDispatcher("WEB-INF/private_jsp/DettagliPersonaggio.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliPersonaggio.jsp").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "Personaggio non trovato");
         	request.getRequestDispatcher("ErrorServlet").forward(request, response);

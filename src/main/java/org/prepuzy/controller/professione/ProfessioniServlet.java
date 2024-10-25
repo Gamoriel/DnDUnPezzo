@@ -20,7 +20,7 @@ public class ProfessioniServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Professione> professioni = BusinessLogic.listaProfessioni();
         request.setAttribute("professioni", professioni);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Professioni.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/Professioni.jsp").forward(request, response);
 	}
 
 

@@ -5,7 +5,7 @@
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrazione</title>
-    <link rel="stylesheet" href="resources/css/Style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
     <div class="registerContainer">

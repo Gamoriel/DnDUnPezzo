@@ -18,7 +18,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Mappa;
 
 @MultipartConfig
-@WebServlet("/AggiungiMappaServlet")
+@WebServlet("/master/AggiungiMappaServlet")
 public class AggiungiMappaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +28,7 @@ public class AggiungiMappaServlet extends HttpServlet {
             listaMappePadri = new ArrayList<>();
         }
         request.setAttribute("listaMappePadri", listaMappePadri);
-        request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class AggiungiMappaServlet extends HttpServlet {
 	        mappa.setVisibleToAll(isVisibleToAll);
 	    } else {
 	        request.setAttribute("errorMessage", "Devi riempire tutti i campi.");
-	        request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
+	        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
 	        return;
 	    }
 
@@ -65,7 +65,7 @@ public class AggiungiMappaServlet extends HttpServlet {
 	            mappa.setImmagine("uploads/" +  immagineFileName);
 	        } catch (IOException e) {
 	            request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-	            request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
+	            request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
 	            return;
 	        }
 	    }
@@ -78,7 +78,7 @@ public class AggiungiMappaServlet extends HttpServlet {
 	            mappa.setMappaPadre(mappaPadre);
 	        } catch (NumberFormatException e) {
 	            request.setAttribute("errorMessage", "Errore nell'ID della mappa padre.");
-	            request.getRequestDispatcher("WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
+	            request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
 	            return;
 	        }
 	    }

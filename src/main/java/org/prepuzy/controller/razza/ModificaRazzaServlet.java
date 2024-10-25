@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Razza;
 
-@WebServlet("/ModificaRazzaServlet")
+@WebServlet("/master/ModificaRazzaServlet")
 public class ModificaRazzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -23,7 +23,7 @@ public class ModificaRazzaServlet extends HttpServlet {
 			Razza razza = BusinessLogic.razzaById(idRazza);
 			if (razza != null) {
 				request.setAttribute("razza", razza);
-				request.getRequestDispatcher("WEB-INF/private_jsp/ModificaRazza.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaRazza.jsp").forward(request, response);
 			} else {
 				response.sendRedirect("RazzaServlet?error=RazzaNonTrovata");
 			}

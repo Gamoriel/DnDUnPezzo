@@ -39,7 +39,7 @@ public class DettagliMappaServlet extends HttpServlet {
         }
 
         request.setAttribute("mappa", mappa);
-        request.getRequestDispatcher("WEB-INF/private_jsp/DettagliMappa.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMappa.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

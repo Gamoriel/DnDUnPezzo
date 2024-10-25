@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaFrutto;
 
 
-@WebServlet("/EliminaAbilitaFruttoServlet")
+@WebServlet("/master/EliminaAbilitaFruttoServlet")
 public class EliminaAbilitaFruttoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

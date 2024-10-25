@@ -11,7 +11,7 @@ import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.StatusAlterati;
 
 
-@WebServlet("/ModificaStatusAlteratoServlet")
+@WebServlet("/master/ModificaStatusAlteratoServlet")
 public class ModificaStatusAlteratoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,7 +23,7 @@ public class ModificaStatusAlteratoServlet extends HttpServlet {
                 StatusAlterati statusAlterato = BusinessLogic.statusById(id);
                 if (statusAlterato != null) {
                     request.setAttribute("statusAlterato", statusAlterato);
-                    request.getRequestDispatcher("WEB-INF/private_jsp/ModificaStatusAlterato.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaStatusAlterato.jsp").forward(request, response);
                 } else {
                 	request.setAttribute("messaggio", "Status Alterato non trovato");
                 	request.getRequestDispatcher("ErrorServlet").forward(request, response);

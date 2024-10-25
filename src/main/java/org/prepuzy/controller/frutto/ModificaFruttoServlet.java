@@ -17,7 +17,7 @@ import org.prepuzy.model.Resistenza;
 import org.prepuzy.model.StatusAlterati;
 import org.prepuzy.model.Tipo;
 
-@WebServlet("/ModificaFruttoServlet")
+@WebServlet("/master/ModificaFruttoServlet")
 public class ModificaFruttoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -45,7 +45,7 @@ public class ModificaFruttoServlet extends HttpServlet {
                     request.setAttribute("status", status);
                     request.setAttribute("resistenze", resistenze);
                     request.setAttribute("listaAbilita", abilita);
-                    request.getRequestDispatcher("WEB-INF/private_jsp/ModificaFrutto.jsp").forward(request, response);
+                    request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaFrutto.jsp").forward(request, response);
                 } else {
                 	request.setAttribute("messaggio", "Frutto non trovato");
                     request.getRequestDispatcher("ErrorServlet").forward(request, response);

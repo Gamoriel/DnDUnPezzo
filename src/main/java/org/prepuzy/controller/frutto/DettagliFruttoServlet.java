@@ -37,7 +37,7 @@ public class DettagliFruttoServlet extends HttpServlet {
 	                	
 	                    request.setAttribute("abilitaVisibili", abilitaFruttoUtente);
 	                	request.setAttribute("frutto", frutto);
-	                    request.getRequestDispatcher("WEB-INF/private_jsp/DettagliFrutto.jsp").forward(request, response);
+	                    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliFrutto.jsp").forward(request, response);
 	                } else {
 	                	request.setAttribute("messaggio", "Frutto non trovato");
 	                	request.getRequestDispatcher("ErrorServlet").forward(request, response);
