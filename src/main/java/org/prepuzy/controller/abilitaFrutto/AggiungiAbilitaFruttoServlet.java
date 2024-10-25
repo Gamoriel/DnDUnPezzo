@@ -1,4 +1,4 @@
-package org.prepuzy.abilitaFrutto;
+package org.prepuzy.controller.abilitaFrutto;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

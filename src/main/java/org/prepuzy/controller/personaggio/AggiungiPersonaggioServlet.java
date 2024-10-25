@@ -140,8 +140,13 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 
 		BusinessLogic.aggiungiPersonaggio(personaggio);
 		if(utenteLoggato != null && utenteLoggato.getRole().equals(Role.BASE)) {
+			if(utenteLoggato.getPersonaggio() == null) {
 			utenteLoggato.setPersonaggio(personaggio);
 			BusinessLogic.modificaUtente(utenteLoggato);
+			} else {
+				request.setAttribute("messaggio", "Hai già creato un personaggio");
+				request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			}
 		}
 		response.sendRedirect("PersonaggiServlet");
 	}

@@ -20,7 +20,7 @@ public class ErrorServlet extends HttpServlet {
         }
 
         request.setAttribute("messaggioErrore", errore);
-        request.getRequestDispatcher("WEB-INF/private_jsp/Error.jsp").forward(request, response);
+        request.getRequestDispatcher("public_jsp/Error.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

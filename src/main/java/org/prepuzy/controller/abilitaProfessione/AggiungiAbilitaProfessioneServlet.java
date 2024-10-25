@@ -1,4 +1,4 @@
-package org.prepuzy.abilitaProfessione;
+package org.prepuzy.controller.abilitaProfessione;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
