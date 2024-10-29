@@ -22,6 +22,7 @@ import org.prepuzy.model.Qualita;
 import org.prepuzy.model.Razza;
 import org.prepuzy.model.Resistenza;
 import org.prepuzy.model.StatusAlterati;
+import org.prepuzy.model.Tecniche;
 import org.prepuzy.model.Tipo;
 import org.prepuzy.model.Tipologia;
 import org.prepuzy.model.Utente;
@@ -422,6 +423,32 @@ public class BusinessLogic {
 	
 	public static boolean eliminaStatus(long id) {
 		return DaoFactory.getInstance(DATABASE).getJpaDaoStatusAlterati().delete(id);
+	}
+	
+	// SEZIONE TECNICHE
+	
+	public static void aggiungiTecnica(Tecniche t) {
+		DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().insertTecniche(t);
+	}
+	
+	public static void modificaTecnica(Tecniche t) {
+		DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().updateTecniche(t);
+	}
+	
+	public static boolean eliminaTecnica(long id) {
+		return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().deleteTecniche(id);
+	}
+	
+	public static List<Tecniche> listaTecniche(){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().listaTecniche();
+	}
+	
+	public static List<Tecniche> listaTecnichePersonaggio(long id){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().listaTecnicheByPersonaggioId(id);
+	}
+	
+	public static Tecniche tecnicaById(long id) {
+		return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().selectTecnicaById(id);
 	}
 	
 	// SEZIONE TIPO

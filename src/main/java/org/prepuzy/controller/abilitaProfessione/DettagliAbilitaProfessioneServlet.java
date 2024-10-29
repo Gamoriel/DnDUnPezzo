@@ -25,7 +25,7 @@ public class DettagliAbilitaProfessioneServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliAbilitaProfessione.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Abilita non trovata");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 

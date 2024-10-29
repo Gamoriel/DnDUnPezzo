@@ -49,19 +49,19 @@ public class SpostaOggettoDepositoServlet extends HttpServlet {
                         request.getRequestDispatcher("DettagliPersonaggioServlet").forward(request, response);
                     } else {
                         request.setAttribute("messaggio", "Oggetto non trovato o deposito pieno");
-                        request.getRequestDispatcher("ErrorServlet").forward(request, response);
+                        request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
                     }
                 } else {
                     request.setAttribute("messaggio", "Deposito non trovato");
-                    request.getRequestDispatcher("ErrorServlet").forward(request, response);
+                    request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
                 }
             } else {
                 request.setAttribute("messaggio", "Nave non trovata");
-                request.getRequestDispatcher("ErrorServlet").forward(request, response);
+                request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             }
         } else {
             request.setAttribute("messaggio", "Personaggio non trovato");
-            request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
         }
 	}
 }

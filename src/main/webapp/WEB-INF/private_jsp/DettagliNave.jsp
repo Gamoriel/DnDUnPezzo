@@ -35,7 +35,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -60,7 +60,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -79,12 +79,10 @@
 				<tr>
 					<th>Statistica</th>
 					<th>Valore</th>
-					<th>Modificatore</th>
 				</tr>
 				<tr>
 					<td>HP:</td>
 					<td><%=nave.getHp()%></td>
-					<td></td>
 				</tr>
 			</table>
 
@@ -109,7 +107,7 @@
 			Ciurma ciurma = nave.getCiurma();
 			if (ciurma != null) {
 			%>
-			<a href="DettagliCiurmaServlet?idCiurma=<%=ciurma.getId()%>"> <%=ciurma.getNome()%>
+			<a href="${pageContext.request.contextPath}/DettagliCiurmaServlet?idCiurma=<%=ciurma.getId()%>"> <%=ciurma.getNome()%>
 			</a>
 			<%
 			} else {
@@ -127,7 +125,7 @@
 			%>
 			<div>
 				<a
-					href="DettagliPersonaggioServlet?idPersonaggio=<%=personaggio.getId()%>">
+					href="${pageContext.request.contextPath}/DettagliPersonaggioServlet?idPersonaggio=<%=personaggio.getId()%>">
 					<%=personaggio.getNome()%>
 				</a>
 			</div>
@@ -160,7 +158,7 @@
 					Oggetto oggetto = entry.getKey();
 					int quantita = entry.getValue();
 				%>
-				<li><a href="DettagliOggettoServlet?id=<%=oggetto.getId()%>">
+				<li><a href="${pageContext.request.contextPath}/DettagliOggettoServlet?id=<%=oggetto.getId()%>">
 						<%=oggetto.getNome()%> (x<%=quantita%>)
 				</a></li>
 				<%
@@ -175,11 +173,11 @@
 			}
 			%>
 			<div class="actionButtons">
-				<form action="master/ModificaNaveServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaNaveServlet" method="get">
 					<input type="hidden" name="idNave" value="<%=nave.getId()%>">
 					<button class="buttonMod" type="submit">Modifica Nave</button>
 				</form>
-				<form action="master/EliminaNaveServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaNaveServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler cancellare questa nave?');">
 					<input type="hidden" name="idNave" value="<%=nave.getId()%>">
 					<button class="buttonDel" type="submit">Cancella Nave</button>

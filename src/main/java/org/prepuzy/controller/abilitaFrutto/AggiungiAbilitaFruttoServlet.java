@@ -25,7 +25,7 @@ public class AggiungiAbilitaFruttoServlet extends HttpServlet {
 
         if (nome == null || nome.isEmpty() || descrizione == null || descrizione.isEmpty()) {
             request.setAttribute("messaggio", "Nome e descrizione sono obbligatori.");
-            request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
 
@@ -35,6 +35,6 @@ public class AggiungiAbilitaFruttoServlet extends HttpServlet {
 
         BusinessLogic.aggiungiAbilitaFrutto(nuovaAbilita);
 
-        response.sendRedirect("AbilitaFruttoServlet");
+       request.getRequestDispatcher("/master/AbilitaFruttoServlet").forward(request, response);
 	}
 }

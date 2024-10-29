@@ -39,7 +39,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -64,7 +64,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -206,7 +206,7 @@
 			List<Oggetto> tuttiOggetti = (List<Oggetto>) request.getAttribute("tuttiOggetti");
 			%>
 			<h3>Aggiungi Oggetto all'Inventario</h3>
-			<form action="master/AggiungiOggettoInventarioServlet" method="post">
+			<form action="${pageContext.request.contextPath}/master/AggiungiOggettoInventarioServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto</option>
@@ -445,11 +445,11 @@
 			}
 			%>
 			<div class="actionButtons">
-				<form action="master/ModificaPersonaggioServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaPersonaggioServlet" method="get">
 					<input type="hidden" name="id" value="<%=personaggio.getId()%>">
 					<input type="submit" value="Modifica Personaggio" class="buttonMod">
 				</form>
-				<form action="master/EliminaPersonaggioServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaPersonaggioServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questo personaggio?');">
 					<input type="hidden" name="id" value="<%=personaggio.getId()%>">
 					<input type="submit" value="Elimina Personaggio" class="buttonDel">

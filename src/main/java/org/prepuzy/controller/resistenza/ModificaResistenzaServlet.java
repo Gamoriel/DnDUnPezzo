@@ -10,59 +10,67 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Resistenza;
 
-
 @WebServlet("/master/ModificaResistenzaServlet")
 public class ModificaResistenzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idResistenzaParam = request.getParameter("idResistenza");
 
-        if (idResistenzaParam != null && !idResistenzaParam.isEmpty()) {
-            try {
-                long idResistenza = Long.parseLong(idResistenzaParam);
-                Resistenza resistenza = BusinessLogic.resistenzaById(idResistenza);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String idResistenzaParam = request.getParameter("idResistenza");
 
-                if (resistenza != null) {
-                    request.setAttribute("resistenza", resistenza);
-                    request.getRequestDispatcher("ModificaResistenza.jsp").forward(request, response);
-                } else {
-                	response.sendRedirect("ErrorServlet?=Resistenza non trovata");
-                }
-            } catch (NumberFormatException e) {
-            	response.sendRedirect("ErrorServlet?=Errore durante la ricerca" + e.getMessage());
-            }
-        } else {
-        	response.sendRedirect("ErrorServlet?=ID non valido");
-        }
+		if (idResistenzaParam != null && !idResistenzaParam.isEmpty()) {
+			try {
+				long idResistenza = Long.parseLong(idResistenzaParam);
+				Resistenza resistenza = BusinessLogic.resistenzaById(idResistenza);
+
+				if (resistenza != null) {
+					request.setAttribute("resistenza", resistenza);
+					request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaResistenza.jsp").forward(request,
+							response);
+				} else {
+					request.setAttribute("messaggio", "Resistenza non trovata");
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+				}
+			} catch (NumberFormatException e) {
+				request.setAttribute("messaggio", "Errore durante la ricerca");
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+			}
+		} else {
+			request.setAttribute("messaggio", "ID non valido");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String idResistenzaParam = request.getParameter("idResistenza");
-        String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+		String nome = request.getParameter("nome");
+		String descrizione = request.getParameter("descrizione");
 
-        if (idResistenzaParam != null && !idResistenzaParam.isEmpty()) {
-            try {
+		if (idResistenzaParam != null && !idResistenzaParam.isEmpty()) {
+			try {
 
-                long idResistenza = Long.parseLong(idResistenzaParam);
-                Resistenza resistenza = BusinessLogic.resistenzaById(idResistenza);
-                if (resistenza != null) {
-                    resistenza.setNome(nome);
-                    resistenza.setDescrizione(descrizione);
+				long idResistenza = Long.parseLong(idResistenzaParam);
+				Resistenza resistenza = BusinessLogic.resistenzaById(idResistenza);
+				if (resistenza != null) {
+					resistenza.setNome(nome);
+					resistenza.setDescrizione(descrizione);
 
-                    BusinessLogic.modificaResistenza(resistenza);
-
-                    response.sendRedirect("DettagliResistenzaServlet?idResistenza=" + idResistenza);
-                } else {
-                	response.sendRedirect("ErrorServlet?=Resistenza non trovata");
-                }
-            } catch (NumberFormatException e) {
-            	response.sendRedirect("ErrorServlet?=Errore durante la modifica" + e.getMessage());
-            }
-        } else {
-        	response.sendRedirect("ErrorServlet?=ID non valido");
-        }
+					BusinessLogic.modificaResistenza(resistenza);
+					request.setAttribute("idResistenza", idResistenza);
+					request.getRequestDispatcher("/DettagliResistenzaServlet").forward(request, response);
+				} else {
+					request.setAttribute("messaggio", "Resistenza non trovata");
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+				}
+			} catch (NumberFormatException e) {
+				request.setAttribute("messaggio", "Errore durante la modifica");
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+			}
+		} else {
+			request.setAttribute("messaggio", "ID non valido");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+		}
 	}
 
 }

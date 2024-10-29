@@ -14,7 +14,8 @@ import org.prepuzy.model.Razza;
 public class EliminaRazzaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String idRazzaStr = request.getParameter("idRazza");
 		if (idRazzaStr != null && !idRazzaStr.isEmpty()) {
@@ -24,25 +25,19 @@ public class EliminaRazzaServlet extends HttpServlet {
 
 				if (razza != null) {
 					BusinessLogic.eliminaRazza(idRazza);
-					response.sendRedirect("RazzaServlet?= Razza eliminata con successo.");
+					request.getRequestDispatcher("/RazzaServlet").forward(request, response);
 				} else {
-					response.sendRedirect("ErrorServlet?= Razza non trovata");
+					request.setAttribute("messaggio", " Razza non trovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 					return;
 				}
 			} catch (NumberFormatException e) {
-				response.sendRedirect("ErrorServlet?= ID non valito");
+				request.setAttribute("messaggio", " ID non valito"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				return;
 			}
 		} else {
-			response.sendRedirect("ErrorServlet?= ID non valido");
+			request.setAttribute("messaggio", " ID non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			return;
 		}
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

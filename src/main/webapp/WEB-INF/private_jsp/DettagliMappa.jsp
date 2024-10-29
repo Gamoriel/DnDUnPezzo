@@ -29,7 +29,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -54,7 +54,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -97,14 +97,14 @@
 			%>
 
 			<div class="actionButtons">
-				<form action="master/ModificaMappaServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaMappaServlet" method="get">
 					<input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
 					<button class="buttonMod" type="submit">Modifica Mappa</button>
 				</form>
-				<form action="master/EliminaMappaServlet" method="post"
-					onsubmit="return confirm('Sei sicuro di voler cancellare questa mappa?');">
-					<input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
-					<button class="buttonDel" type="submit">Cancella Mappa</button>
+				<form action="${pageContext.request.contextPath}/master/EliminaMappaServlet" method="post"
+				      onsubmit="return confirm('Sei sicuro di voler cancellare questa mappa?');">
+				    <input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
+				    <button class="buttonDel" type="submit">Cancella Mappa</button>
 				</form>
 			</div>
 			<%

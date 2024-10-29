@@ -27,13 +27,13 @@ public class ModificaCapitoloServlet extends HttpServlet {
                     request.setAttribute("capitolo", capitolo);
                     request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaCapitolo.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect("ErrorServlet?messaggio=Capitolo non trovato");
+                   request.getRequestDispatcher("/ErrorServlet?messaggio=Capitolo non trovato").forward(request, response);
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("ErrorServlet?messaggio=ID non valido");
+               request.getRequestDispatcher("/ErrorServlet?messaggio=ID non valido").forward(request, response);
             }
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=ID del capitolo mancante");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=ID del capitolo mancante").forward(request, response);
         }
 	}
 
@@ -55,12 +55,12 @@ public class ModificaCapitoloServlet extends HttpServlet {
         	c.setVisibleToAll(isVisibleToAll);
             try {
                 BusinessLogic.modificaCapitoloConMappa(c, m);
-                response.sendRedirect("MasterPageServlet?message=Capitolo modificato con successo");
+               request.getRequestDispatcher("/MasterPageServlet?message=Capitolo modificato con successo").forward(request, response);
             } catch (Exception e) {
-                response.sendRedirect("ErrorServlet?messaggio=Errore nella modifica del capitolo");
+               request.getRequestDispatcher("/ErrorServlet?messaggio=Errore nella modifica del capitolo").forward(request, response);
             }
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=Dati mancanti per la modifica");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=Dati mancanti per la modifica").forward(request, response);
         }
 	}
 

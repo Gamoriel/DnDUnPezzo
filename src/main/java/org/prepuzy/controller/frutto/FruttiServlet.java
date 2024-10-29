@@ -38,7 +38,6 @@ public class FruttiServlet extends HttpServlet {
 	    }
 		
 		request.setAttribute("listaFrutti", listaFrutti);
-
 		request.getRequestDispatcher("/WEB-INF/private_jsp/Frutti.jsp").forward(request, response);
 	}
 

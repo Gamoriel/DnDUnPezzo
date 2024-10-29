@@ -19,9 +19,9 @@ public class EliminaProfessioneServlet extends HttpServlet {
         boolean professione = BusinessLogic.eliminaProfessione(id);
 
         if (professione) {
-            response.sendRedirect("ProfessioniServlet");
+           request.getRequestDispatcher("/ProfessioniServlet").forward(request, response);
         } else {
-            request.getRequestDispatcher("ErrorServlet?=Errore durante l'eliminazione della professione.").forward(request, response);
+            request.setAttribute("messaggio", "Errore durante l'eliminazione della professione."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -27,7 +27,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -51,7 +51,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -81,11 +81,11 @@
 			}
 			%>
 			<div class="actionButtons">
-				<form action="master/ModificaAbilitaFruttoServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaAbilitaFruttoServlet" method="get">
 					<input type="hidden" name="idAbilita" value="<%=abilita.getId()%>">
 					<button type="submit" class="buttonMod">Modifica Abilità</button>
 				</form>
-				<form action="master/EliminaAbilitaFruttoServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaAbilitaFruttoServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questa abilita?');">
 					<input type="hidden" name="idAbilita" value="<%=abilita.getId()%>">
 					<button type="submit" class="buttonDel">Elimina Abilità</button>

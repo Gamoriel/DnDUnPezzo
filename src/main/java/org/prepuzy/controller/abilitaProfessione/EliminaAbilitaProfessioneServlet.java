@@ -24,10 +24,10 @@ public class EliminaAbilitaProfessioneServlet extends HttpServlet {
             BusinessLogic.eliminaAbilitaProfessione(abilita.getId());
         } else {
             request.setAttribute("messaggio", "Abilità non trovata.");
-            request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
-        request.getRequestDispatcher("AbilitaProfessioneServlet").forward(request, response);
+        request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
 	}
 
 

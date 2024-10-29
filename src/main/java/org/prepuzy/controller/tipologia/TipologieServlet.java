@@ -24,7 +24,8 @@ public class TipologieServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/private_jsp/Tipologie.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("ErrorServlet?=Errore durante il recupero delle tipologie" + e.getMessage()).forward(request, response);
+            request.setAttribute("messaggio", "Errore durante il recupero delle tipologie");
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 

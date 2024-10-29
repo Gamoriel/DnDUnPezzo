@@ -25,19 +25,19 @@ public class EliminaCapitoloServlet extends HttpServlet {
 
 				if (capitoloEliminato) {
 
-					response.sendRedirect("MasterPageServlet?message=Capitolo eliminato con successo");
+					request.getRequestDispatcher("MasterPageServlet?message=Capitolo eliminato con successo").forward(request, response);
 				} else {
 
-					response.sendRedirect("ErrorServlet?messaggio=Errore nell'eliminazione del capitolo");
+					request.setAttribute("messaggio", "Errore nell'eliminazione del capitolo"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}
 
 			} catch (NumberFormatException e) {
 
-				response.sendRedirect("ErrorServlet?messaggio=ID del capitolo non valido");
+				request.setAttribute("messaggio", "ID del capitolo non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
 
-			response.sendRedirect("ErrorServlet?messaggio=ID del capitolo mancante");
+			request.setAttribute("messaggio", "ID del capitolo mancante"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

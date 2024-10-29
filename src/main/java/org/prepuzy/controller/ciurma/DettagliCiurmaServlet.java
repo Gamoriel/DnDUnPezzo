@@ -27,7 +27,7 @@ public class DettagliCiurmaServlet extends HttpServlet {
             request.setAttribute("membri", membri);
             request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCiurma.jsp").forward(request, response);
         } else {
-            response.sendRedirect("CiurmaServlet");
+           request.getRequestDispatcher("/CiurmaServlet").forward(request, response);
         }
 	}
 

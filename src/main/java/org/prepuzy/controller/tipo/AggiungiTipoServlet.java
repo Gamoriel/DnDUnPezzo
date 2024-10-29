@@ -28,7 +28,7 @@ public class AggiungiTipoServlet extends HttpServlet {
         nuovoTipo.setDescrizione(descrizione);
 
         BusinessLogic.aggiungiTipo(nuovoTipo);
-        response.sendRedirect("TipiServlet");
+       request.getRequestDispatcher("/master/TipiServlet").forward(request, response);
 	}
 
 }

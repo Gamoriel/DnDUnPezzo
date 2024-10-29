@@ -44,6 +44,8 @@ public class Personaggio {
     private List<AbilitaFrutto> abilitaFruttoVisibileAPersonaggio;
     @ManyToMany(mappedBy = "visibileAPersonaggio")
     private List<AbilitaProfessione> abilitaProfessioneVisibileAPersonaggio;
+    @ManyToMany(mappedBy = "visibileAPersonaggio")
+    private List<Tecniche> tecnichePersonaggio;
     private int forza,destrezza,costituzione,intelligenza,saggezza,carisma,hp,classeArmatura;
     private boolean isVisibleToAll, isMercante;
 	
@@ -283,4 +285,12 @@ public class Personaggio {
 		this.abilitaProfessioneVisibileAPersonaggio = abilitaProfessioneVisibileAPersonaggio;
 	}
 
+	public List<Tecniche> getTecnichePersonaggio() {
+		return tecnichePersonaggio;
+	}
+
+	public void setTecnichePersonaggio(List<Tecniche> tecnichePersonaggio) {
+		this.tecnichePersonaggio = tecnichePersonaggio;
+	}
+	
 }

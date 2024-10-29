@@ -24,18 +24,18 @@ public class EliminaOggettoServlet extends HttpServlet {
 				boolean success = BusinessLogic.deleteOggetto(id);
 
 				if (success) {
-					response.sendRedirect("OggettiServlet?= Oggetto eliminato con successo");
+					request.getRequestDispatcher("/OggettiServlet").forward(request, response);
 					return;
 				} else {
-					response.sendRedirect("ErrorServlet?=Oggetto non trovato");
+					request.setAttribute("messaggio", "Oggetto non trovato"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 					return;
 				}
 			} catch (Exception e) {
-				response.sendRedirect("ErrorServlet?=Errore durante eliminazione oggetto" + e.getMessage());
+				request.setAttribute("messaggio", "Errore durante eliminazione oggetto"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				e.printStackTrace();
 			}
 		} else {
-			response.sendRedirect("ErrorServlet?=ID non valido");
+			request.setAttribute("messaggio", "ID non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

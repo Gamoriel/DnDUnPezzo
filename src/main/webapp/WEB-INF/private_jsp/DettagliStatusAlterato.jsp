@@ -27,7 +27,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -52,7 +52,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -70,13 +70,13 @@
 				<strong>Descrizione:</strong>
 				<%=statusAlterato.getDescrizione()%></p>
 			<div class="actionButtons">
-				<form action="master/ModificaStatusAlteratoServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaStatusAlteratoServlet" method="get">
 					<input type="hidden" name="idStatusAlterato"
 						value="<%=statusAlterato.getId()%>">
 					<button type="submit" class="buttonMod">Modifica</button>
 				</form>
 
-				<form action="master/EliminaStatusAlteratoServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaStatusAlteratoServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questo status alterato?');">
 					<input type="hidden" name="idStatusAlterato"
 						value="<%=statusAlterato.getId()%>">

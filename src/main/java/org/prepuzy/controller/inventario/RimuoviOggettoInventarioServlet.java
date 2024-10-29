@@ -39,15 +39,15 @@ public class RimuoviOggettoInventarioServlet extends HttpServlet {
 	    			request.getRequestDispatcher("DettagliPersonaggioServlet").forward(request, response);
 	    		} else {
 	    			request.setAttribute("messaggio", "Oggetto non trovato nell'inventario");
-	    			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+	    			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	    		}
 	    	} else {
     			request.setAttribute("messaggio", "Personaggio non trovato");
-    			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+    			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	    	}
 	    } else {
 			request.setAttribute("messaggio", "Id non valido");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	    }
 	}
 

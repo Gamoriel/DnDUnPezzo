@@ -57,7 +57,7 @@ public class AggiungiProfessioneServlet extends HttpServlet {
 	        nuovaProfessione.setHp(hp);
 	        
 	        BusinessLogic.aggiungiProfessione(nuovaProfessione);
-	        response.sendRedirect("ProfessioniServlet");
+	       request.getRequestDispatcher("/ProfessioniServlet").forward(request, response);
 	}
 
 }

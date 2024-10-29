@@ -23,7 +23,7 @@ public class LoginLogicServlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("Registrati".equals(action)) {
-			response.sendRedirect("RegisterPageServlet");
+			response.sendRedirect(request.getContextPath() + "/RegisterPageServlet");
 			return;
 		}
 
@@ -46,7 +46,7 @@ public class LoginLogicServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.setAttribute("loggedUser", u);
 
-		request.getRequestDispatcher("MasterPageServlet").forward(request, response);
+		request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
 		return;
 
 	}

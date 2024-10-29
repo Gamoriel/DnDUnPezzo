@@ -54,7 +54,7 @@ public class AggiungiNaveServlet extends HttpServlet {
 	    }
 
 	    BusinessLogic.aggiungiNave(nave);
-	    response.sendRedirect("NaviServlet");
+	   request.getRequestDispatcher("/NaviServlet").forward(request, response);
 	}
 
 }

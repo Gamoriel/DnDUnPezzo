@@ -196,7 +196,7 @@ public class JpaDaoProfessione implements DaoProfessione {
 
 	    try {
 	        t.begin();
-	        AbilitaFrutto abilita = em.find(AbilitaFrutto.class, id);
+	        AbilitaProfessione abilita = em.find(AbilitaProfessione.class, id);
 	        if (abilita != null) {
 	            em.remove(abilita);
 	            t.commit();

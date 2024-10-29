@@ -23,18 +23,18 @@ public class EliminaQualitaServlet extends HttpServlet {
 				boolean eliminato = BusinessLogic.eliminaQualita(idQualita);
 
 				if (eliminato) {
-					response.sendRedirect("QualitaServlet");
+					request.getRequestDispatcher("/master/QualitaServlet").forward(request, response);
 				} else {
 					request.setAttribute("messaggio", "Impossibile eliminare la qualità.");
-					request.getRequestDispatcher("ErrorServlet").forward(request, response);
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 				}
 			} catch (NumberFormatException e) {
 				request.setAttribute("messaggio", "ID qualità non valido.");
-				request.getRequestDispatcher("ErrorServlet").forward(request, response);
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 			}
 		} else {
 			request.setAttribute("messaggio", "ID qualità non fornito.");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 }

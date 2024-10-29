@@ -20,12 +20,14 @@ public class EliminaTipologiaServlet extends HttpServlet {
             long idTipologia = Long.parseLong(idTipologiaParam);
             boolean eliminato = BusinessLogic.eliminaTipologia(idTipologia);
             if (eliminato) {
-                response.sendRedirect("TipologieServlet");
+               request.getRequestDispatcher("/master/TipologieServlet").forward(request, response);
             } else {
-                request.getRequestDispatcher("ErrorServlet?=Errore durante l'eliminazione della tipologia").forward(request, response);
+            	request.setAttribute("messaggio", "Errore durante l'eliminazione della tipologia");
+                request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
         } else {
-            request.getRequestDispatcher("ErrorServlet?=ID della tipologia non valido").forward(request, response);
+        	request.setAttribute("messaggio", "D della tipologia non valido");
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 

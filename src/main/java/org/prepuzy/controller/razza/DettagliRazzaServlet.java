@@ -28,13 +28,13 @@ public class DettagliRazzaServlet extends HttpServlet {
 					request.setAttribute("razza", razza);
 					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliRazza.jsp").forward(request, response);
 				} else {
-					response.sendRedirect("ErrorServlet?= Razza non trovata");
+					request.setAttribute("messaggio", " Razza non trovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}
 			} catch (NumberFormatException e) {
-				response.sendRedirect("ErrorServlet?=ID non valido");
+				request.setAttribute("messaggio", "ID non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
-			response.sendRedirect("ErrorServlet?=ID non valido");
+			request.setAttribute("messaggio", "ID non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

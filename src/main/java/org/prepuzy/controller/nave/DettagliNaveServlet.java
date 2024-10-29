@@ -24,7 +24,7 @@ public class DettagliNaveServlet extends HttpServlet {
 			request.setAttribute("nave", nave);
 			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliNave.jsp").forward(request, response);
 		} else {
-			request.getRequestDispatcher("ErrorServlet?=Nave non trovata.").forward(request, response);
+			request.setAttribute("messaggio", "Nave non trovata."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

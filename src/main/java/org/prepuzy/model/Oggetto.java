@@ -32,6 +32,9 @@ public class Oggetto {
     @ManyToMany( fetch = FetchType.EAGER)
     @JoinTable(name = "oggetto_status",joinColumns = @JoinColumn(name = "oggetto_id"),inverseJoinColumns = @JoinColumn(name = "status_id"))
 	private List<StatusAlterati> status;
+    @ManyToMany( fetch = FetchType.EAGER)
+    @JoinTable(name = "oggetto_frutto",joinColumns = @JoinColumn(name = "oggetto_id"),inverseJoinColumns = @JoinColumn(name = "frutto_id"))
+    private List<Frutto> frutti;
     @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "tipologia_id")
 	private Tipologia tipologia;
@@ -223,6 +226,14 @@ public class Oggetto {
 
 	public void setClasseArmatura(int classeArmatura) {
 		this.classeArmatura = classeArmatura;
+	}
+
+	public List<Frutto> getFrutti() {
+		return frutti;
+	}
+
+	public void setFrutti(List<Frutto> frutti) {
+		this.frutti = frutti;
 	}
 
 	public boolean equals(Object o) {

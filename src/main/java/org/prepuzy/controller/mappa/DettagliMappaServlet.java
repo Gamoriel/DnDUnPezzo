@@ -25,7 +25,8 @@ public class DettagliMappaServlet extends HttpServlet {
                 idMappa = Long.parseLong(idMappaParam);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
-                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID mappa non valido");
+                request.setAttribute("messaggio", "ID mappa non valido");
+            	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
                 return;
             }
         }
@@ -34,7 +35,7 @@ public class DettagliMappaServlet extends HttpServlet {
 
         if (mappa == null) {
         	request.setAttribute("messaggio", "Mappa non trovata");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
 

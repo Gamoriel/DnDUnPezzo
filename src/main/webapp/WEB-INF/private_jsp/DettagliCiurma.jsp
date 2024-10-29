@@ -29,7 +29,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -54,7 +54,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -103,11 +103,11 @@
 			%>
 
 			<div class="actionButtons">
-				<form action="master/ModificaCiurmaServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaCiurmaServlet" method="get">
 					<input type="hidden" name="idCiurma" value="<%=ciurma.getId()%>">
 					<button class="buttonMod" type="submit">Modifica Ciurma</button>
 				</form>
-				<form action="master/EliminaCiurmaServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaCiurmaServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler cancellare questa ciurma?');">
 					<input type="hidden" name="idCiurma" value="<%=ciurma.getId()%>">
 					<button class="buttonDel" type="submit">Cancella Ciurma</button>

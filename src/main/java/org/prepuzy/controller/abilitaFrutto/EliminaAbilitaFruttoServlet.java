@@ -24,10 +24,10 @@ public class EliminaAbilitaFruttoServlet extends HttpServlet {
             BusinessLogic.eliminaAbilitaFrutto(abilita.getId());
         } else {
             request.setAttribute("messaggio", "Abilità non trovata.");
-            request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
-        request.getRequestDispatcher("AbilitaFruttoServlet").forward(request, response);
+        request.getRequestDispatcher("/master/AbilitaFruttoServlet").forward(request, response);
 	}
 
 

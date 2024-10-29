@@ -21,7 +21,7 @@ public class RegisterLogicServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if("login".equals(action)) {
-			response.sendRedirect("Login");
+			request.getRequestDispatcher("/Login").forward(request, response);
 			return;
 		}
 		
@@ -37,7 +37,7 @@ public class RegisterLogicServlet extends HttpServlet {
 			request.getRequestDispatcher("public_jsp/Registrazione.jsp").forward(request, response);
 			return;
 		}
-		response.sendRedirect("Login");
+		request.getRequestDispatcher("/Login").forward(request, response);
 	}
 
 }

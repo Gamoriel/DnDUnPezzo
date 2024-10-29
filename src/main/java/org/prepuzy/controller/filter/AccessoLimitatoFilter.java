@@ -29,7 +29,7 @@ public class AccessoLimitatoFilter extends HttpFilter implements Filter {
 	    HttpSession session = httpRequest.getSession(false);
 
 	    if (session == null || session.getAttribute("loggedUser") == null) {
-	        httpResponse.sendRedirect(httpRequest.getContextPath() + "/Login");
+	    	httpRequest.getRequestDispatcher(httpRequest.getContextPath() + "/Login");
 	        return;
 	    }
 

@@ -1,6 +1,8 @@
 package org.prepuzy.controller.nave;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +21,15 @@ public class ModificaNaveServlet extends HttpServlet {
 			throws ServletException, IOException {
 		long idNave = Long.parseLong(request.getParameter("idNave"));
 		Nave nave = BusinessLogic.naveById(idNave);
+		List<Ciurma> ciurme = BusinessLogic.listaCiurme();
 
 		if (nave != null) {
 			request.setAttribute("nave", nave);
+			request.setAttribute("ciurme", ciurme);
 			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaNave.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Nave non trovata");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 
@@ -57,8 +61,8 @@ public class ModificaNaveServlet extends HttpServlet {
 	    nave.setVisibleToAll(isVisibleToAll);
 
 		BusinessLogic.modificaNave(nave);
-
-		response.sendRedirect("DettagliNaveServlet?idNave=" + idNave);
+		request.setAttribute("idNave", idNave);
+		request.getRequestDispatcher("/DettagliNaveServlet").forward(request, response);
 	}
 
 }

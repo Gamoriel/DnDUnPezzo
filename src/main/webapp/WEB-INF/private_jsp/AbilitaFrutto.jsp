@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -58,7 +58,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -68,7 +68,6 @@
 
 		<div class="centerBar">
 			<h1>Lista Abilità per Frutto</h1>
-			<div class="cardContainer">
 				<%
 				Map<String, List<AbilitaFrutto>> abilitaPerFrutto = (Map<String, List<AbilitaFrutto>>) request.getAttribute("abilitaPerFrutto");
 				if (abilitaPerFrutto != null && !abilitaPerFrutto.isEmpty()) {
@@ -76,8 +75,8 @@
 						String nomeFrutto = entry.getKey();
 						List<AbilitaFrutto> abilitaList = entry.getValue();
 				%>
-				<div class="cardContainer">
-					<h2><%=nomeFrutto%></h2>
+			<h2><%=nomeFrutto%></h2>
+			<div class="cardContainer">
 					<%
 					for (AbilitaFrutto abilita : abilitaList) {
 					%>
@@ -107,7 +106,6 @@
 				<%
 				}
 				%>
-			</div>
 		</div>
 	</div>
 </body>

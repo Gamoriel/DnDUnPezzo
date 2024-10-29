@@ -33,7 +33,7 @@ public class NaviServlet extends HttpServlet {
 	    		navi = BusinessLogic.mostraNaviVisibilitaUtenteBase();
 	    	}
 	    } else {
-	    	request.getRequestDispatcher("Login").forward(request, response);
+	    	request.getRequestDispatcher("/Login").forward(request, response);
 	    }
 	    
 	        request.setAttribute("navi", navi);

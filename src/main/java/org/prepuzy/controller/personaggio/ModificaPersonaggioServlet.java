@@ -130,7 +130,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			personaggio.setHp(hp);
 			personaggio.setClasseArmatura(classeArmatura);
 			BusinessLogic.modificaPersonaggio(personaggio);
-			response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
+			request.getRequestDispatcher("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
 		} else {
 			request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
 			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);

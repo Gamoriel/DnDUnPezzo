@@ -31,12 +31,12 @@ public class RimuoviOggettoEquipServlet extends HttpServlet {
 	                personaggio.getInventario().getOggetti().add(oggetto);
 	                BusinessLogic.modificaPersonaggio(personaggio);
 
-	                response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
+	               request.getRequestDispatcher("/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
 	            } else {
-	                response.sendRedirect("ErrorServlet?messaggio=Oggetto non presente nell'equipaggiamento");
+	               request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non presente nell'equipaggiamento").forward(request, response);
 	            }
 	        } else {
-	            response.sendRedirect("ErrorServlet?messaggio=Personaggio o Oggetto non trovati");
+	           request.getRequestDispatcher("/ErrorServlet?messaggio=Personaggio o Oggetto non trovati").forward(request, response);
 	        }
 	}
 

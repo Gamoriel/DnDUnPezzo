@@ -11,7 +11,7 @@
 <body>
 	<nav>
 		<div class="addNew">
-			<form action="master/AggiungiStatusAlteratiServlet" method="get">
+			<form action="${pageContext.request.contextPath}/master/AggiungiStatusAlteratiServlet" method="get">
 				<button type="submit" class="btnAdd">Aggiungi Nuovo Status
 					Alterato</button>
 			</form>
@@ -31,7 +31,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -42,6 +42,7 @@
 
 	<div class="container">
 		<div class="leftBar">
+		<h2>Collegamenti</h2>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
@@ -55,7 +56,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -74,8 +75,8 @@
 				<div class="listCard">
 					<h2><%=status.getNome()%></h2>
 					<div class="formContainer">
-						<form action="DettagliStatusAlteratiServlet" method="get">
-							<input type="hidden" name="idStatusAlterati"
+						<form action="${pageContext.request.contextPath}/DettagliStatusAlteratiServlet" method="get">
+							<input type="hidden" name="idStatusAlterato"
 								value="<%=status.getId()%>">
 							<button type="submit" class="buttonMod">Dettagli</button>
 						</form>

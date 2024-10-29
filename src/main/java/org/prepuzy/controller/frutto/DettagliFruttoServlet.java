@@ -40,15 +40,15 @@ public class DettagliFruttoServlet extends HttpServlet {
 	                    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliFrutto.jsp").forward(request, response);
 	                } else {
 	                	request.setAttribute("messaggio", "Frutto non trovato");
-	                	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+	                	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	                }
 	            } catch (NumberFormatException e) {
 	            	request.setAttribute("messaggio", "Frutto non valido");
-	            	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+	            	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	            }
 	        } else {
 	        	request.setAttribute("messaggio", "Frutto non fornito");
-	        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+	        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 	        }
 	    }
 

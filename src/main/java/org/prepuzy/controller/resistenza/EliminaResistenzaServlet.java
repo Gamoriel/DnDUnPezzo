@@ -19,12 +19,12 @@ public class EliminaResistenzaServlet extends HttpServlet {
             try {
                 long idResistenza = Long.parseLong(idResistenzaParam);
                 BusinessLogic.eliminaResistenza(idResistenza);
-                response.sendRedirect("ResistenzeServlet");
+               request.getRequestDispatcher("/ResistenzeServlet").forward(request, response);
             } catch (NumberFormatException e) {
-            	response.sendRedirect("ErrorServlet?=Errore nell'eliminazione" + e.getMessage());
+            	request.setAttribute("messaggio", "Errore nell'eliminazione"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
         } else {
-        	response.sendRedirect("ErrorServlet?=Id non valido");
+        	request.setAttribute("messaggio", "Id non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 

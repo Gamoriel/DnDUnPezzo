@@ -27,7 +27,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -52,7 +52,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -140,13 +140,13 @@
 			}
 			%>
 			<div class="actionButtons">
-				<form action="master/ModificaProfessioneServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaProfessioneServlet" method="get">
 					<input type="hidden" name="idProfessione"
 						value="<%=professione.getId()%>">
 					<button class="buttonMod" type="submit">Modifica
 						Professione</button>
 				</form>
-				<form action="master/EliminaProfessioneServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaProfessioneServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler cancellare questa professione?');">
 					<input type="hidden" name="idProfessione"
 						value="<%=professione.getId()%>">

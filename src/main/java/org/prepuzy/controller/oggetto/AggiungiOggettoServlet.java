@@ -118,7 +118,7 @@ public class AggiungiOggettoServlet extends HttpServlet {
 		oggetto.setTipologia(tipologia);
 
 		BusinessLogic.aggiungiOggetto(oggetto);
-		response.sendRedirect("OggettiServlet");
+		request.getRequestDispatcher("/OggettiServlet").forward(request, response);
 	}
 
 }

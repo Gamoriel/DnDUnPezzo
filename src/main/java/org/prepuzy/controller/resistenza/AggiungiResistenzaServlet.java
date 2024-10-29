@@ -29,7 +29,7 @@ public class AggiungiResistenzaServlet extends HttpServlet {
 
         BusinessLogic.aggiungiResistenza(resistenza);
 
-        response.sendRedirect("ResistenzeServlet");
+       request.getRequestDispatcher("/ResistenzeServlet").forward(request, response);
 	}
 
 }

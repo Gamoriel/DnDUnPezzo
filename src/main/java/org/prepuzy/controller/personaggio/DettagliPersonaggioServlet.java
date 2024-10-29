@@ -30,7 +30,7 @@ public class DettagliPersonaggioServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliPersonaggio.jsp").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "Personaggio non trovato");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
         }
 	}
 

@@ -34,7 +34,7 @@ public class SpostaOggettoDaDepositoServlet extends HttpServlet {
 			BusinessLogic.modificaNave(nave);
 		}
 
-		response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
+		request.getRequestDispatcher("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
 	}
 
 }

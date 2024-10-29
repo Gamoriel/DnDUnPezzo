@@ -50,13 +50,13 @@ public class ModificaOggettoServlet extends HttpServlet {
 
                     request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaOggetto.jsp").forward(request, response);
                 } else {
-                    response.sendRedirect("ErrorServlet?messaggio=Oggetto non trovato");
+                   request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non trovato").forward(request, response);
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("ErrorServlet?messaggio=ID Oggetto non valido");
+               request.getRequestDispatcher("/ErrorServlet?messaggio=ID Oggetto non valido").forward(request, response);
             }
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=ID Oggetto non fornito");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=ID Oggetto non fornito").forward(request, response);
         }
     }
 
@@ -124,15 +124,15 @@ public class ModificaOggettoServlet extends HttpServlet {
                     }
 
                     BusinessLogic.aggiornaOggetto(oggetto);
-                    response.sendRedirect("DettagliOggettoServlet?id=" + idOggetto);
+                   request.getRequestDispatcher("/DettagliOggettoServlet?id=" + idOggetto).forward(request, response);
                 } else {
-                    response.sendRedirect("ErrorServlet?messaggio=Oggetto non trovato");
+                   request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non trovato").forward(request, response);
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("ErrorServlet?messaggio=Errore nei valori numerici");
+               request.getRequestDispatcher("/ErrorServlet?messaggio=Errore nei valori numerici").forward(request, response);
             }
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=Parametri mancanti o non validi");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=Parametri mancanti o non validi").forward(request, response);
         }
     }
 

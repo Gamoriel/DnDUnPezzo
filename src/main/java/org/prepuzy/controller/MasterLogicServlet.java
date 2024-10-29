@@ -28,15 +28,15 @@ public class MasterLogicServlet extends HttpServlet {
 					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCapitolo.jsp").forward(request, response);
 				} else {
 					request.setAttribute("messaggio","Capitolo non trovato");
-					request.getRequestDispatcher("ErrorServlet").forward(request, response);
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 				}
 			} catch (NumberFormatException e) {
 				request.setAttribute("messaggio","ID non valido");
-				request.getRequestDispatcher("ErrorServlet").forward(request, response);
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 			}
 		} else {
 			request.setAttribute("messaggio","Nessun capitolo selezionato");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 }

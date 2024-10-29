@@ -57,22 +57,22 @@ public class AggiungiOggettoInventarioServlet extends HttpServlet {
 							BusinessLogic.aggiungiOggettoMercante(oggettiMercante);
 						}
 
-						response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
+						request.getRequestDispatcher("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
 					} else {
 						request.setAttribute("messaggio", "Capacità massima dell'inventario raggiunta. Non puoi aggiungere " + oggetto.getNome());
-						request.getRequestDispatcher("ErrorServlet").forward(request, response);
+						request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 					}
 				} else {
 					request.setAttribute("messaggio", "Personaggio o Oggetto non trovati.");
-					request.getRequestDispatcher("ErrorServlet").forward(request, response);
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 				}
 			} catch (NumberFormatException e) {
 				request.setAttribute("messaggio", "ID non valido. Assicurati di aver selezionato un personaggio e un oggetto correttamente.");
-				request.getRequestDispatcher("ErrorServlet").forward(request, response);
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 			}
 		} else {
 			request.setAttribute("messaggio", "ID del personaggio o dell'oggetto mancante.");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 }

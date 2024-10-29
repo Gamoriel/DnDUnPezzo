@@ -8,6 +8,7 @@ import org.prepuzy.model.Inventario;
 import org.prepuzy.model.Nave;
 import org.prepuzy.model.OggettiMercante;
 import org.prepuzy.model.Personaggio;
+import org.prepuzy.model.Tecniche;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -78,13 +79,10 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 	        t.begin();
 	        Personaggio personaggio = em.find(Personaggio.class, id);
 	        if (personaggio != null) {
-	            System.out.println("Personaggio trovato: " + personaggio.getNome());
 	            em.remove(personaggio);
 	            t.commit();
-	            System.out.println("Personaggio eliminato con successo.");
 	            return true;
 	        } else {
-	            System.out.println("Personaggio con ID " + id + " non trovato.");
 	            t.rollback();
 	            return false;
 	        }
@@ -235,6 +233,100 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 	    } finally {
 	        em.close();
 	    }
+	}
+
+	@Override
+	public void insertTecniche(Tecniche te) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    t.begin();
+	    if (te.getId() == 0) {
+	        em.persist(te);
+	    } else {
+	        em.merge(te);
+	    }
+
+	    t.commit();
+	}
+
+	@Override
+	public void updateTecniche(Tecniche te) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        em.merge(te);    
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'aggiornamento della tecnica: " + e.getMessage(), e);
+	    } finally {
+	        em.close();
+	    }
+	}
+
+	@Override
+	public boolean deleteTecniche(long id) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        Tecniche tecnica = em.find(Tecniche.class, id);
+	        if (tecnica != null) {
+	            em.remove(tecnica);
+	            t.commit();
+	            return true;
+	        } else {
+	            t.rollback();
+	            return false;
+	        }
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        em.close();
+	    }
+	}
+
+	@Override
+	public List<Tecniche> listaTecniche() {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+		TypedQuery<Tecniche> q = em.createQuery("select t from Tecniche t", Tecniche.class);
+		return(q.getResultList());
+	}
+
+	@Override
+	public List<Tecniche> listaTecnicheByPersonaggioId(long id) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+		TypedQuery<Tecniche> q = em.createQuery("select t from Tecniche t JOIN t.visibileAPersonaggio p where p.id = :id", Tecniche.class);
+		return(q.getResultList());
+	}
+
+	@Override
+	public Tecniche selectTecnicaById(long id) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+		EntityTransaction t = em.getTransaction();
+		Tecniche te = null;
+
+		try {
+			t.begin();
+			te = em.find(Tecniche.class, id);
+			t.commit();
+		} catch (Exception e) {
+			if (t.isActive()) {
+				t.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+
+		return te;
 	}
 
 }

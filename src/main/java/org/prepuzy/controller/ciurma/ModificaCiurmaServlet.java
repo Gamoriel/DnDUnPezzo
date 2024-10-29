@@ -90,6 +90,6 @@ public class ModificaCiurmaServlet extends HttpServlet {
 		}
 
 		BusinessLogic.modificaCiurma(ciurma);
-		response.sendRedirect("CiurmaServlet");
+		request.getRequestDispatcher("CiurmaServlet").forward(request, response);
 	}
 }

@@ -29,7 +29,7 @@ public class DettagliMercanteServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMercante.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Mercante non trovato");
-			request.getRequestDispatcher("ErrorServlet").forward(request, response);
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 
@@ -44,7 +44,7 @@ public class DettagliMercanteServlet extends HttpServlet {
 				BusinessLogic.aggiornaPrezzo(invOggetto, nuovoPrezzo);
 			}
 		}
-		response.sendRedirect("DettagliMercanteServlet?idMercante=" + idMercante);
+		request.getRequestDispatcher("DettagliMercanteServlet?idMercante=" + idMercante).forward(request, response);
 	}
 
 }

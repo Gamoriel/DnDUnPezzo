@@ -12,19 +12,25 @@ import org.prepuzy.businesslogic.BusinessLogic;
 @WebServlet("/master/EliminaMappaServlet")
 public class EliminaMappaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED, "GET method not supported for this action");
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			long idMappa = Long.parseLong(request.getParameter("idMappa"));
 			BusinessLogic.eliminaMappa(idMappa);
-			response.sendRedirect("MappeServlet?message=Mappa eliminata con successo.");
+			request.getRequestDispatcher("/MappeServlet").forward(request, response);
 		} catch (NumberFormatException e) {
 
-			response.sendRedirect("ErrorServlet?messaggio=ID della mappa non valido.");
+			request.setAttribute("messaggio", "ID della mappa non valido.");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		} catch (Exception e) {
 
-			response.sendRedirect("ErrorServlet?messaggio=Errore durante l'eliminazione della mappa.");
+			request.setAttribute("messaggio", "Errore durante l'eliminazione della mappa.");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

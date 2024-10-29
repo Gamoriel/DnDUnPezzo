@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.prepuzy.model.OggettiMercante;
 import org.prepuzy.model.Personaggio;
+import org.prepuzy.model.Tecniche;
 
 public interface DaoPersonaggio {
 	void insert(Personaggio p);
@@ -20,4 +21,10 @@ public interface DaoPersonaggio {
 	Personaggio PersonaggioConTuttiElementi(long id);
 	void aggiornaPrezzo(OggettiMercante o, long prezzo);
 	void insertOggettoMercante(OggettiMercante o);
+	void insertTecniche(Tecniche t);
+	void updateTecniche(Tecniche t);
+	boolean deleteTecniche(long id);
+	Tecniche selectTecnicaById(long id);
+	List<Tecniche> listaTecniche();
+	List<Tecniche> listaTecnicheByPersonaggioId(long id);
 }

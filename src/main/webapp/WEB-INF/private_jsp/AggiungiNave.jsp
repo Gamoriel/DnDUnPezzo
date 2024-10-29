@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -51,7 +51,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -62,7 +62,7 @@
 		<div class="centerBar">
 			<h1>Aggiungi Nuova Nave</h1>
 
-			<form action="master/AggiungiNaveServlet" method="post">
+			<form action="${pageContext.request.contextPath}/master/AggiungiNaveServlet" method="post">
 				<div class="formGroup">
 					<label for="nome">Nome:</label> <input type="text" id="nome"
 						name="nome" required>
@@ -100,7 +100,7 @@
 						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">
 				</div>
 				<div class="formGroup">
-					<button type="submit" class="btnAdd">Aggiungi Capitolo</button>
+					<button type="submit" class="btnAdd">Aggiungi Nave</button>
 				</div>
 			</form>
 		</div>

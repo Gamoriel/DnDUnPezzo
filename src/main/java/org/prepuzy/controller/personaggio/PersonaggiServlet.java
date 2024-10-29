@@ -33,7 +33,7 @@ public class PersonaggiServlet extends HttpServlet {
 	    		personaggi = BusinessLogic.mostraPersonaggiVisibilitaUtenteBase();
 	    	}
 	    } else {
-	    	 request.getRequestDispatcher("Login").forward(request, response);
+	    	 request.getRequestDispatcher("/Login").forward(request, response);
 	    }
 
         request.setAttribute("personaggi", personaggi);

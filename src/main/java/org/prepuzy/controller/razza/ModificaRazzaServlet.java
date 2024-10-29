@@ -25,10 +25,10 @@ public class ModificaRazzaServlet extends HttpServlet {
 				request.setAttribute("razza", razza);
 				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaRazza.jsp").forward(request, response);
 			} else {
-				response.sendRedirect("RazzaServlet?error=RazzaNonTrovata");
+				request.setAttribute("messaggio", "RazzaNonTrovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
-			response.sendRedirect("RazzaServlet?error=IDInvalido");
+			request.setAttribute("messaggio", "IDInvalido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 
@@ -45,13 +45,13 @@ public class ModificaRazzaServlet extends HttpServlet {
 				razza.setNome(nome);
 				razza.setDescrizione(descrizione);
 				BusinessLogic.modificaRazza(razza);
-
-				response.sendRedirect("DettagliRazzaServlet?idRazza=" + idRazza);
+				request.setAttribute("idRazza", idRazza);
+				request.getRequestDispatcher("/DettagliRazzaServlet").forward(request, response);
 			} else {
-				response.sendRedirect("RazzaServlet?error=RazzaNonTrovata");
+				request.setAttribute("messaggio", "RazzaNonTrovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
-			response.sendRedirect("RazzeServlet?error=IDInvalido");
+			request.setAttribute("messaggio", "IDInvalido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

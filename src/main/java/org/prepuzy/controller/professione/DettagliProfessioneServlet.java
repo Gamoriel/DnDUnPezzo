@@ -36,10 +36,10 @@ public class DettagliProfessioneServlet extends HttpServlet {
                 request.setAttribute("professione", professione);
                 request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliProfessione.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("ErrorServlet?=Professione non trovata.").forward(request, response);
+                request.setAttribute("messaggio", "Professione non trovata."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
         } else {
-            request.getRequestDispatcher("ErrorServlet?=ID professione non fornito.").forward(request, response);
+            request.setAttribute("messaggio", "ID professione non fornito."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 

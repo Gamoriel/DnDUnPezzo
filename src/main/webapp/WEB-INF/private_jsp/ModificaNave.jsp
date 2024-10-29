@@ -30,7 +30,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -55,7 +55,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -68,24 +68,38 @@
 
 			<%
 			Nave nave = (Nave) request.getAttribute("nave");
+			List<Ciurma> listaCiurme = (List<Ciurma>) request.getAttribute("ciurme");
 			%>
 
-			<form action="master/ModificaNaveServlet" method="post"
-				enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/master/ModificaNaveServlet" method="post">
+			
 				<input type="hidden" name="idNave" value="<%=nave.getId()%>">
 
-				<label for="nome">Nome Nave:</label> <input type="text" name="nome"
-					value="<%=nave.getNome()%>" required><br>
-				<br> <label for="descrizione">Descrizione:</label>
+				<label for="nome">Nome Nave:</label> 
+				<input type="text" name="nome" value="<%=nave.getNome()%>" required><br>
+				<br> 
+				<label for="descrizione">Descrizione:</label>
 				<textarea name="descrizione" rows="4" cols="50" required><%=nave.getDescrizione()%></textarea>
 				<br>
-				<br> <label for="hp">HP:</label> <input type="number" name="hp"
-					value="<%=nave.getHp()%>" required><br>
-				<br>
+				<label for="hp">HP:</label> 
+				<input type="number" name="hp" value="<%=nave.getHp()%>" required><br>
+				<label for="ciurma">Ciurma:</label>
+    			<select name="ciurma" required>
+		        <option value="">Seleziona una ciurma</option>
+		        <% 
+		            for (Ciurma ciurma : listaCiurme) {
+		                String selected = (nave.getCiurma() != null && nave.getCiurma().getId() == ciurma.getId()) ? "selected" : "";
+		        %>
+		                <option value="<%=ciurma.getId()%>" <%=selected%>><%=ciurma.getNome()%></option>
+		        <% 
+		            } 
+		        %>
+    </select>
+    <br>
 
 				<div class="formGroup">
-					<label for="isVisibleToAll">Visibile a tutti:</label> <input
-						type="checkbox" id="isVisibleToAll" name="isVisibleToAll"
+					<label for="isVisibleToAll">Visibile a tutti:</label> 
+					<input type="checkbox" id="isVisibleToAll" name="isVisibleToAll"
 						<%=nave.isVisibleToAll() ? "checked" : ""%>>
 				</div>
 

@@ -13,7 +13,7 @@
 <body>
 	<nav>
 		<div class="addNew">
-			<form action="master/AggiungiFruttoServlet" method="get">
+			<form action="${pageContext.request.contextPath}/master/AggiungiFruttoServlet" method="get">
 				<button type="submit" class="btnAdd">Aggiungi Frutto</button>
 			</form>
 		</div>
@@ -32,7 +32,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -57,7 +57,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -76,7 +76,7 @@
 				<div class="listCard">
 					<h2><%=frutto.getNome()%></h2>
 					<div class="formContainer">
-						<form action="DettagliFruttoServlet" method="get">
+						<form action="${pageContext.request.contextPath}/DettagliFruttoServlet" method="get">
 							<input type="hidden" name="idFrutto" value="<%=frutto.getId()%>">
 							<button type="submit" class="buttonMod">Dettagli</button>
 						</form>

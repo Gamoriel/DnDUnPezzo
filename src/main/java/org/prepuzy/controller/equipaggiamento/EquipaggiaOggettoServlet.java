@@ -41,14 +41,14 @@ public class EquipaggiaOggettoServlet extends HttpServlet {
                 personaggio.getInventario().getOggetti().remove(oggetto);
                 BusinessLogic.modificaEquipaggiamento(equip);
                 BusinessLogic.modificaPersonaggio(personaggio);
-                response.sendRedirect("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
+               request.getRequestDispatcher("/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
             } else {
             	request.setAttribute("messaggio", "Oggetto non presente nell'inventario");
-            	request.getRequestDispatcher("ErrorServlet").forward(request, response);;
+            	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  ;
             }
         } else {
         	request.setAttribute("messaggio", "Personaggio o Oggetto non trovati");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);;
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  ;
         }
 	}
 }

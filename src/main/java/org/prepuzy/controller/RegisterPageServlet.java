@@ -19,20 +19,20 @@ public class RegisterPageServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
         if ("login".equals(action)) {
-            request.getRequestDispatcher("LoginPageServlet").forward(request, response);
+            request.getRequestDispatcher("/LoginPageServlet").forward(request, response);
             return;
         }
 		
 		if(userInSession != null) {
 			switch (userInSession.getRole()) {
 			case BASE: 
-				request.getRequestDispatcher("MasterPageServlet").forward(request, response);
+				request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
 				return;
 			case MASTER:
-				request.getRequestDispatcher("MasterPageServlet").forward(request, response);
+				request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
 				return;
 			default:
-				request.getRequestDispatcher("ErrorPageServlet").forward(request, response);
+				request.getRequestDispatcher("/ErrorPageServlet").forward(request, response);
 				return;
 			}
 		}

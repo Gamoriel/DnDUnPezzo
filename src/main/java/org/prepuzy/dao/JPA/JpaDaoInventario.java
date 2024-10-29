@@ -28,7 +28,7 @@ public class JpaDaoInventario implements DaoInventario{
 	    EntityTransaction t = em.getTransaction();
 	    try {
 	        t.begin();
-	        em.persist(i);
+	        em.merge(i);
 	        t.commit();
 	    } catch (Exception e) {
 	        if (t.isActive()) {

@@ -42,18 +42,18 @@ public class AggiungiCapitoloServlet extends HttpServlet {
 					BusinessLogic.inserisciCapitolo(nuovoCapitolo);
 					;
 
-					response.sendRedirect("MasterPageServlet?message=Capitolo aggiunto con successo");
+					request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
 				} else {
-
-					response.sendRedirect("ErrorServlet?messaggio=Capitolo non trovato");
+					request.setAttribute("messaggio", "Capitolo non trovato");
+					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 				}
 			} catch (NumberFormatException e) {
-
-				response.sendRedirect("ErrorServlet?messaggio=ID Capitolo non valido");
+				request.setAttribute("messaggio", "Non tutti i campi sono compilati");
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 			}
 		} else {
-
-			response.sendRedirect("ErrorServlet?messaggio=Dati mancanti per aggiungere il capitolo");
+			request.setAttribute("messaggio", "Dati mancanti per aggiungere il capitolo");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
 		}
 	}
 }

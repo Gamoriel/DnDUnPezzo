@@ -35,7 +35,7 @@ public class OggettiServlet extends HttpServlet {
 	    		oggetti = BusinessLogic.mostraOggettiVisibilitaUtenteBase();
 	    	}
 	    } else {
-	    	request.getRequestDispatcher("Login").forward(request, response);
+	    	request.getRequestDispatcher("/Login").forward(request, response);
 	    }
 
 		request.setAttribute("oggetti", oggetti);

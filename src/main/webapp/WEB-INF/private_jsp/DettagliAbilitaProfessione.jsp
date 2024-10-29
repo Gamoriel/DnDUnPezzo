@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -50,7 +50,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -70,17 +70,17 @@
 				<strong>Descrizione:</strong>
 				<%=abilita.getDescrizione()%></p>
 			<p>
-				<strong>Frutto Associato:</strong>
-				<%=abilita.getProfessione().getNome()%></p>
+				<strong>Professione Associato:</strong>
+				<%=abilita.getProfessione() != null ? abilita.getProfessione().getNome() : "Nessuna professione associata"%></p>
 			<div class="actionButtons">
-				<form action="master/ModificaAbilitaProfessioneServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaAbilitaProfessioneServlet" method="get">
 					<input type="hidden" name="idAbilita" value="<%=abilita.getId()%>">
 					<button type="submit" class="buttonMod">Modifica Abilità</button>
 				</form>
-				<form action="master/EliminaAbilitaProfessioneServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaAbilitaProfessioneServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questa abilita?');">
 					<input type="hidden" name="idAbilita" value="<%=abilita.getId()%>">
-					<button type="submit" class="buttonDel">Elimina Capitolo</button>
+					<button type="submit" class="buttonDel">Elimina Abilita</button>
 				</form>
 			</div>
 			<%

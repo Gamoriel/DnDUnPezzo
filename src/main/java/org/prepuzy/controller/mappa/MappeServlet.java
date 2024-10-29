@@ -36,15 +36,19 @@ public class MappeServlet extends HttpServlet {
 					listaMappe = BusinessLogic.mostraMappeVisibilitaUtenteBase();
 				}
 			} else {
-				request.getRequestDispatcher("Login").forward(request, response);
+				request.getRequestDispatcher("/Login").forward(request, response);
 			}
 
 			request.setAttribute("listaMappe", listaMappe);
 			request.getRequestDispatcher("/WEB-INF/private_jsp/Mappe.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.getRequestDispatcher("ErrorServlet?=Errore durante il recupero delle mappe.").forward(request, response);
+			request.setAttribute("messaggio", "Errore durante il recupero delle mappe."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
-
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 }

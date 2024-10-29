@@ -29,7 +29,7 @@ public class ModificaProfessioneServlet extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaProfessione.jsp").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "Professione non trovata");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
         }
 	}
 
@@ -61,7 +61,7 @@ public class ModificaProfessioneServlet extends HttpServlet {
 
 	    BusinessLogic.modificaProfessione(professione);
 
-	    response.sendRedirect("ProfessioniServlet");
+	   request.getRequestDispatcher("/ProfessioniServlet").forward(request, response);
 	}
 
 }

@@ -22,7 +22,7 @@ public class AbilitaProfessioneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<AbilitaProfessione> abilitaList = BusinessLogic.listaAbilitaProfessione();
 
-        Map<String, List<AbilitaProfessione>> abilitaPerProfessione = abilitaList.stream().collect(Collectors.groupingBy(abilita -> abilita.getProfessione().getNome()));
+		Map<String, List<AbilitaProfessione>> abilitaPerProfessione = abilitaList.stream() .collect(Collectors.groupingBy(abilita -> abilita.getProfessione() != null ? abilita.getProfessione().getNome() : "Senza Professione"));
         
         request.setAttribute("abilitaPerProfessione", abilitaPerProfessione);
         request.getRequestDispatcher("/WEB-INF/private_jsp/AbilitaProfessione.jsp").forward(request, response);

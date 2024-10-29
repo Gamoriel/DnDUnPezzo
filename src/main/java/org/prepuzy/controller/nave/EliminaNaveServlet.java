@@ -19,10 +19,10 @@ public class EliminaNaveServlet extends HttpServlet {
         boolean eliminata = BusinessLogic.eliminaNave(idNave);
 
         if (eliminata) {
-            response.sendRedirect("NaviServlet");
+           request.getRequestDispatcher("/NaviServlet").forward(request, response);
         } else {
         	request.setAttribute("messaggio", "eliminazione fallita");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
         }
 	}
 

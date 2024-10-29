@@ -27,7 +27,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -52,7 +52,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -76,12 +76,12 @@
 				<%=capitolo.getTesto()%></p>
 
 			<div class="actionButtons">
-				<form action="master/ModificaCapitoloServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaCapitoloServlet" method="get">
 					<input type="hidden" name="idCapitolo"
 						value="<%=capitolo.getId()%>">
 					<button type="submit" class="buttonMod">Modifica Capitolo</button>
 				</form>
-				<form action="master/EliminaCapitoloServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaCapitoloServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questo capitolo?');">
 					<input type="hidden" name="idCapitolo"
 						value="<%=capitolo.getId()%>">

@@ -26,13 +26,13 @@ public class DettagliResistenzaServlet extends HttpServlet {
 					request.setAttribute("resistenza", resistenza);
 					request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliResistenza.jsp").forward(request, response);
 				} else {
-					response.sendRedirect("ErrorServlet?=Resistenza non trovata");
+					request.setAttribute("messaggio", "Resistenza non trovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}
 			} catch (NumberFormatException e) {
-				response.sendRedirect("ErrorServlet?= errore nel trovare Resistenza" + e.getMessage());
+				request.setAttribute("messaggio", " errore nel trovare Resistenza"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
-			response.sendRedirect("ErrorServlet?=ID non valido");
+			request.setAttribute("messaggio", "ID non valido"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

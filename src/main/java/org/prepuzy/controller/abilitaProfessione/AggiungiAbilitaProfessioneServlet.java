@@ -26,7 +26,7 @@ public class AggiungiAbilitaProfessioneServlet extends HttpServlet {
 
         if (nome == null || nome.isEmpty() || descrizione == null || descrizione.isEmpty()) {
             request.setAttribute("messaggio", "Nome e descrizione sono obbligatori.");
-            request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
         
@@ -36,7 +36,7 @@ public class AggiungiAbilitaProfessioneServlet extends HttpServlet {
         
         BusinessLogic.aggiungiAbilitaProfessione(abilita);
         
-        response.sendRedirect("AbilitaProfessioneServlet");
+       request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
 	}
 
 }

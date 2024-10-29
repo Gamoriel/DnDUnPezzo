@@ -22,15 +22,15 @@ public class EliminaPersonaggioServlet extends HttpServlet {
 				boolean eliminato = BusinessLogic.eliminaPersonaggio(id);
 
 				if (eliminato) {
-					response.sendRedirect("PersonaggiServlet");
+					request.getRequestDispatcher("PersonaggiServlet").forward(request, response);
 				} else {
-					request.getRequestDispatcher("ErrorServlet?=Impossibile eliminare il personaggio.").forward(request, response);
+					request.setAttribute("messaggio", "Impossibile eliminare il personaggio."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}
 			} catch (NumberFormatException e) {
-				request.getRequestDispatcher("ErrorServlet?=ID non valido.").forward(request, response);
+				request.setAttribute("messaggio", "ID non valido."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}
 		} else {
-			request.getRequestDispatcher("ErrorServlet?=ID del personaggio non specificato.").forward(request, response);
+			request.setAttribute("messaggio", "ID del personaggio non specificato."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
 	}
 

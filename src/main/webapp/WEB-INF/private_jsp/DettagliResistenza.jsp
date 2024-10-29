@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -51,7 +51,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -72,13 +72,13 @@
 				<%=resistenza.getDescrizione()%></p>
 
 			<div class="actionButtons">
-				<form action="master/ModificaResistenzaServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaResistenzaServlet" method="get">
 					<input type="hidden" name="idResistenza"
 						value="<%=resistenza.getId()%>">
 					<button type="submit" class="buttonMod">Modifica</button>
 				</form>
 
-				<form action="master/EliminaResistenzaServlet" method="post">
+				<form action="${pageContext.request.contextPath}/master/EliminaResistenzaServlet" method="post">
 					<input type="hidden" name="idResistenza"
 						value="<%=resistenza.getId()%>">
 					<button type="submit" class="buttonDel"

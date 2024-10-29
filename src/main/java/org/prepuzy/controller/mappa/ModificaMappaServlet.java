@@ -19,7 +19,6 @@ import org.prepuzy.model.Capitolo;
 import org.prepuzy.model.Mappa;
 import org.prepuzy.model.Personaggio;
 
-
 @MultipartConfig
 @WebServlet("/master/ModificaMappaServlet")
 public class ModificaMappaServlet extends HttpServlet {
@@ -45,84 +44,88 @@ public class ModificaMappaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	    long idMappa = Long.parseLong(request.getParameter("idMappa"));
-	    String nome = request.getParameter("nome");
-	    String descrizione = request.getParameter("descrizione");
-	    Part immaginePart = request.getPart("immagine");
-	    boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
+		
+		long idMappa = Long.parseLong(request.getParameter("idMappa"));
+		String nome = request.getParameter("nome");
+		String descrizione = request.getParameter("descrizione");
+		Part immaginePart = request.getPart("immagine");
+		boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 
-	    Mappa mappa = BusinessLogic.cercaMappaConId(idMappa);
-	    if (mappa == null) {
-	        request.setAttribute("errorMessage", "Mappa non trovata.");
-	        request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
-	        return;
-	    }
+		Mappa mappa = BusinessLogic.cercaMappaConId(idMappa);
+		if (mappa == null) {
+			request.setAttribute("messaggio", "Mappa non trovata.");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+			return;
+		}
 
-	    aggiornaMappa(mappa, nome, descrizione, isVisibleToAll, immaginePart, request, response);
+		aggiornaMappa(mappa, nome, descrizione, isVisibleToAll, immaginePart, request, response);
 
-	    gestisciPersonaggiEMappe(mappa, request);
+		gestisciPersonaggiEMappe(mappa, request);
 
-	    BusinessLogic.modificaMappa(mappa);
-	    response.sendRedirect("DettagliMappaServlet?idMappa=" + idMappa);
+		BusinessLogic.modificaMappa(mappa);
+		request.setAttribute("idMappa", idMappa);
+		request.getRequestDispatcher("/DettagliMappaServlet").forward(request, response);
 	}
 
-	private void aggiornaMappa(Mappa mappa, String nome, String descrizione, boolean isVisibleToAll, Part immaginePart, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
-		mappa.setNome(nome);
-	    mappa.setDescrizione(descrizione);
-	    mappa.setVisibleToAll(isVisibleToAll);
+	private void aggiornaMappa(Mappa mappa, String nome, String descrizione, boolean isVisibleToAll, Part immaginePart,
+			HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-	    if (immaginePart != null && immaginePart.getSize() > 0) {
-	        String fileName = System.currentTimeMillis() + "_" + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
-	        String uploadDir = getServletContext().getRealPath("/uploads");
-	        File uploadDirFile = new File(uploadDir);
-	        if (!uploadDirFile.exists()) {
-	            uploadDirFile.mkdirs();
-	        }
-	        
-	        String filePath = uploadDir + File.separator + fileName;
-	        try {
-	            immaginePart.write(filePath);
-	            mappa.setImmagine("uploads/" +  fileName);
-	        } catch (IOException e) {
-	            request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-	            request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
-	            throw e;
-	        }
-	    }
+		mappa.setNome(nome);
+		mappa.setDescrizione(descrizione);
+		mappa.setVisibleToAll(isVisibleToAll);
+
+		if (immaginePart != null && immaginePart.getSize() > 0) {
+			String fileName = System.currentTimeMillis() + "_"
+					+ Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+			String uploadDir = getServletContext().getRealPath("/uploads");
+			File uploadDirFile = new File(uploadDir);
+			if (!uploadDirFile.exists()) {
+				uploadDirFile.mkdirs();
+			}
+
+			String filePath = uploadDir + File.separator + fileName;
+			try {
+				immaginePart.write(filePath);
+				mappa.setImmagine("uploads/" + fileName);
+			} catch (IOException e) {
+				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
+				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaMappa.jsp").forward(request, response);
+				throw e;
+			}
+		}
 	}
 
 	private void gestisciPersonaggiEMappe(Mappa mappa, HttpServletRequest request) {
-	    String[] personaggiIds = request.getParameterValues("personaggi");
-	    List<Personaggio> nuoviPersonaggi = new ArrayList<>();
-	    if (personaggiIds != null) {
-	        for (String idPersonaggio : personaggiIds) {
-	            Personaggio personaggio = BusinessLogic.personaggioById(Long.parseLong(idPersonaggio));
-	            if (personaggio != null) {
-	                nuoviPersonaggi.add(personaggio);
-	            }
-	        }
-	    }
-	    mappa.setPersonaggi(nuoviPersonaggi);
+		String[] personaggiIds = request.getParameterValues("personaggi");
+		List<Personaggio> nuoviPersonaggi = new ArrayList<>();
+		if (personaggiIds != null) {
+			for (String idPersonaggio : personaggiIds) {
+				Personaggio personaggio = BusinessLogic.personaggioById(Long.parseLong(idPersonaggio));
+				if (personaggio != null) {
+					nuoviPersonaggi.add(personaggio);
+				}
+			}
+		}
+		mappa.setPersonaggi(nuoviPersonaggi);
 
-	    long idCapitolo = Long.parseLong(request.getParameter("capitolo"));
-	    if (idCapitolo != -1) {
-	        Capitolo capitolo = BusinessLogic.cercaConId(idCapitolo);
-	        mappa.setCapitolo(capitolo);
-	    } else {
-	        mappa.setCapitolo(null);
-	    }
+		long idCapitolo = Long.parseLong(request.getParameter("capitolo"));
+		if (idCapitolo != -1) {
+			Capitolo capitolo = BusinessLogic.cercaConId(idCapitolo);
+			mappa.setCapitolo(capitolo);
+		} else {
+			mappa.setCapitolo(null);
+		}
 
-	    String[] mappeIds = request.getParameterValues("mappe");
-	    List<Mappa> mappeAssociate = new ArrayList<>();
-	    if (mappeIds != null) {
-	        for (String idMappaAssociata : mappeIds) {
-	            Mappa mappaAssociata = BusinessLogic.cercaMappaConId(Long.parseLong(idMappaAssociata));
-	            if (mappaAssociata != null) {
-	                mappeAssociate.add(mappaAssociata);
-	            }
-	        }
-	    }
-	    mappa.setMappe(mappeAssociate);
+		String[] mappeIds = request.getParameterValues("mappe");
+		List<Mappa> mappeAssociate = new ArrayList<>();
+		if (mappeIds != null) {
+			for (String idMappaAssociata : mappeIds) {
+				Mappa mappaAssociata = BusinessLogic.cercaMappaConId(Long.parseLong(idMappaAssociata));
+				if (mappaAssociata != null) {
+					mappeAssociate.add(mappaAssociata);
+				}
+			}
+		}
+		mappa.setMappe(mappeAssociate);
 	}
 }

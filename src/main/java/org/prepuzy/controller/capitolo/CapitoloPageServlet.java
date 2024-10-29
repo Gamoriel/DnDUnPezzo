@@ -19,7 +19,7 @@ public class CapitoloPageServlet extends HttpServlet {
         if (capitolo != null) {
             request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCapitolo.jsp").forward(request, response);
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=capitolo non trovato");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=capitolo non trovato").forward(request, response);
         }
 	}
 

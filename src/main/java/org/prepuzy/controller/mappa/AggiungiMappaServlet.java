@@ -22,69 +22,72 @@ import org.prepuzy.model.Mappa;
 public class AggiungiMappaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Mappa> listaMappePadri = BusinessLogic.listaMappe();
-        if (listaMappePadri == null) {
-            listaMappePadri = new ArrayList<>();
-        }
-        request.setAttribute("listaMappePadri", listaMappePadri);
-        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<Mappa> listaMappePadri = BusinessLogic.listaMappe();
+		if (listaMappePadri == null) {
+			listaMappePadri = new ArrayList<>();
+		}
+		request.setAttribute("listaMappePadri", listaMappePadri);
+		request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String nome = request.getParameter("nome");
-	    String descrizione = request.getParameter("descrizione");
-	    boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		String descrizione = request.getParameter("descrizione");
+		boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 
-	    Mappa mappa = new Mappa();
 
-	    if (nome != null && descrizione != null && !nome.isEmpty() && !descrizione.isEmpty()) {
-	        mappa.setNome(nome);
-	        mappa.setDescrizione(descrizione);
-	        mappa.setVisibleToAll(isVisibleToAll);
-	    } else {
-	        request.setAttribute("errorMessage", "Devi riempire tutti i campi.");
-	        request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
-	        return;
-	    }
+		Mappa mappa = new Mappa();
 
-	    Part immaginePart = request.getPart("immagine");
-	    if (immaginePart != null && immaginePart.getSize() > 0) {
-	        String immagineFileName = System.currentTimeMillis() + "_" + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
-	        String uploadDir = getServletContext().getRealPath("/uploads");
-	        System.out.println(uploadDir);
-	        File uploadDirFile = new File(uploadDir);
-	        if (!uploadDirFile.exists()) {
-	            uploadDirFile.mkdir();
-	        }
+		if (nome != null && descrizione != null && !nome.isEmpty() && !descrizione.isEmpty()) {
+			mappa.setNome(nome);
+			mappa.setDescrizione(descrizione);
+			mappa.setVisibleToAll(isVisibleToAll);
+		} else {
+			request.setAttribute("messaggio", "Devi riempire tutti i campi.");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+			return;
+		}
 
-	        File file = new File(uploadDir + File.separator + immagineFileName);
-	        try {
-	            immaginePart.write(file.getAbsolutePath());
-	            
-	            mappa.setImmagine("uploads/" +  immagineFileName);
-	        } catch (IOException e) {
-	            request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-	            request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
-	            return;
-	        }
-	    }
-	    
-	    String idMappaPadreStr = request.getParameter("mappaPadre");
-	    if (idMappaPadreStr != null && !idMappaPadreStr.isEmpty()) {
-	        try {
-	            long idMappaPadre = Long.parseLong(idMappaPadreStr);
-	            Mappa mappaPadre = BusinessLogic.cercaMappaConId(idMappaPadre);
-	            mappa.setMappaPadre(mappaPadre);
-	        } catch (NumberFormatException e) {
-	            request.setAttribute("errorMessage", "Errore nell'ID della mappa padre.");
-	            request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiMappa.jsp").forward(request, response);
-	            return;
-	        }
-	    }
+		Part immaginePart = request.getPart("immagine");
+		if (immaginePart != null && immaginePart.getSize() > 0) {
+			String immagineFileName = System.currentTimeMillis() + "_"
+					+ Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+			String uploadDir = getServletContext().getRealPath("/uploads");
+			File uploadDirFile = new File(uploadDir);
+			if (!uploadDirFile.exists()) {
+				uploadDirFile.mkdir();
+			}
 
-	    BusinessLogic.aggiungiMappa(mappa);
-	    response.sendRedirect("MappeServlet");
+			File file = new File(uploadDir + File.separator + immagineFileName);
+			try {
+				immaginePart.write(file.getAbsolutePath());
+
+				mappa.setImmagine("uploads/" + immagineFileName);
+			} catch (IOException e) {
+				request.setAttribute("messaggio", "Errore durante il caricamento dell'immagine.");
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+				return;
+			}
+		}
+
+		String idMappaPadreStr = request.getParameter("mappaPadre");
+		if (idMappaPadreStr != null && !idMappaPadreStr.isEmpty()) {
+			try {
+				long idMappaPadre = Long.parseLong(idMappaPadreStr);
+				Mappa mappaPadre = BusinessLogic.cercaMappaConId(idMappaPadre);
+				mappa.setMappaPadre(mappaPadre);
+			} catch (NumberFormatException e) {
+				request.setAttribute("messaggio", "Errore nell'ID della mappa padre.");
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+				return;
+			}
+		}
+
+		BusinessLogic.aggiungiMappa(mappa);
+		request.getRequestDispatcher("/MappeServlet").forward(request, response);
 	}
 
 }

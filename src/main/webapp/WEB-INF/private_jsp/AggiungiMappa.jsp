@@ -45,7 +45,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -69,7 +69,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -79,8 +79,7 @@
 		<div class="centerBar">
 			<h1>Aggiungi Nuova Mappa</h1>
 
-			<form action="master/AggiungiMappaServlet" method="post"
-				enctype="multipart/form-data">
+			<form action="${pageContext.request.contextPath}/master/AggiungiMappaServlet" method="post" enctype="multipart/form-data">
 				<div>
 					<label for="nome">Nome:</label> <input type="text" id="nome"
 						name="nome" required>
@@ -100,25 +99,23 @@
 					<div class="file-name" id="fileName">Nessun file selezionato</div>
 				</div>
 				<div>
-					<label for="mappaPadre">Seleziona Mappa Padre:</label> <select
-						id="mappaPadre" name="mappaPadre">
-						<option value="">Nessuna</option>
-						<%
-						List<Mappa> listaMappePadri = (List<Mappa>) request.getAttribute("listaMappePadri");
-						if (listaMappePadri != null && !listaMappePadri.isEmpty()) {
-							for (Mappa mappa : listaMappePadri) {
-						%>
-						<div>
-							<p><%=mappa.getNome()%></p>
-						</div>
-						<%
-						}
-						} else {
-						%>
-						<p>Nessuna mappa padre trovata.</p>
-						<%
-						}
-						%>
+					<label for="mappaPadre">Seleziona Mappa Padre:</label>
+					<select id="mappaPadre" name="mappaPadre">
+					    <option value="">Nessuna</option>
+					    <%
+					    List<Mappa> listaMappePadri = (List<Mappa>) request.getAttribute("listaMappePadri");
+					    if (listaMappePadri != null && !listaMappePadri.isEmpty()) {
+					        for (Mappa mappa : listaMappePadri) {
+					    %>
+					    <option value="<%= mappa.getId() %>"><%= mappa.getNome() %></option>
+					    <%
+					        }
+					    } else {
+					    %>
+					    <option disabled>Nessuna mappa padre trovata.</option>
+					    <%
+					    }
+					    %>
 					</select>
 				</div>
 				<div class="formGroup">

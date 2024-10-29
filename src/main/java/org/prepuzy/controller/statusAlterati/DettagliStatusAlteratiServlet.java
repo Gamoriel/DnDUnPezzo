@@ -18,7 +18,7 @@ public class DettagliStatusAlteratiServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        String idParam = request.getParameter("idStatusAlterati");
+        String idParam = request.getParameter("idStatusAlterato");
         if (idParam != null && !idParam.isEmpty()) {
             try {
                 long id = Long.parseLong(idParam);
@@ -27,16 +27,16 @@ public class DettagliStatusAlteratiServlet extends HttpServlet {
                     request.setAttribute("statusAlterato", statusAlterato);
                     request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliStatusAlterato.jsp").forward(request, response);
                 } else {
-                	request.setAttribute("ErrorServlet","Status Alterato non trovato");
-                	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+                	request.setAttribute("messaggio","Status Alterato non trovato");
+                	request.getRequestDispatcher("/ErrorServlet").forward(request, response);
                 }
             } catch (NumberFormatException e) {
-            	request.setAttribute("ErrorServlet","Errore nella ricerca" + e.getMessage());
-            	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+            	request.setAttribute("messaggio","Errore nella ricerca" + e.getMessage());
+            	request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
         } else {
-        	request.setAttribute("ErrorServlet","ID non valido");
-        	request.getRequestDispatcher("ErrorServlet").forward(request, response);
+        	request.setAttribute("messaggio","ID non valido");
+        	request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 

@@ -26,13 +26,13 @@ public class CapitoloLogicServlet extends HttpServlet {
                     request.setAttribute("capitoloSelezionato", capitolo);
                     request.getRequestDispatcher("CapitoloPageServlet").forward(request, response);
                 } else {
-                    response.sendRedirect("ErrorServlet?messaggio=Capitolo non trovato");
+                   request.getRequestDispatcher("/ErrorServlet?messaggio=Capitolo non trovato").forward(request, response);
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("ErrorServlet?messaggio=ID non valido");
+               request.getRequestDispatcher("/ErrorServlet?messaggio=ID non valido").forward(request, response);
             }
         } else {
-            response.sendRedirect("ErrorServlet?messaggio=Nessun capitolo selezionato");
+           request.getRequestDispatcher("/ErrorServlet?messaggio=Nessun capitolo selezionato").forward(request, response);
         }
 	}
 }

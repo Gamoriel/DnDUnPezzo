@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -58,7 +58,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità Frutti</a></li>
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -182,17 +182,17 @@
 			<p>
 				<strong>Prezzo:</strong>
 				<%=frutto.getPrezzo()%>
-				monete
+				Berry
 			</p>
 
 
 			<div class="actionButtons">
-				<form action="master/ModificaFruttoServlet" method="get"
+				<form action="${pageContext.request.contextPath}/master/ModificaFruttoServlet" method="get"
 					style="display: inline;">
 					<input type="hidden" name="idFrutto" value="<%=frutto.getId()%>">
 					<button type="submit" class="buttonMod">Modifica Frutto</button>
 				</form>
-				<form action="master/EliminaFruttoServlet" method="post"
+				<form action="${pageContext.request.contextPath}/master/EliminaFruttoServlet" method="post"
 					style="display: inline;"
 					onsubmit="return confirm('Sei sicuro di voler cancellare questo frutto?');">
 					<input type="hidden" name="idFrutto" value="<%=frutto.getId()%>">
