@@ -121,7 +121,7 @@ public class JpaDaoProfessione implements DaoProfessione {
 
         try {
             t.begin();
-            em.persist(p);
+            em.merge(p);
             t.commit();
         } catch (Exception e) {
             if (t.isActive()) {

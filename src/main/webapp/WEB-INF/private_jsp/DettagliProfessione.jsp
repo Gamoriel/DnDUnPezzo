@@ -67,7 +67,8 @@
 			<h2><%=professione.getNome()%></h2>
 			<p>
 				<strong>Descrizione:</strong>
-				<%=professione.getDescrizione()%></p>
+			</p>
+			<p><%=professione.getDescrizione()%></p>	
 
 			<h2>Altre Abilità</h2>
 			<ul>

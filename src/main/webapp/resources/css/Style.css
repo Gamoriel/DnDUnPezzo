@@ -9,6 +9,15 @@ body {
 	padding: 0;
 }
 
+p {
+	word-wrap: break-word;
+}
+
+.overflow {
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
 button {
 	font-family: "Montserrat", sans-serif;
 }
