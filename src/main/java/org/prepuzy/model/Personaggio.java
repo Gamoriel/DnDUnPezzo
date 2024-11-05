@@ -3,12 +3,14 @@ package org.prepuzy.model;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -19,7 +21,10 @@ public class Personaggio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome, soprannome, descrizione, urlImmagine, abilita;
+	private String nome, soprannome, urlImmagine;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String descrizione;
 	private List<Integer> taglia;
     @OneToMany(mappedBy = "mercante", cascade = CascadeType.ALL)
     private List<OggettiMercante> oggettiMercante;
@@ -253,14 +258,6 @@ public class Personaggio {
 
 	public void setClasseArmatura(int classeArmatura) {
 		this.classeArmatura = classeArmatura;
-	}
-
-	public String getAbilita() {
-		return abilita;
-	}
-
-	public void setAbilita(String abilita) {
-		this.abilita = abilita;
 	}
 
 	public boolean isMercante() {

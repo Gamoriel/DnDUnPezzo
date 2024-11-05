@@ -2,10 +2,12 @@ package org.prepuzy.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -13,7 +15,10 @@ public class Tipo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String tipo, descrizione;
+	private String tipo;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String descrizione;
 	@OneToMany(mappedBy = "tipo")
 	private List<Frutto> frutto;
 	

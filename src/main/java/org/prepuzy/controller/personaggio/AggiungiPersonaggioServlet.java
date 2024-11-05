@@ -47,7 +47,6 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String soprannome = request.getParameter("soprannome");
 		String descrizione = request.getParameter("descrizione");
-		String abilita = request.getParameter("abilita");
 		int forza = Integer.parseInt(request.getParameter("forza"));
 		int destrezza = Integer.parseInt(request.getParameter("destrezza"));
 		int costituzione = Integer.parseInt(request.getParameter("costituzione"));
@@ -89,7 +88,6 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 			personaggio.setNome(nome);
 			personaggio.setSoprannome(soprannome);
 			personaggio.setDescrizione(descrizione);
-			personaggio.setAbilita(abilita);
 			personaggio.setForza(forza);
 			personaggio.setDestrezza(destrezza);
 			personaggio.setCostituzione(costituzione);

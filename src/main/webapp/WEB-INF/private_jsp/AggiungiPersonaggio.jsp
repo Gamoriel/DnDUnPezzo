@@ -126,10 +126,6 @@
 					<label for="classeArmatura">Classe Armatura</label> <input
 						type="number" id="classeArmatura" name="classeArmatura" required>
 				</div>
-				<div class="formGroup">
-					<label for="abilita">Descrizione:</label>
-					<textarea id="abilita" name="abilita" rows="4" required></textarea>
-				</div>
 				<div>
 					<label for="razza">Seleziona Razza:</label> <select id="razza"
 						name="razza">

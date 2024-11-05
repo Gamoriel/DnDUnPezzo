@@ -9,7 +9,10 @@ public class AbilitaFrutto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome,descrizione;
+	private String nome;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String descrizione;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "personaggio_abilita_frutto", joinColumns = @JoinColumn(name = "abilita_id"), inverseJoinColumns = @JoinColumn(name = "personaggio_id"))
     private List<Personaggio> visibileAPersonaggio;

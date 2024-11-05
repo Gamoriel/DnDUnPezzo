@@ -2,10 +2,12 @@ package org.prepuzy.model;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 
 @Entity
@@ -13,7 +15,10 @@ public class StatusAlterati {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome, descrizione;
+	private String nome;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String descrizione;
 	@ManyToMany(mappedBy = "status")
     private List<Oggetto> oggetto;
     

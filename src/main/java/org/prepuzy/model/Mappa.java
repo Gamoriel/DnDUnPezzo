@@ -2,13 +2,14 @@ package org.prepuzy.model;
 
 import java.util.List;
 
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -18,7 +19,10 @@ public class Mappa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String immagine, nome, descrizione;
+	private String immagine, nome;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String descrizione;
     @OneToMany(mappedBy = "mappaPadre",  fetch = FetchType.EAGER)
     private List<Mappa> mappe;
     @ManyToOne
