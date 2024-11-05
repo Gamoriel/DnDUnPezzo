@@ -51,5 +51,4 @@ public class JpaDaoInventario implements DaoInventario{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

@@ -29,7 +29,7 @@ public class Equipaggiamento {
 		return id;
 	}
 
-	public void SetId(long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -37,7 +37,7 @@ public class Equipaggiamento {
 		return oggetti;
 	}
 
-	public void SetOggetti(List<Oggetto> oggetti) {
+	public void setOggetti(List<Oggetto> oggetti) {
 		this.oggetti = oggetti;
 	}
 

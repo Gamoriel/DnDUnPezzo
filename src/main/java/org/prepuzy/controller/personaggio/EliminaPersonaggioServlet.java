@@ -15,14 +15,14 @@ public class EliminaPersonaggioServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String idString = request.getParameter("id");
+		String idString = request.getParameter("idPersonaggio");
 		if (idString != null && !idString.isEmpty()) {
 			try {
 				long id = Long.parseLong(idString);
 				boolean eliminato = BusinessLogic.eliminaPersonaggio(id);
 
 				if (eliminato) {
-					request.getRequestDispatcher("PersonaggiServlet").forward(request, response);
+					request.getRequestDispatcher("/PersonaggiServlet").forward(request, response);
 				} else {
 					request.setAttribute("messaggio", "Impossibile eliminare il personaggio."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}

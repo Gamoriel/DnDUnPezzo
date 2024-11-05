@@ -32,7 +32,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -56,7 +56,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 		<div class="centerBar">
@@ -73,7 +73,7 @@
 				<%=t.getDescrizione()%></p>
 
 			<div class="actionButtons">
-				<form action="${pageContext.request.contextPath}/master/ModificaTenicheServlet" method="get">
+				<form action="${pageContext.request.contextPath}/master/ModificaTecnicheServlet" method="get">
 					<input type="hidden" name="idTecnica" value="<%=t.getId()%>">
 					<button type="submit" class="buttonMod">Modifica Tecnica</button>
 				</form>

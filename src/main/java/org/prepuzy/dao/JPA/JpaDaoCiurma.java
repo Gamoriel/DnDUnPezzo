@@ -33,63 +33,87 @@ public class JpaDaoCiurma implements DaoCiurma {
 			em.merge(c);
 		}
 		t.commit();
+		em.close();
 	}
 
 	@Override
 	public List<Ciurma> listaCiurme() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Ciurma> q = em.createQuery("select c from Ciurma c", Ciurma.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Ciurma> q = em.createQuery("select c from Ciurma c", Ciurma.class);
+			return(q.getResultList());			
+		}finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public Ciurma selectById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		String query = "select c from Ciurma c left join fetch c.personaggi left join fetch c.nave where c.id = :id";
-		return em.createQuery(query, Ciurma.class).setParameter("id", id).getSingleResult();
+		try {
+			String query = "select c from Ciurma c left join fetch c.personaggi left join fetch c.nave where c.id = :id";
+			return em.createQuery(query, Ciurma.class).setParameter("id", id).getSingleResult();
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public void delete(long id) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
 
-		Ciurma ciurma = em.find(Ciurma.class, id);
-		if (ciurma != null) {
-			em.remove(ciurma);
-		} else {
-			throw new EntityNotFoundException("Personaggio non trovato per ID: " + id);
-		}
+	        Ciurma ciurma = em.find(Ciurma.class, id);
+	        if (ciurma != null) {
+	            em.remove(ciurma);
+	        } else {
+	            throw new EntityNotFoundException("Ciurma non trovata per ID: " + id);
+	        }
 
-		t.commit();
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'eliminazione della ciurma", e);
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public void update(Ciurma c) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        Ciurma existingCiurma = em.find(Ciurma.class, c.getId());
+	        if (existingCiurma != null) {
+	            existingCiurma.setNome(c.getNome());
+	            existingCiurma.setJollyRoger(c.getJollyRoger());
+	            existingCiurma.setDescrizione(c.getDescrizione());
+	            if (c.getPersonaggi() != null) {
+	                existingCiurma.setPersonaggi(c.getPersonaggi());
+	            }
+	            if (c.getNave() != null) {
+	                existingCiurma.setNave(c.getNave());
+	            }
+	            em.merge(existingCiurma);
+	        } else {
+	            throw new EntityNotFoundException("Ciurma non trovata per ID: " + c.getId());
+	        }
 
-		Ciurma existingCiurma = em.find(Ciurma.class, c.getId());
-		if (existingCiurma != null) {
-			existingCiurma.setNome(c.getNome());
-			existingCiurma.setJollyRoger(c.getJollyRoger());
-			existingCiurma.setDescrizione(c.getDescrizione());
-
-			if (c.getPersonaggi() != null) {
-				existingCiurma.setPersonaggi(c.getPersonaggi());
-			}
-
-			if (c.getNave() != null) {
-				existingCiurma.setNave(c.getNave());
-			}
-			em.merge(existingCiurma);
-		} else {
-			throw new EntityNotFoundException("Ciurma non trovata per ID: " + c.getId());
-		}
-
-		t.commit();
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'aggiornamento della ciurma", e);
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
@@ -180,7 +204,11 @@ public class JpaDaoCiurma implements DaoCiurma {
 	@Override
 	public List<Ciurma> filtroSelectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Ciurma> q = em.createQuery("select c from Ciurma c where c.isVisibleToAll = true", Ciurma.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Ciurma> q = em.createQuery("select c from Ciurma c where c.isVisibleToAll = true", Ciurma.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
 	}
 }

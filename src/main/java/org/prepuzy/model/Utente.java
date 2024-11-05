@@ -1,11 +1,14 @@
 package org.prepuzy.model;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Utente {
@@ -13,8 +16,8 @@ public class Utente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String username, password;
-	@OneToOne (cascade = CascadeType.ALL)
-	private Personaggio personaggio;
+	@OneToMany(mappedBy = "utente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Personaggio> personaggi;
 	private Role role;
 	
 	public Utente() {
@@ -38,11 +41,11 @@ public class Utente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Personaggio getPersonaggio() {
-		return personaggio;
+	public List<Personaggio> getPersonaggi() {
+		return personaggi;
 	}
-	public void setPersonaggio(Personaggio personaggio) {
-		this.personaggio = personaggio;
+	public void setPersonaggi(List<Personaggio> personaggi) {
+		this.personaggi = personaggi;
 	}
 	public Role getRole() {
 		return role;

@@ -31,7 +31,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -56,7 +56,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -68,8 +68,7 @@
 				if (listaMercanti != null && !listaMercanti.isEmpty()) {
 					for (Personaggio mercante : listaMercanti) {
 				%>
-				<div class="listCard"
-					style="background-image: url(<%=mercante.getUrlImmagine()%>)">
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + mercante.getUrlImmagine() %>')">
 					<h2><%=mercante.getNome()%></h2>
 					<div class="formContainer">
 						<form action="DettagliMercanteServlet" method="get">

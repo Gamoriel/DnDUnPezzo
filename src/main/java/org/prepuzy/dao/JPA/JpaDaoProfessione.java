@@ -26,8 +26,13 @@ public class JpaDaoProfessione implements DaoProfessione {
 	@Override
 	public List<Professione> selectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Professione> q = em.createQuery("select p from Professione p", Professione.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Professione> q = em.createQuery("select p from Professione p", Professione.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override
@@ -131,8 +136,13 @@ public class JpaDaoProfessione implements DaoProfessione {
 	@Override
 	public AbilitaProfessione abilitaById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		String query = "select a from AbilitaProfessione a where a.id = :id";
-		return em.createQuery(query, AbilitaProfessione.class).setParameter("id", id).getSingleResult();
+		try {
+			String query = "select a from AbilitaProfessione a where a.id = :id";
+			return em.createQuery(query, AbilitaProfessione.class).setParameter("id", id).getSingleResult();
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override

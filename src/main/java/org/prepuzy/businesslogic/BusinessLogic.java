@@ -121,6 +121,11 @@ public class BusinessLogic {
 	public static Equipaggiamento equipByPersonaggioId(long id) {
 		return DaoFactory.getInstance(DATABASE).getJpaDaoEquipaggiamento().equipByIdPersonaggio(id);
 	}
+	
+	public static void modificaEquipaggiamentoPersonaggio(Equipaggiamento equip, Personaggio personaggio, Oggetto oggetto) {
+		DaoFactory.getInstance(DATABASE).getJpaDaoEquipaggiamento().updateEquipPersoInv(equip, personaggio, oggetto);
+	}
+	
 	// SEZIONE FRUTTO
 	
 	public static void aggiungiFrutto(Frutto f) {
@@ -293,8 +298,8 @@ public class BusinessLogic {
 		return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().inventarioMercante(p);
 	}
 	
-	public static void aggiornaPrezzo(OggettiMercante om, long prezzo) {
-		DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().aggiornaPrezzo(om, prezzo);
+	public static void aggiornaPrezzo(List<OggettiMercante> o) {
+		DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().aggiornaPrezzi(o);
 	}
 	
 	public static void aggiungiOggettoMercante(OggettiMercante o) {

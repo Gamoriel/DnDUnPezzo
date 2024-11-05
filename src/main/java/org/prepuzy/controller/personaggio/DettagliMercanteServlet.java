@@ -1,6 +1,7 @@
 package org.prepuzy.controller.personaggio;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,16 +36,21 @@ public class DettagliMercanteServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long idMercante = Long.parseLong(request.getParameter("idMercante"));
-		Personaggio mercante = BusinessLogic.personaggioById(idMercante);
-		List<OggettiMercante> inventario = BusinessLogic.inventarioMercante(mercante);
-		for (OggettiMercante invOggetto : inventario) {
-			String prezzoModificato = request.getParameter("prezzo_" + invOggetto.getOggetto().getId());
-			if (prezzoModificato != null) {
-				long nuovoPrezzo = Long.parseLong(prezzoModificato);
-				BusinessLogic.aggiornaPrezzo(invOggetto, nuovoPrezzo);
-			}
-		}
-		request.getRequestDispatcher("DettagliMercanteServlet?idMercante=" + idMercante).forward(request, response);
+	    Personaggio mercante = BusinessLogic.personaggioById(idMercante);
+	    List<OggettiMercante> inventario = BusinessLogic.inventarioMercante(mercante);
+
+	    List<OggettiMercante> oggettiDaAggiornare = new ArrayList<>();
+	    for (OggettiMercante invOggetto : inventario) {
+	        String prezzoModificato = request.getParameter("prezzo_" + invOggetto.getOggetto().getId());
+	        if (prezzoModificato != null) {
+	            long nuovoPrezzo = Long.parseLong(prezzoModificato);
+	            invOggetto.setPrezzo(nuovoPrezzo);
+	            oggettiDaAggiornare.add(invOggetto);
+	        }
+	    }
+
+	    BusinessLogic.aggiornaPrezzo(oggettiDaAggiornare);
+	    response.sendRedirect("DettagliMercanteServlet?idMercante=" + idMercante);
 	}
 
 }

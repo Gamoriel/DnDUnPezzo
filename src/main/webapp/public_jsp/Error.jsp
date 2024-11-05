@@ -44,7 +44,7 @@
     <div class="error-container">
         <h1>Errore</h1>
         <p><%= request.getAttribute("messaggioErrore") %></p>
-        <a href="MasterPageServlet" class="btn-back">Torna alla Home</a>
+        <a href="${pageContext.request.contextPath}/MasterPageServlet" class="btn-back">Torna alla Home</a>
     </div>
 
 </body>

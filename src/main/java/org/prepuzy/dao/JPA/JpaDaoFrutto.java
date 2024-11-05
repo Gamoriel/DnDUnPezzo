@@ -36,8 +36,13 @@ public class JpaDaoFrutto implements DaoFrutto {
 	@Override
 	public Frutto selectById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		String query = "SELECT f FROM Frutto f where f.id = :id";
-		return em.createQuery(query, Frutto.class).setParameter("id", id).getSingleResult();
+		try {
+			String query = "SELECT f FROM Frutto f where f.id = :id";
+			return em.createQuery(query, Frutto.class).setParameter("id", id).getSingleResult();
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override
@@ -131,15 +136,25 @@ public class JpaDaoFrutto implements DaoFrutto {
 	@Override
 	public List<Frutto> filtroSelectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Frutto> q = em.createQuery("select f from Frutto f where f.isVisibleToAll = true", Frutto.class);
-		return (q.getResultList());
+		try {
+			TypedQuery<Frutto> q = em.createQuery("select f from Frutto f where f.isVisibleToAll = true", Frutto.class);
+			return (q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override
 	public AbilitaFrutto abilitaById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		String query = "select a from AbilitaFrutto a where a.id = :id";
-		return em.createQuery(query, AbilitaFrutto.class).setParameter("id", id).getSingleResult();
+		try {
+			String query = "select a from AbilitaFrutto a where a.id = :id";
+			return em.createQuery(query, AbilitaFrutto.class).setParameter("id", id).getSingleResult();
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override

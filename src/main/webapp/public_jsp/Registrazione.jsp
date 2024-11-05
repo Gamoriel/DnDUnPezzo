@@ -14,7 +14,7 @@
 	<div class="registerContainer">
 		<div class="registerFormWrapper">
 			<h1 class="registerTitle">DnD OP</h1>
-			<form class="registerForm" action="RegisterLogicServlet" method="POST">
+			<form class="registerForm" action="${pageContext.request.contextPath}/RegisterLogicServlet" method="POST">
 				<div class="form-control">
 					<input type="text" name="usernameFormInput" id="usernameFormInput" required> 
 						<label for="usernameFormInput">

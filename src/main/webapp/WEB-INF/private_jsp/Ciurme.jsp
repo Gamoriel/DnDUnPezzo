@@ -36,7 +36,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -61,7 +61,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -73,11 +73,10 @@
 				if (listaCiurme != null && !listaCiurme.isEmpty()) {
 					for (Ciurma ciurma : listaCiurme) {
 				%>
-				<div class="listCard"
-					style="background-image: url(<%=ciurma.getJollyRoger()%>)">
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + ciurma.getJollyRoger() %>')">
 					<h2><%=ciurma.getNome()%></h2>
 					<div class="formContainer">
-						<form action="DettagliCiurmaServlet" method="get">
+						<form action="${pageContext.request.contextPath}/DettagliCiurmaServlet" method="get">
 							<input type="hidden" name="idCiurma" value="<%=ciurma.getId()%>">
 							<button class="buttonMod" type="submit">Dettagli Ciurma</button>
 						</form>

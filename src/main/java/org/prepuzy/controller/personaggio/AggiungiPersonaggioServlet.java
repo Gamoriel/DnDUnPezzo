@@ -3,6 +3,8 @@ package org.prepuzy.controller.personaggio;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -15,7 +17,6 @@ import javax.servlet.http.Part;
 
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Ciurma;
-import org.prepuzy.model.Equipaggiamento;
 import org.prepuzy.model.Mappa;
 import org.prepuzy.model.Nave;
 import org.prepuzy.model.Personaggio;
@@ -138,20 +139,29 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 			Mappa mappa = BusinessLogic.cercaMappaConId(mappaId);
 			personaggio.setMappa(mappa);
 		}
-		
-		Equipaggiamento e = new Equipaggiamento();
-		personaggio.setEquip(e);
 
 		BusinessLogic.aggiungiPersonaggio(personaggio);
-		if(utenteLoggato != null && utenteLoggato.getRole().equals(Role.BASE)) {
-			if(utenteLoggato.getPersonaggio() == null) {
-			utenteLoggato.setPersonaggio(personaggio);
-			BusinessLogic.modificaUtente(utenteLoggato);
+
+		if (utenteLoggato != null) {
+			if (utenteLoggato.getRole().equals(Role.BASE) || utenteLoggato.getRole().equals(Role.MASTER)) {
+				List<Personaggio> personaggi = utenteLoggato.getPersonaggi();
+				if (personaggi == null) {
+					personaggi = new ArrayList<>();
+				}
+				personaggi.add(personaggio);
+				utenteLoggato.setPersonaggi(personaggi);
+				if (utenteLoggato.getRole().equals(Role.BASE)) {
+					personaggio.setVisibleToAll(true);
+				}
+				personaggio.setUtente(utenteLoggato);
+				BusinessLogic.modificaUtente(utenteLoggato);
+				BusinessLogic.modificaPersonaggio(personaggio);
 			} else {
 				request.setAttribute("messaggio", "Hai già creato un personaggio");
-				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
+				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+				return;
 			}
 		}
-		request.getRequestDispatcher("PersonaggiServlet").forward(request, response);
+		request.getRequestDispatcher("/PersonaggiServlet").forward(request, response);
 	}
 }

@@ -8,7 +8,6 @@ import org.prepuzy.model.Mappa;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 public class JpaDaoMappa implements DaoMappa {
@@ -25,18 +24,22 @@ public class JpaDaoMappa implements DaoMappa {
 	public Mappa selectById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
 		try {
-			return (Mappa) em.createQuery("SELECT m FROM Mappa m WHERE m.id = :id", Mappa.class).setParameter("id", id)
-					.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
+			return (Mappa) em.createQuery("SELECT m FROM Mappa m WHERE m.id = :id", Mappa.class).setParameter("id", id).getSingleResult();
+		} finally {
+			em.close();
+		} 
 	}
 
 	@Override
 	public List<Mappa> listaMappe() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Mappa> q = em.createQuery("select m from Mappa m", Mappa.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Mappa> q = em.createQuery("select m from Mappa m", Mappa.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override
@@ -99,7 +102,12 @@ public class JpaDaoMappa implements DaoMappa {
 	@Override
 	public List<Mappa> filtroSelectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Mappa> q = em.createQuery("select m from Mappa m where m.isVisibleToAll = true", Mappa.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Mappa> q = em.createQuery("select m from Mappa m where m.isVisibleToAll = true", Mappa.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 }

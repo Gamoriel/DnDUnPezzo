@@ -23,15 +23,16 @@ public class LoginLogicServlet extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if ("Registrati".equals(action)) {
-			response.sendRedirect(request.getContextPath() + "/RegisterPageServlet");
+			response.sendRedirect("RegisterPageServlet");
 			return;
 		}
 
-		if (username.isBlank() && password.isBlank() || username == null && password == null) {
+		if (username == null || password == null || username.isBlank() || password.isBlank()) {
 			request.setAttribute("errorMsg", "Devi inserire username e password");
 			request.getRequestDispatcher("public_jsp/Login.jsp").forward(request, response);
 			return;
 		}
+
 		Utente u = new Utente();
 		u.setUsername(username);
 		u.setPassword(password);
@@ -45,9 +46,7 @@ public class LoginLogicServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		session.setAttribute("loggedUser", u);
-
-		request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
-		return;
+		response.sendRedirect("MasterPageServlet");
 
 	}
 }

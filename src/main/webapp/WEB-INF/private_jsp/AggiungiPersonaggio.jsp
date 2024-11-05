@@ -1,3 +1,5 @@
+<%@page import="org.prepuzy.model.Role"%>
+<%@page import="org.prepuzy.model.Utente"%>
 <%@page import="java.util.List"%>
 <%@ page import="org.prepuzy.model.Razza"%>
 <%@ page import="org.prepuzy.model.Professione"%>
@@ -13,6 +15,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
+		<%		
+			HttpSession s = request.getSession();
+			Utente utenteLoggato = (Utente) s.getAttribute("loggedUser"); 
+		%>
 	<nav>
 		
 		<div id="menuToggle">
@@ -34,7 +40,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -59,14 +65,14 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
 		<div class="centerBar">
 			<h1>Aggiungi Nuovo Personaggio</h1>
 
-			<form action="${pageContext.request.contextPath}/master/AggiungiPersonaggioServlet" method="post"
+			<form action="${pageContext.request.contextPath}/AggiungiPersonaggioServlet" method="post"
 				enctype="multipart/form-data">
 				<div class="formGroup">
 					<label for="nome">Nome:</label> <input type="text" id="nome"
@@ -221,12 +227,11 @@
 						%>
 					</select>
 				</div>
-
-				<div class="formGroup">
+				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
 					<label for="isVisibleToAll">Visibile a tutti:</label> <input
 						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">
 				</div>
-				<div class="formGroup">
+				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
 					<label for="isMercante">Mercante:</label> <input type="checkbox"
 						id="isMercante" name="isMercante">
 				</div>

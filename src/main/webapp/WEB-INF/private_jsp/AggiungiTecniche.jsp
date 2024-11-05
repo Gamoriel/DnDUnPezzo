@@ -28,7 +28,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -53,7 +53,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -61,7 +61,7 @@
 			<h1>Aggiungi Nuova Tecnica</h1>
 			<form action="${pageContext.request.contextPath}/master/AggiungiTecnicheServlet" method="post">
 				<div>
-					<label for="nome">Tipo:</label> <input type="text" id="nome"
+					<label for="nome">Nome Tecnica:</label> <input type="text" id="nome"
 						name="nome" required>
 				</div>
 				<div>
@@ -69,7 +69,7 @@
 					<textarea id="descrizione" name="descrizione" rows="4" required></textarea>
 				</div>
 				<div>
-					<input type="submit" value="Aggiungi Tipo">
+					<input type="submit" value="Aggiungi Tecnica">
 				</div>
 			</form>
 		</div>

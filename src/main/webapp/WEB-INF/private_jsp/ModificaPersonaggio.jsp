@@ -1,3 +1,5 @@
+<%@page import="org.prepuzy.model.Role"%>
+<%@page import="org.prepuzy.model.Utente"%>
 <%@page import="org.prepuzy.controller.frutto.FruttiServlet"%>
 <%@page import="org.prepuzy.model.Personaggio"%>
 <%@page import="org.prepuzy.model.Razza"%>
@@ -17,8 +19,11 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
+		<%		
+			HttpSession s = request.getSession();
+			Utente utenteLoggato = (Utente) s.getAttribute("loggedUser"); 
+		%>
 	<nav>
-		
 		<div id="menuToggle">
 			<input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
@@ -38,7 +43,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -63,7 +68,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -79,9 +84,9 @@
 			List<Frutto> frutti = (List<Frutto>) request.getAttribute("frutti");
 			%>
 
-			<form action="${pageContext.request.contextPath}/master/ModificaPersonaggioServlet" method="post"
+			<form action="${pageContext.request.contextPath}/ModificaPersonaggioServlet" method="post"
 				enctype="multipart/form-data">
-				<input type="hidden" name="id" value="<%=personaggio.getId()%>">
+				<input type="hidden" name="idPersonaggio" value="<%=personaggio.getId()%>">
 
 				<label for="nome">Nome:</label> <input type="text" id="nome"
 					name="nome" value="<%=personaggio.getNome()%>" required><br>
@@ -122,8 +127,9 @@
 					<%
 					}
 					%>
-				</select><br> <label for="ciurma">Ciurma:</label> <select id="ciurma"
-					name="ciurma">
+				</select><br> 
+				<label for="ciurma">Ciurma:</label> 
+				<select id="ciurma" name="ciurma">
 					<option value="">Seleziona Ciurma</option>
 					<%
 					for (Ciurma ciurma : ciurme) {
@@ -135,7 +141,8 @@
 					<%
 					}
 					%>
-				</select><br> <label for="nave">Nave:</label> <select id="nave"
+				</select><br> 
+				<label for="nave">Nave:</label> <select id="nave"
 					name="nave">
 					<option value="">Seleziona Nave</option>
 					<%
@@ -212,11 +219,11 @@
 					id="classeArmatura" name="classeArmatura"
 					value="<%=personaggio.getClasseArmatura()%>" required><br>
 
-				<div class="formGroup">
+				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
 					<label for="isVisibleToAll">Visibile a tutti:</label> <input
 						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">
 				</div>
-				<div class="formGroup">
+				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
 					<label for="isMercante">Mercante:</label> <input type="checkbox"
 						id="isMercante" name="isMercante">
 				</div>

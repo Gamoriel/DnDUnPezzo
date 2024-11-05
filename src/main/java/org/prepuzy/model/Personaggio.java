@@ -8,6 +8,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -20,7 +21,7 @@ public class Personaggio {
 	private long id;
 	private String nome, soprannome, descrizione, urlImmagine, abilita;
 	private List<Integer> taglia;
-    @OneToMany(mappedBy = "mercante")
+    @OneToMany(mappedBy = "mercante", cascade = CascadeType.ALL)
     private List<OggettiMercante> oggettiMercante;
 	@ManyToOne (fetch = FetchType.EAGER)
 	private Razza razza;
@@ -28,7 +29,7 @@ public class Personaggio {
 	private Professione professione;
 	@OneToOne(mappedBy = "personaggio", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Inventario inventario;
-	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Equipaggiamento equip;
 	@ManyToOne (fetch = FetchType.EAGER)
 	private Ciurma ciurma;
@@ -38,7 +39,8 @@ public class Personaggio {
 	private Frutto frutto;
 	@ManyToOne
 	private Mappa mappa;
-    @OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER)
+    @ManyToOne
+    @JoinColumn(name = "utente_id")
     private Utente utente;
     @ManyToMany(mappedBy = "visibileAPersonaggio")
     private List<AbilitaFrutto> abilitaFruttoVisibileAPersonaggio;

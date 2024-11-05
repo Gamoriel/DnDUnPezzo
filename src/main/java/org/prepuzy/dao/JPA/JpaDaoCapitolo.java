@@ -24,41 +24,71 @@ public class JpaDaoCapitolo implements DaoCapitolo {
 
 	@Override
 	public void insert(Capitolo c) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		em.merge(c);
-		t.commit();
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        em.merge(c);
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'aggiornamento del capitolo", e);
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public void update(Capitolo c) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		em.merge(c);
-		t.commit();
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        em.merge(c);
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'aggiornamento del capitolo", e);
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public List<Capitolo> selectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c", Capitolo.class);
-		return (q.getResultList());
+		try {
+			TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c", Capitolo.class);			
+			return (q.getResultList());
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public Capitolo selectById(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		String query = "SELECT c FROM Capitolo c JOIN FETCH c.mappa WHERE c.id = :id";
-		return em.createQuery(query, Capitolo.class).setParameter("id", id).getSingleResult();
+		try {
+			String query = "SELECT c FROM Capitolo c JOIN FETCH c.mappa WHERE c.id = :id";
+			return em.createQuery(query, Capitolo.class).setParameter("id", id).getSingleResult();			
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
 	public List<Capitolo> SelectAllWithMappe() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c left join fetch c.mappa", Capitolo.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c left join fetch c.mappa", Capitolo.class);
+			return(q.getResultList());			
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override
@@ -111,7 +141,11 @@ public class JpaDaoCapitolo implements DaoCapitolo {
 	@Override
 	public List<Capitolo> filtroSelectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c where c.isVisibleToAll = true", Capitolo.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Capitolo> q = em.createQuery("select c from Capitolo c where c.isVisibleToAll = true", Capitolo.class);
+			return(q.getResultList());			
+		} finally {
+			em.close();
+		}
 	}
 }

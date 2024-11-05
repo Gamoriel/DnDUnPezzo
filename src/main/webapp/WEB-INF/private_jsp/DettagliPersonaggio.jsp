@@ -43,7 +43,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -68,7 +68,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -98,13 +98,13 @@
 				<%=personaggio.getTaglia() != null ? personaggio.getTaglia().toString() : "N/A"%></p>
 			<p>
 				<strong>Razza:</strong> <a
-					href="DettagliRazzaServlet?idRazza=<%=personaggio.getRazza() != null ? personaggio.getRazza().getId() : -1%>">
+					href=" ${pageContext.request.contextPath}/DettagliRazzaServlet?idRazza=<%=personaggio.getRazza() != null ? personaggio.getRazza().getId() : -1%>">
 					<%=personaggio.getRazza() != null ? personaggio.getRazza().getNome() : "N/A"%>
 				</a>
 			</p>
 			<p>
 				<strong>Professione:</strong> <a
-					href="DettagliProfessioneServlet?idProfessione=<%=personaggio.getProfessione() != null ? personaggio.getProfessione().getId() : -1%>">
+					href="${pageContext.request.contextPath}/DettagliProfessioneServlet?idProfessione=<%=personaggio.getProfessione() != null ? personaggio.getProfessione().getId() : -1%>">
 					<%=personaggio.getProfessione() != null ? personaggio.getProfessione().getNome() : "N/A"%>
 				</a>
 			</p>
@@ -166,6 +166,7 @@
 					<td><%=personaggio.getHp()%></td>
 					<td>
 						<%
+						if(equipaggiamento != null){
 						List<Oggetto> oggettiEquip = equipaggiamento.getOggetti();
 						int count = 0;
 						if (oggettiEquip != null) {
@@ -174,27 +175,61 @@
 							}
 						}
 						%> + <%=count%>
+						<%} else { %>
+						+ 0
+						<%}%>
 					</td>
-					<td><%=personaggio.getHp() + count%></td>
+					<td>
+						<%
+						if(equipaggiamento != null){
+						List<Oggetto> oggettiEquip = equipaggiamento.getOggetti();
+						int count = 0;
+						if (oggettiEquip != null) {
+							for (Oggetto o : oggettiEquip) {
+								count += o.getHp();
+							}
+						}
+						%> <%=personaggio.getHp() + count%> 
+						<%} else { %>
+						<%=personaggio.getHp()%>
+						<%}%>
+					</td>
 				</tr>
 								<tr>
 					<td>Classe Armatura:</td>
 					<td><%=personaggio.getClasseArmatura()%></td>
 					<td>
 						<%
+						if(equipaggiamento != null){
+							List<Oggetto> oggettiEquip = equipaggiamento.getOggetti();
 						int countCA = 0;
 						if (oggettiEquip != null) {
 							for (Oggetto o : oggettiEquip) {
 								countCA += o.getClasseArmatura();
 							}
-						}
-						%> + <%=count%>
+						} %> + <%=countCA%>
+						<%} else { %>
+						 + 0
+						 <%} %>
 					</td>
-					<td><%=personaggio.getClasseArmatura() + count%></td>
+					<td>
+						<%
+						if(equipaggiamento != null){
+							List<Oggetto> oggettiEquip = equipaggiamento.getOggetti();
+						int countCA = 0;
+						if (oggettiEquip != null) {
+							for (Oggetto o : oggettiEquip) {
+								countCA += o.getClasseArmatura();
+							}
+						} %> <%=personaggio.getClasseArmatura() + countCA%>
+						<%} else { %>
+						 <%= personaggio.getClasseArmatura() %>
+						 <%} %>
+					</td>
 				</tr>
 			</table>
 			<h3>Gestisci Denaro</h3>
-			<form action="AggiornaDenaroServlet" method="post">
+			<form action="${pageContext.request.contextPath}/AggiornaDenaroServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <label for="denaro">Quantità
 					di Denaro:</label> <input type="number" name="denaro"
@@ -206,7 +241,7 @@
 			List<Oggetto> tuttiOggetti = (List<Oggetto>) request.getAttribute("tuttiOggetti");
 			%>
 			<h3>Aggiungi Oggetto all'Inventario</h3>
-			<form action="${pageContext.request.contextPath}/master/AggiungiOggettoInventarioServlet" method="post">
+			<form action="${pageContext.request.contextPath}/AggiungiOggettoInventarioServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto</option>
@@ -225,7 +260,7 @@
 			</form>
 
 			<h3>Rimuovi Oggetto dall'Inventario</h3>
-			<form action="RimuoviOggettoInventarioServlet" method="post">
+			<form action="${pageContext.request.contextPath}/RimuoviOggettoInventarioServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto</option>
@@ -248,7 +283,7 @@
 			</form>
 
 			<h3>Sposta Oggetto nel Deposito della Nave</h3>
-			<form action="SpostaOggettoDepositoServlet" method="post">
+			<form action="${pageContext.request.contextPath}/SpostaOggettoDepositoServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<%
@@ -269,7 +304,7 @@
 			</form>
 
 			<h3>Aggiungi Oggetto all'Equipaggiamento</h3>
-			<form action="EquipaggiaOggettoServlet" method="post">
+			<form action="${pageContext.request.contextPath}/EquipaggiaOggettoServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto dall'inventario</option>
@@ -288,7 +323,7 @@
 			</form>
 
 			<h3>Rimuovi Oggetto dall'Equipaggiamento</h3>
-			<form action="RimuoviOggettoEquipServlet" method="post">
+			<form action="${pageContext.request.contextPath}/RimuoviOggettoEquipServlet" method="post">
 				<input type="hidden" name="idPersonaggio"
 					value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto dall'equipaggiamento</option>
@@ -312,7 +347,7 @@
 				if (personaggio.getCiurma() != null) {
 				%>
 				<a
-					href="DettagliCiurmaServlet?idCiurma=<%=personaggio.getCiurma().getId()%>">Vedi
+					href="${pageContext.request.contextPath}/DettagliCiurmaServlet?idCiurma=<%=personaggio.getCiurma().getId()%>">Vedi
 					ciurma</a>
 				<%
 				} else {
@@ -329,7 +364,7 @@
 				if (personaggio.getCiurma() != null) {
 				%>
 				<a
-					href="DettagliNaveServlet?idNave=<%=personaggio.getNave() != null ? personaggio.getNave().getId() : -1%>">
+					href="${pageContext.request.contextPath}/DettagliNaveServlet?idNave=<%=personaggio.getNave() != null ? personaggio.getNave().getId() : -1%>">
 					<%=personaggio.getNave() != null ? personaggio.getNave().getNome() : "Nessuna nave"%>
 				</a>
 				<%
@@ -347,7 +382,7 @@
 				if (personaggio.getCiurma() != null) {
 				%>
 				<a
-					href="DettagliFruttoServlet?idFrutto=<%=personaggio.getFrutto() != null ? personaggio.getFrutto().getId() : -1%>">
+					href="${pageContext.request.contextPath}/DettagliFruttoServlet?idFrutto=<%=personaggio.getFrutto() != null ? personaggio.getFrutto().getId() : -1%>">
 					<%=personaggio.getFrutto() != null ? personaggio.getFrutto().getNome() : "Nessun frutto"%>
 				</a>
 				<%
@@ -365,7 +400,7 @@
 				if (personaggio.getCiurma() != null) {
 				%>
 				<a
-					href="DettagliMappaServlet?idMappa=<%=personaggio.getMappa() != null ? personaggio.getMappa().getId() : -1%>">
+					href="${pageContext.request.contextPath}/DettagliMappaServlet?idMappa=<%=personaggio.getMappa() != null ? personaggio.getMappa().getId() : -1%>">
 					<%=personaggio.getMappa() != null ? personaggio.getMappa().getNome() : "Nessuna mappa"%>
 				</a>
 				<%
@@ -396,7 +431,7 @@
 					Oggetto oggetto = entry.getKey();
 					int quantita = entry.getValue();
 				%>
-				<li><a href="DettagliOggettoServlet?id=<%=oggetto.getId()%>">
+				<li><a href="${pageContext.request.contextPath}/DettagliOggettoServlet?id=<%=oggetto.getId()%>">
 						<%=oggetto.getNome()%> (x<%=quantita%>)
 				</a></li>
 				<%
@@ -430,7 +465,7 @@
 					Oggetto oggetto = entry.getKey();
 					int quantita = entry.getValue();
 				%>
-				<li><a href="DettagliOggettoServlet?id=<%=oggetto.getId()%>">
+				<li><a href="${pageContext.request.contextPath}/DettagliOggettoServlet?id=<%=oggetto.getId()%>">
 						<%=oggetto.getNome()%> (x<%=quantita%>)
 				</a></li>
 				<%
@@ -445,13 +480,13 @@
 			}
 			%>
 			<div class="actionButtons">
-				<form action="${pageContext.request.contextPath}/master/ModificaPersonaggioServlet" method="get">
-					<input type="hidden" name="id" value="<%=personaggio.getId()%>">
+				<form action="${pageContext.request.contextPath}/ModificaPersonaggioServlet" method="get">
+					<input type="hidden" name="idPersonaggio" value="<%=personaggio.getId()%>">
 					<input type="submit" value="Modifica Personaggio" class="buttonMod">
 				</form>
-				<form action="${pageContext.request.contextPath}/master/EliminaPersonaggioServlet" method="post"
+				<form action="${pageContext.request.contextPath}/EliminaPersonaggioServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questo personaggio?');">
-					<input type="hidden" name="id" value="<%=personaggio.getId()%>">
+					<input type="hidden" name="idPersonaggio" value="<%=personaggio.getId()%>">
 					<input type="submit" value="Elimina Personaggio" class="buttonDel">
 				</form>
 			</div>

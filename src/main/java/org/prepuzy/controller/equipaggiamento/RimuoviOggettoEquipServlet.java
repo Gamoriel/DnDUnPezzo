@@ -16,28 +16,36 @@ import org.prepuzy.model.Personaggio;
 public class RimuoviOggettoEquipServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
-	        long idOggetto = Long.parseLong(request.getParameter("idOggetto"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
+		String idOggettoStr = request.getParameter("idOggetto");
 
-	        Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
-	        Oggetto oggetto = BusinessLogic.oggettoById(idOggetto);
+		Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
+		if(idOggettoStr != null && !idOggettoStr.isEmpty()) {			
+			Oggetto oggetto = BusinessLogic.oggettoById(Long.parseLong(idOggettoStr));
+			if (personaggio != null && oggetto != null) {
+				Equipaggiamento equip = personaggio.getEquip();
+				
+				if (equip != null && equip.getOggetti().contains(oggetto)) {
+					equip.getOggetti().remove(oggetto);
+					oggetto.setEquipaggiamento(null);
+					personaggio.getInventario().getOggetti().add(oggetto);
+					BusinessLogic.modificaEquipaggiamentoPersonaggio(equip, personaggio, oggetto);
+					
+					request.getRequestDispatcher("/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio)
+					.forward(request, response);
+				} else {
+					request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non presente nell'equipaggiamento")
+					.forward(request, response);
+				}
+			} else {
+				request.getRequestDispatcher("/ErrorServlet?messaggio=Personaggio o Oggetto non trovati").forward(request, response);
+			}
+		} else {
+			request.getRequestDispatcher("/ErrorServlet?messaggio=Non hai selezionato niente").forward(request, response);
+		}
 
-	        if (personaggio != null && oggetto != null) {
-	            Equipaggiamento equip = personaggio.getEquip();
-
-	            if (equip != null && equip.getOggetti().contains(oggetto)) {
-	                equip.getOggetti().remove(oggetto);
-	                personaggio.getInventario().getOggetti().add(oggetto);
-	                BusinessLogic.modificaPersonaggio(personaggio);
-
-	               request.getRequestDispatcher("/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
-	            } else {
-	               request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non presente nell'equipaggiamento").forward(request, response);
-	            }
-	        } else {
-	           request.getRequestDispatcher("/ErrorServlet?messaggio=Personaggio o Oggetto non trovati").forward(request, response);
-	        }
 	}
 
 }

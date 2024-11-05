@@ -19,7 +19,7 @@ public interface DaoPersonaggio {
 	List<Personaggio> filtroSelectAll();
 	List<Personaggio> listaMercanti();
 	Personaggio PersonaggioConTuttiElementi(long id);
-	void aggiornaPrezzo(OggettiMercante o, long prezzo);
+	void aggiornaPrezzi(List<OggettiMercante> oggettiDaAggiornare);
 	void insertOggettoMercante(OggettiMercante o);
 	void insertTecniche(Tecniche t);
 	void updateTecniche(Tecniche t);

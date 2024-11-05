@@ -23,8 +23,13 @@ public class JpaDaoNave implements DaoNave {
 	@Override
 	public List<Nave> selectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Nave> q = em.createQuery("select n from Nave n", Nave.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Nave> q = em.createQuery("select n from Nave n", Nave.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override
@@ -121,8 +126,13 @@ public class JpaDaoNave implements DaoNave {
 	@Override
 	public List<Nave> filtroSceletAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Nave> q = em.createQuery("select n from Nave n where n.isVisibleToAll = true", Nave.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Nave> q = em.createQuery("select n from Nave n where n.isVisibleToAll = true", Nave.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 }

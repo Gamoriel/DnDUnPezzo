@@ -53,7 +53,6 @@ public class AggiungiOggettoInventarioServlet extends HttpServlet {
 							OggettiMercante oggettiMercante = new OggettiMercante();
 							oggettiMercante.setMercante(personaggio);
 							oggettiMercante.setOggetto(oggetto);
-							System.out.println("Aggiungendo oggetto mercante: " + oggettiMercante);
 							BusinessLogic.aggiungiOggettoMercante(oggettiMercante);
 						}
 

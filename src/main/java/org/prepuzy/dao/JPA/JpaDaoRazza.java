@@ -23,8 +23,12 @@ public class JpaDaoRazza implements DaoRazza{
 	@Override
 	public List<Razza> selectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Razza> q = em.createQuery("select r from Razza r", Razza.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<Razza> q = em.createQuery("select r from Razza r", Razza.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override

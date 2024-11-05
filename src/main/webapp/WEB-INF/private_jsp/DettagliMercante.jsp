@@ -31,7 +31,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -55,7 +55,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -84,10 +84,8 @@
 					%>
 					<tr>
 						<td><%=invOggetto.getOggetto().getNome()%></td>
-						<td><%=invOggetto.getPrezzo()%> monete</td>
-						<td><input type="text"
-							name="prezzo_<%=invOggetto.getOggetto().getId()%>"
-							value="<%=invOggetto.getPrezzo()%>"></td>
+						<td><%=invOggetto.getPrezzo()%> Berry</td>
+						<td><input type="number" name="prezzo_<%=invOggetto.getOggetto().getId()%>" value="<%=invOggetto.getPrezzo()%>"></td>
 					</tr>
 					<%
 					}

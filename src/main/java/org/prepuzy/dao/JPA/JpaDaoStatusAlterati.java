@@ -23,8 +23,13 @@ public class JpaDaoStatusAlterati implements DaoStatusAlterati{
 	@Override
 	public List<StatusAlterati> selectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<StatusAlterati> q = em.createQuery("select s from StatusAlterati s", StatusAlterati.class);
-		return(q.getResultList());
+		try {
+			TypedQuery<StatusAlterati> q = em.createQuery("select s from StatusAlterati s", StatusAlterati.class);
+			return(q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 
 	@Override

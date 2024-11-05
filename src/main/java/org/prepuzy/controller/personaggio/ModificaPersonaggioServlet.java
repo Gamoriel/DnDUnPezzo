@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.prepuzy.businesslogic.BusinessLogic;
@@ -20,7 +21,8 @@ import org.prepuzy.model.Nave;
 import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Professione;
 import org.prepuzy.model.Razza;
-
+import org.prepuzy.model.Role;
+import org.prepuzy.model.Utente;
 
 @MultipartConfig
 @WebServlet("/ModificaPersonaggioServlet")
@@ -29,7 +31,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		long idPersonaggio = Long.parseLong(request.getParameter("id"));
+		long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
 
 		Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
 
@@ -39,20 +41,27 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		List<Nave> navi = BusinessLogic.listaNavi();
 		List<Frutto> frutti = BusinessLogic.listaFrutti();
 
-		request.setAttribute("personaggio", personaggio);
-		request.setAttribute("razze", razze);
-		request.setAttribute("professioni", professioni);
-		request.setAttribute("ciurme", ciurme);
-		request.setAttribute("navi", navi);
-		request.setAttribute("frutti", frutti);
+		HttpSession session = request.getSession();
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 
-		request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
+		if ((loggedUser.getId() == personaggio.getId()) || loggedUser.getRole().equals(Role.MASTER)) {
+			request.setAttribute("personaggio", personaggio);
+			request.setAttribute("razze", razze);
+			request.setAttribute("professioni", professioni);
+			request.setAttribute("ciurme", ciurme);
+			request.setAttribute("navi", navi);
+			request.setAttribute("frutti", frutti);
+			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
+		} else {
+			request.setAttribute("messaggio", "Non puoi modificare il personaggio di qualcun'altro, biricchino. Porcaccioddio!");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		long idPersonaggio = Long.parseLong(request.getParameter("id"));
+
+		long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
 		String razzaStr = request.getParameter("razza");
 		String professioneStr = request.getParameter("professione");
 		String naveStr = request.getParameter("nave");
@@ -74,27 +83,35 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
 
 		Part filePart = request.getPart("urlImmagine");
-		
-		if(razzaStr != null && !razzaStr.isEmpty()) {
+
+		if (razzaStr != null && !razzaStr.isEmpty()) {
 			Razza razza = BusinessLogic.razzaById(Long.parseLong(razzaStr));
 			personaggio.setRazza(razza);
+		} else {
+			personaggio.setRazza(null);
 		}
-		
-		if(professioneStr != null && !professioneStr.isEmpty()) {
+
+		if (professioneStr != null && !professioneStr.isEmpty()) {
 			Professione professione = BusinessLogic.professioneById(Long.parseLong(professioneStr));
 			personaggio.setProfessione(professione);
+		} else {
+			personaggio.setProfessione(null);
 		}
-		
-		if(naveStr != null && !naveStr.isEmpty()) {
+
+		if (naveStr != null && !naveStr.isEmpty()) {
 			Nave nave = BusinessLogic.naveById(Long.parseLong(naveStr));
 			personaggio.setNave(nave);
+		} else {
+			personaggio.setNave(null);
 		}
 
 		if (fruttoStr != null && !fruttoStr.isEmpty()) {
 			Frutto frutto = BusinessLogic.trovaFruttoById(Long.parseLong(fruttoStr));
 			personaggio.setFrutto(frutto);
+		} else {
+			personaggio.setFrutto(null);
 		}
-		
+
 		if (filePart != null && filePart.getSize() > 0) {
 			String immagineFileName = System.currentTimeMillis() + "_"
 					+ Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
@@ -107,7 +124,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			File file = new File(uploadDir + File.separator + immagineFileName);
 			try {
 				filePart.write(file.getAbsolutePath());
-				personaggio.setUrlImmagine("uploads/" +  immagineFileName);
+				personaggio.setUrlImmagine("uploads/" + immagineFileName);
 			} catch (IOException e) {
 				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
 				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
@@ -115,26 +132,22 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			}
 		}
 
-		if (personaggio != null) {
-			personaggio.setNome(nome);
-			personaggio.setSoprannome(soprannome);
-			personaggio.setDescrizione(descrizione);
-			personaggio.setVisibleToAll(isVisibleToAll);
-			personaggio.setMercante(isMercante);
-			personaggio.setForza(forza);
-			personaggio.setDestrezza(destrezza);
-			personaggio.setCostituzione(costituzione);
-			personaggio.setIntelligenza(intelligenza);
-			personaggio.setSaggezza(saggezza);
-			personaggio.setCarisma(carisma);
-			personaggio.setHp(hp);
-			personaggio.setClasseArmatura(classeArmatura);
-			BusinessLogic.modificaPersonaggio(personaggio);
-			request.getRequestDispatcher("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
-		} else {
-			request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
-		}
+		personaggio.setNome(nome);
+		personaggio.setSoprannome(soprannome);
+		personaggio.setDescrizione(descrizione);
+		personaggio.setVisibleToAll(isVisibleToAll);
+		personaggio.setMercante(isMercante);
+		personaggio.setForza(forza);
+		personaggio.setDestrezza(destrezza);
+		personaggio.setCostituzione(costituzione);
+		personaggio.setIntelligenza(intelligenza);
+		personaggio.setSaggezza(saggezza);
+		personaggio.setCarisma(carisma);
+		personaggio.setHp(hp);
+		personaggio.setClasseArmatura(classeArmatura);
+		BusinessLogic.modificaPersonaggio(personaggio);
+		request.setAttribute("idPersonaggio", idPersonaggio);
+		request.getRequestDispatcher("/DettagliPersonaggioServlet").forward(request, response);
 	}
 
 }

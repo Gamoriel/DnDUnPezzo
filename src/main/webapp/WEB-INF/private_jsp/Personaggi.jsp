@@ -13,7 +13,7 @@
 <body>
 	<nav>
 		<div class="addNew">
-			<form action="${pageContext.request.contextPath}/master/AggiungiPersonaggioServlet" method="get">
+			<form action="${pageContext.request.contextPath}/AggiungiPersonaggioServlet" method="get">
 				<button type="submit" class="btnAdd">Aggiungi Personaggio</button>
 			</form>
 		</div>
@@ -36,7 +36,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -60,7 +60,7 @@
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -73,11 +73,10 @@
 				if (personaggi != null && !personaggi.isEmpty()) {
 					for (Personaggio personaggio : personaggi) {
 				%>
-				<div class="listCard"
-					style="background-image: url(<%=personaggio.getUrlImmagine()%>)">
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + personaggio.getUrlImmagine() %>')">
 					<h2><%=personaggio.getNome()%></h2>
 					<div class="formContainer">
-						<form action="DettagliPersonaggioServlet" method="get">
+						<form action="${pageContext.request.contextPath}/DettagliPersonaggioServlet" method="get">
 							<input type="hidden" name="idPersonaggio"
 								value="<%=personaggio.getId()%>">
 							<button class="buttonMod" type="submit">Dettagli</button>

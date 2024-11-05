@@ -160,21 +160,24 @@ public class JpaDaoOggetto implements DaoOggetto {
 			t.begin();
 			em.merge(o);
 			t.commit();
-			System.out.println("Oggetto inserito con successo: " + o);
 		} catch (Exception e) {
 			if (t.isActive()) {
 				t.rollback();
 			}
 		} finally {
 			em.close();
-			System.out.println("EntityManager chiuso.");
 		}
 	}
 
 	@Override
 	public List<Oggetto> filtroSelectAll() {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		TypedQuery<Oggetto> q = em.createQuery("select o from Oggetto o where o.isVisibleToAll = true", Oggetto.class);
-		return (q.getResultList());
+		try {
+			TypedQuery<Oggetto> q = em.createQuery("select o from Oggetto o where o.isVisibleToAll = true", Oggetto.class);
+			return (q.getResultList());
+		} finally {
+			em.close();
+		}
+
 	}
 }
