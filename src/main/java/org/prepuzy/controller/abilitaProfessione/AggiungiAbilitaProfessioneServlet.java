@@ -38,5 +38,4 @@ public class AggiungiAbilitaProfessioneServlet extends HttpServlet {
         
        request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
 	}
-
 }

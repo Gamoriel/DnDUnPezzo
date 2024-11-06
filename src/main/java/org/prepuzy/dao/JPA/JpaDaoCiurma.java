@@ -67,6 +67,10 @@ public class JpaDaoCiurma implements DaoCiurma {
 
 	        Ciurma ciurma = em.find(Ciurma.class, id);
 	        if (ciurma != null) {
+	        	for(Personaggio p : ciurma.getPersonaggi()) {
+	        		p.setCiurma(null);
+	        		em.merge(p);
+	        	}
 	            em.remove(ciurma);
 	        } else {
 	            throw new EntityNotFoundException("Ciurma non trovata per ID: " + id);

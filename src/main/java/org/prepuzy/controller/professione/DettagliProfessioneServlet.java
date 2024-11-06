@@ -31,7 +31,7 @@ public class DettagliProfessioneServlet extends HttpServlet {
                 Utente utenteLoggato = (Utente) session.getAttribute("loggedUser");
             	
                 List<AbilitaProfessione> abilitaProfessioneUtente = BusinessLogic.abilitaProfessioneUtente(utenteLoggato.getId());
-            	
+            	System.out.println(abilitaProfessioneUtente.size());
                 request.setAttribute("abilitaVisibili", abilitaProfessioneUtente);
                 request.setAttribute("professione", professione);
                 request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliProfessione.jsp").forward(request, response);

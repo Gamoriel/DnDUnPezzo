@@ -5,8 +5,9 @@ package org.prepuzy.dao.JPA;
 import java.util.List;
 
 import org.prepuzy.dao.DaoProfessione;
-import org.prepuzy.model.AbilitaFrutto;
 import org.prepuzy.model.AbilitaProfessione;
+import org.prepuzy.model.Oggetto;
+import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Professione;
 
 import jakarta.persistence.EntityManager;
@@ -37,81 +38,88 @@ public class JpaDaoProfessione implements DaoProfessione {
 
 	@Override
 	public Professione selectbyId(long id) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		Professione professione = null;
-		try {
-			t.begin();
-			professione = em.find(Professione.class, id);
-			t.commit();
-		} catch (RuntimeException e) {
-			if (t.isActive()) {
-				t.rollback();
-			}
-			throw e;
-		} finally {
-			em.close();
-		}
-		return professione;
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    try {
+	        return em.find(Professione.class, id);
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public void update(Professione p) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		try {
-			t.begin();
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        Professione professioneEsistente = em.find(Professione.class, p.getId());
+	        if (professioneEsistente != null) {
+	            professioneEsistente.setNome(p.getNome());
+	            professioneEsistente.setDescrizione(p.getDescrizione());
+	            professioneEsistente.setForza(p.getForza());
+	            professioneEsistente.setDestrezza(p.getDestrezza());
+	            professioneEsistente.setCostituzione(p.getCostituzione());
+	            professioneEsistente.setIntelligenza(p.getIntelligenza());
+	            professioneEsistente.setSaggezza(p.getSaggezza());
+	            professioneEsistente.setCarisma(p.getCarisma());
+	            professioneEsistente.setHp(p.getHp());
+	            for (AbilitaProfessione abilita : p.getAbilitaProfessione()) {
+	                if (!professioneEsistente.getAbilitaProfessione().contains(abilita)) {
+	                    abilita.setProfessione(professioneEsistente);
+	                    em.merge(abilita);
+	                }
+	            }
+	            professioneEsistente.setAbilitaProfessione(p.getAbilitaProfessione());
+	            em.merge(professioneEsistente);
+	        } else {
+	            throw new RuntimeException("Professione non trovata con ID: " + p.getId());
+	        }
 
-			Professione professioneEsistente = em.find(Professione.class, p.getId());
-			if (professioneEsistente != null) {
-				professioneEsistente.setNome(p.getNome());
-				professioneEsistente.setDescrizione(p.getDescrizione());
-				professioneEsistente.setForza(p.getForza());
-				professioneEsistente.setDestrezza(p.getDestrezza());
-				professioneEsistente.setCostituzione(p.getCostituzione());
-				professioneEsistente.setIntelligenza(p.getIntelligenza());
-				professioneEsistente.setSaggezza(p.getSaggezza());
-				professioneEsistente.setCarisma(p.getCarisma());
-				professioneEsistente.setHp(p.getHp());
-
-				em.merge(professioneEsistente);
-			} else {
-				throw new RuntimeException("Professione non trovata con ID: " + p.getId());
-			}
-
-			t.commit();
-		} catch (RuntimeException e) {
-			if (t.isActive()) {
-				t.rollback();
-			}
-			throw e;
-		} finally {
-			em.close();
-		}
+	        t.commit();
+	    } catch (RuntimeException e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw e;
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
 	public boolean delete(long id) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		try {
-			t.begin();
-			Professione professione = em.find(Professione.class, id);
-			if (professione != null) {
-				em.remove(professione);
-				t.commit();
-				return true;
-			} else {
-				return false;
-			}
-		} catch (RuntimeException e) {
-			if (t.isActive()) {
-				t.rollback();
-			}
-			throw e;
-		} finally {
-			em.close();
-		}
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();        
+	        Professione professione = em.find(Professione.class, id);
+	        if (professione != null) {
+	            for (AbilitaProfessione abilita : professione.getAbilitaProfessione()) {
+	                abilita.setProfessione(null);
+	                em.merge(abilita);
+	            }
+	            for (Personaggio p : professione.getPersonaggi()) {
+	            	p.setProfessione(null);
+	            	em.merge(p);
+	            }
+	            for (Oggetto o : professione.getOggetto()) {
+	            	o.setProfessioni(null);
+	            	em.merge(o);
+	            }
+	            em.remove(professione);
+	            t.commit();
+	            return true;
+	        } else {
+	            return false;
+	        }
+	    } catch (RuntimeException e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw e;
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
@@ -177,26 +185,36 @@ public class JpaDaoProfessione implements DaoProfessione {
 
 	@Override
 	public void updateAbilita(AbilitaProfessione a) {
-		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		try {
-			t.begin();
-			AbilitaFrutto existingAbilita = em.find(AbilitaFrutto.class, a.getId());
-			if (existingAbilita != null) {
-				existingAbilita.setNome(a.getNome());
-				existingAbilita.setDescrizione(a.getDescrizione());
-				existingAbilita.setVisibileAPersonaggio(a.getVisibileAPersonaggio());
-				em.merge(existingAbilita);
-			}
-			t.commit();
-		} catch (Exception e) {
-			if (t.isActive()) {
-				t.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        AbilitaProfessione existingAbilita = em.find(AbilitaProfessione.class, a.getId());
+	        if (existingAbilita != null) {
+	            for (Personaggio p : existingAbilita.getVisibileAPersonaggio()) {
+	                p.getAbilitaProfessioneVisibileAPersonaggio().remove(existingAbilita);
+	            }
+	            existingAbilita.setNome(a.getNome());
+	            existingAbilita.setDescrizione(a.getDescrizione());
+	            List<Personaggio> newVisibleCharacters = a.getVisibileAPersonaggio();
+	            existingAbilita.setVisibileAPersonaggio(newVisibleCharacters);
+	            for (Personaggio p : newVisibleCharacters) {
+	                if (!p.getAbilitaProfessioneVisibileAPersonaggio().contains(existingAbilita)) {
+	                    p.getAbilitaProfessioneVisibileAPersonaggio().add(existingAbilita);
+	                }
+	            }
+	            em.merge(existingAbilita);
+	            em.flush();
+	        }
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override

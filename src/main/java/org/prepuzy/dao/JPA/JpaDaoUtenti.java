@@ -1,5 +1,6 @@
 package org.prepuzy.dao.JPA;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.prepuzy.dao.DaoUtenti;
@@ -74,8 +75,7 @@ public class JpaDaoUtenti implements DaoUtenti {
 		EntityManager em = JpaDaoFactory.getEntityManager();
 		List<Personaggio> personaggi = null;
 		try {
-			TypedQuery<Personaggio> q = em.createQuery("SELECT p FROM Personaggio p WHERE p.utente.id = :id",
-					Personaggio.class);
+			TypedQuery<Personaggio> q = em.createQuery("SELECT p FROM Personaggio p WHERE p.utente.id = :id", Personaggio.class);
 			q.setParameter("id", id);
 			personaggi = q.getResultList();
 		} finally {
@@ -101,14 +101,17 @@ public class JpaDaoUtenti implements DaoUtenti {
 	@Override
 	public List<AbilitaProfessione> abilitaProfessioneUtente(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		try {
-			TypedQuery<AbilitaProfessione> query = em.createQuery(
-					"SELECT a FROM AbilitaProfessione a JOIN a.visibileAPersonaggio p WHERE p.utente.id = :id",
-					AbilitaProfessione.class).setParameter("id", id);
-			return query.getResultList();
-		} finally {
-			em.close();
-		}
+	    try {
+	        Personaggio personaggio = personaggioByIdUtente(id);
+	        if (personaggio != null) {
+	            TypedQuery<AbilitaProfessione> query = em.createQuery("SELECT a FROM AbilitaProfessione a JOIN a.visibileAPersonaggio p WHERE p.id = :idPersonaggio", AbilitaProfessione.class).setParameter("idPersonaggio", personaggio.getId());
+	            return query.getResultList();
+	        } else {
+	            return Collections.emptyList();
+	        }
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
@@ -155,5 +158,18 @@ public class JpaDaoUtenti implements DaoUtenti {
 		} finally {
 			em.close();
 		}
+	}
+
+	@Override
+	public Personaggio personaggioByIdUtente(long id) {
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    try {
+	        TypedQuery<Personaggio> query = em.createQuery("SELECT p FROM Personaggio p WHERE p.utente.id = :idUtente", Personaggio.class).setParameter("idUtente", id);
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    } finally {
+	        em.close();
+	    }
 	}
 }

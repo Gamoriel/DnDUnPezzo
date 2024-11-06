@@ -16,7 +16,7 @@ public class AbilitaFrutto {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "personaggio_abilita_frutto", joinColumns = @JoinColumn(name = "abilita_id"), inverseJoinColumns = @JoinColumn(name = "personaggio_id"))
     private List<Personaggio> visibileAPersonaggio;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "frutto_id")
     private Frutto frutto;
     

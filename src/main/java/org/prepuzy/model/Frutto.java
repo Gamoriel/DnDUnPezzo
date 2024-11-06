@@ -2,7 +2,6 @@ package org.prepuzy.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -24,18 +23,18 @@ public class Frutto {
     @Column(columnDefinition = "TEXT")
     private String descrizione;
 	private int prezzo;
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<StatusAlterati> status;
 	@OneToOne(fetch = FetchType.EAGER)
 	@ManyToOne
 	private Tipo tipo;
 	@ManyToOne
 	private Qualita qualita;
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Resistenza> resistenza;
 	@OneToOne
 	private Personaggio personaggio;
-	@OneToMany(mappedBy = "frutto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "frutto", fetch = FetchType.EAGER)
     private List<AbilitaFrutto> abilitaFrutto;
 	private int forza,destrezza,costituzione,intelligenza,saggezza,carisma,hp;
 	private boolean isVisibleToAll;

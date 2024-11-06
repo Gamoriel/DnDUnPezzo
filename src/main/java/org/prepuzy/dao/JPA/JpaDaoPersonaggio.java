@@ -3,7 +3,11 @@ package org.prepuzy.dao.JPA;
 import java.util.List;
 
 import org.prepuzy.dao.DaoPersonaggio;
+import org.prepuzy.model.AbilitaFrutto;
+import org.prepuzy.model.AbilitaProfessione;
 import org.prepuzy.model.Equipaggiamento;
+import org.prepuzy.model.Frutto;
+import org.prepuzy.model.Inventario;
 import org.prepuzy.model.OggettiMercante;
 import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Tecniche;
@@ -68,28 +72,95 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 	@Override
 	public boolean delete(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-	    EntityTransaction t = em.getTransaction();
-	    try {
-	        t.begin();
-	        Personaggio personaggio = em.find(Personaggio.class, id);
-	        
-	        if (personaggio != null) {
-	            em.remove(personaggio);
-	            t.commit();
-	            return true;
-	        } else {
-	            t.rollback();
-	            return false;
-	        }
-	    } catch (Exception e) {
-	        if (t.isActive()) {
-	            t.rollback();
-	        }
-	        e.printStackTrace();
-	        return false;
-	    } finally {
-	        em.close();
-	    }
+		EntityTransaction t = em.getTransaction();
+
+		try {
+			t.begin();
+			Personaggio personaggio = em.find(Personaggio.class, id);
+			if (personaggio != null) {
+				if (personaggio.getInventario() != null) {
+					Inventario inventario = personaggio.getInventario();
+					personaggio.setInventario(null);
+					inventario.setPersonaggio(null);
+					em.remove(inventario);
+				}
+
+				if (personaggio.getEquip() != null) {
+					Equipaggiamento equip = personaggio.getEquip();
+					personaggio.setEquip(null);
+					equip.setPersonaggio(null);
+					em.remove(equip);
+				}
+
+				if (personaggio.getFrutto() != null) {
+					Frutto frutto = personaggio.getFrutto();
+					personaggio.setFrutto(null);
+					frutto.setPersonaggio(null);
+					em.remove(frutto);
+				}
+
+				if (personaggio.getOggettiMercante() != null) {
+					for (OggettiMercante oggetto : personaggio.getOggettiMercante()) {
+						oggetto.setMercante(null);
+						em.remove(oggetto);
+					}
+					personaggio.getOggettiMercante().clear();
+				}
+
+				if (personaggio.getAbilitaFruttoVisibileAPersonaggio() != null) {
+					for (AbilitaFrutto abilita : personaggio.getAbilitaFruttoVisibileAPersonaggio()) {
+						abilita.getVisibileAPersonaggio().remove(personaggio);
+						em.merge(abilita);
+					}
+				}
+
+				if (personaggio.getAbilitaProfessioneVisibileAPersonaggio() != null) {
+					for (AbilitaProfessione abilita : personaggio.getAbilitaProfessioneVisibileAPersonaggio()) {
+						abilita.getVisibileAPersonaggio().remove(personaggio);
+						em.merge(abilita);
+					}
+				}
+
+				if (personaggio.getTecnichePersonaggio() != null) {
+					for (Tecniche tecnica : personaggio.getTecnichePersonaggio()) {
+						tecnica.getVisibileAPersonaggio().remove(personaggio);
+						em.merge(tecnica);
+					}
+				}
+
+				if (personaggio.getUtente() != null) {
+					personaggio.getUtente().getPersonaggi().remove(personaggio);
+					em.merge(personaggio.getUtente());
+				}
+
+				if (personaggio.getCiurma() != null) {
+					personaggio.getCiurma().getPersonaggi().remove(personaggio);
+					em.merge(personaggio.getCiurma());
+				}
+
+				if (personaggio.getNave() != null) {
+					personaggio.getNave().getPersonaggi().remove(personaggio);
+					em.merge(personaggio.getNave());
+				}
+
+				if (personaggio.getMappa() != null) {
+					personaggio.getMappa().getPersonaggi().remove(personaggio);
+					em.merge(personaggio.getMappa());
+				}
+				em.remove(personaggio);
+				t.commit();
+				return true;
+			}else {
+				return false;
+			}
+		} catch (RuntimeException e) {
+			if (t.isActive()) {
+				t.rollback();
+			}
+			return false;
+		} finally {
+			em.close();
+		}
 	}
 
 	@Override

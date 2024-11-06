@@ -47,11 +47,11 @@ public class Personaggio {
     @ManyToOne
     @JoinColumn(name = "utente_id")
     private Utente utente;
-    @ManyToMany(mappedBy = "visibileAPersonaggio")
+    @ManyToMany(mappedBy = "visibileAPersonaggio", fetch = FetchType.EAGER)
     private List<AbilitaFrutto> abilitaFruttoVisibileAPersonaggio;
-    @ManyToMany(mappedBy = "visibileAPersonaggio")
+    @ManyToMany(mappedBy = "visibileAPersonaggio", fetch = FetchType.EAGER)
     private List<AbilitaProfessione> abilitaProfessioneVisibileAPersonaggio;
-    @ManyToMany(mappedBy = "visibileAPersonaggio")
+    @ManyToMany(mappedBy = "visibileAPersonaggio", fetch = FetchType.EAGER)
     private List<Tecniche> tecnichePersonaggio;
     private int forza,destrezza,costituzione,intelligenza,saggezza,carisma,hp,classeArmatura;
     private boolean isVisibleToAll, isMercante;

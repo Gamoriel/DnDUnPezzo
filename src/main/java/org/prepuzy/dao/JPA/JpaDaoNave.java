@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.prepuzy.dao.DaoNave;
 import org.prepuzy.model.Nave;
+import org.prepuzy.model.Personaggio;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -39,11 +40,6 @@ public class JpaDaoNave implements DaoNave {
 		try {
 			t.begin();
 			Nave nave = em.find(Nave.class, id);
-			if (nave != null) {
-				nave.getCiurma();
-				nave.getDeposito();
-				nave.getPersonaggi().size();
-			}
 			t.commit();
 			return nave;
 		} catch (Exception e) {
@@ -85,6 +81,10 @@ public class JpaDaoNave implements DaoNave {
 			t.begin();
 			Nave nave = em.find(Nave.class, id);
 			if (nave != null) {
+				for (Personaggio p : nave.getPersonaggi()) {
+					p.setMappa(null);
+					em.merge(p);
+				}
 				em.remove(nave);
 				t.commit();
 				return true;

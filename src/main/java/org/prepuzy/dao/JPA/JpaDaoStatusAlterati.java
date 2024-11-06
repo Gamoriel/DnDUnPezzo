@@ -4,6 +4,7 @@ package org.prepuzy.dao.JPA;
 import java.util.List;
 
 import org.prepuzy.dao.DaoStatusAlterati;
+import org.prepuzy.model.Oggetto;
 import org.prepuzy.model.StatusAlterati;
 
 import jakarta.persistence.EntityManager;
@@ -66,28 +67,33 @@ public class JpaDaoStatusAlterati implements DaoStatusAlterati{
 
 	@Override
 	public boolean delete(long id) {
-        EntityManager em = JpaDaoFactory.getEntityManager();
-        EntityTransaction t = em.getTransaction();
-
-        try {
-            t.begin();
-            StatusAlterati statusAlterato = em.find(StatusAlterati.class, id);
-            if (statusAlterato != null) {
-                em.remove(statusAlterato);
-                t.commit();
-                return true;
-            } else {
-            	return false;
-            }
-        } catch (Exception e) {
-            if (t.isActive()) {
-                t.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            em.close();
-        }
-		return false;
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        StatusAlterati status = em.find(StatusAlterati.class, id);
+	        if (status != null) {
+	            if (status.getOggetto() != null) {
+	                for (Oggetto oggetto : status.getOggetto()) {
+	                    oggetto.getStatus().remove(status);
+	                    em.merge(oggetto);
+	                }
+	                status.getOggetto().clear();
+	            }
+	            em.remove(status);
+	            t.commit();
+	            return true;
+	        } else {
+	        	return false;
+	        }
+	    } catch (RuntimeException e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        return false;
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override

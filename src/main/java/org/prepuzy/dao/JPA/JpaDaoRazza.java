@@ -4,6 +4,8 @@ package org.prepuzy.dao.JPA;
 import java.util.List;
 
 import org.prepuzy.dao.DaoRazza;
+import org.prepuzy.model.Oggetto;
+import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Razza;
 
 import jakarta.persistence.EntityManager;
@@ -66,9 +68,17 @@ public class JpaDaoRazza implements DaoRazza{
 		EntityTransaction t = em.getTransaction();
 		try {
 			t.begin();
-			Razza professione = em.find(Razza.class, id);
-			if (professione != null) {
-				em.remove(professione);
+			Razza r = em.find(Razza.class, id);
+			if (r != null) {
+				for (Personaggio p : r.getPersonaggi()) {
+					p.setRazza(null);
+					em.merge(p);
+				}
+				for (Oggetto o : r.getOggetto()) {
+					o.setRazze(null);
+					em.merge(o);
+				}
+				em.remove(r);
 				t.commit();
 				return true;
 			} else {

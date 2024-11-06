@@ -26,7 +26,7 @@ public class AbilitaProfessione {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "personaggio_abilita_professione", joinColumns = @JoinColumn(name = "abilita_id"), inverseJoinColumns = @JoinColumn(name = "personaggio_id"))
     private List<Personaggio> visibileAPersonaggio;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "professione_id")
     private Professione professione;
     

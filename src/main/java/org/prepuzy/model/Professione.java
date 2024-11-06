@@ -2,7 +2,6 @@ package org.prepuzy.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +25,7 @@ public class Professione {
 	private List<Personaggio> personaggi;
 	@ManyToMany(mappedBy = "professioni", fetch = FetchType.EAGER)
     private List<Oggetto> oggetto;
-	@OneToMany(mappedBy = "professione", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "professione", fetch = FetchType.EAGER)
     private List<AbilitaProfessione> abilitaProfessione;
     private int forza,destrezza,costituzione,intelligenza,saggezza,carisma,hp;
 	

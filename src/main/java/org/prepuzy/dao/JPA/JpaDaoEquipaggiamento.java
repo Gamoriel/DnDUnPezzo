@@ -41,14 +41,17 @@ public class JpaDaoEquipaggiamento implements DaoEquipaggiamento {
 	public boolean delete(long id) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
 		EntityTransaction transaction = em.getTransaction();
-		boolean deleted = false;
 
 		try {
 			transaction.begin();
 			Equipaggiamento eq = em.find(Equipaggiamento.class, id);
 			if (eq != null) {
+				for (Oggetto o : eq.getOggetti()) {
+					o.setEquipaggiamento(null);
+					em.merge(o);
+				}
 				em.remove(eq);
-				deleted = true;
+				return true;
 			}
 			transaction.commit();
 		} catch (Exception e) {
@@ -60,7 +63,7 @@ public class JpaDaoEquipaggiamento implements DaoEquipaggiamento {
 			em.close();
 		}
 
-		return deleted;
+		return false;
 	}
 
 	@Override

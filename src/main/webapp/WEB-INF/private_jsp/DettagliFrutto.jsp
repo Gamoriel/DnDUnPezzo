@@ -73,7 +73,7 @@
 			<h1>
 				Dettagli del Frutto:
 				<%=frutto.getNome()%></h1>
-
+			<h2>Descrizione</h2>
 			<p><%=frutto.getDescrizione()%></p>
 
 			<h2>Altre Abilità</h2>

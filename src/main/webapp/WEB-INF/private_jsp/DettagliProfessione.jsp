@@ -64,7 +64,9 @@
 			Professione professione = (Professione) request.getAttribute("professione");
 			if (professione != null) {
 			%>
-			<h2><%=professione.getNome()%></h2>
+			<h1>
+				Dettagli del Frutto:
+				<%=professione.getNome()%></h1>
 			<p>
 				<strong>Descrizione:</strong>
 			</p>
@@ -81,9 +83,6 @@
 				}
 				%>
 			</ul>
-			<p>
-				<strong>Altre Informazioni:</strong>
-			</p>
 			<h2>Statistiche</h2>
 			<table>
 				<tr>

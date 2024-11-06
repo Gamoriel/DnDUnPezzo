@@ -26,7 +26,7 @@ public class Mappa {
     @OneToMany(mappedBy = "mappaPadre",  fetch = FetchType.EAGER)
     private List<Mappa> mappe;
     @ManyToOne
-    @JoinColumn(name = "mappa_padre_id")
+    @JoinColumn(name = "mappa_padre_id" )
     private Mappa mappaPadre;
 	@OneToMany(mappedBy = "mappa", fetch = FetchType.EAGER)
 	private List<Personaggio> personaggi;

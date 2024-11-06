@@ -5,7 +5,9 @@ import java.util.List;
 import org.prepuzy.dao.DaoFrutto;
 import org.prepuzy.model.AbilitaFrutto;
 import org.prepuzy.model.Frutto;
+import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Qualita;
+import org.prepuzy.model.Resistenza;
 import org.prepuzy.model.Tipo;
 
 import jakarta.persistence.EntityManager;
@@ -100,6 +102,14 @@ public class JpaDaoFrutto implements DaoFrutto {
 			t.begin();
 			Frutto frutto = em.find(Frutto.class, id);
 			if (frutto != null) {
+				for (Resistenza r : frutto.getResistenza()) {
+					r.setFrutto(null);
+					em.merge(r);
+				}
+				for (AbilitaFrutto a : frutto.getAbilita()) {
+					a.setFrutto(null);
+					em.merge(a);
+				}
 				em.remove(frutto);
 				t.commit();
 				return true;
@@ -190,25 +200,35 @@ public class JpaDaoFrutto implements DaoFrutto {
 	@Override
 	public void updateAbilita(AbilitaFrutto a) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
-		EntityTransaction t = em.getTransaction();
-		try {
-			t.begin();
-			AbilitaFrutto existingAbilita = em.find(AbilitaFrutto.class, a.getId());
-			if (existingAbilita != null) {
-				existingAbilita.setNome(a.getNome());
-				existingAbilita.setDescrizione(a.getDescrizione());
-				existingAbilita.setVisibileAPersonaggio(a.getVisibileAPersonaggio());
-				em.merge(existingAbilita);
-			}
-			t.commit();
-		} catch (Exception e) {
-			if (t.isActive()) {
-				t.rollback();
-			}
-			e.printStackTrace();
-		} finally {
-			em.close();
-		}
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        AbilitaFrutto existingAbilita = em.find(AbilitaFrutto.class, a.getId());
+	        if (existingAbilita != null) {
+	            for (Personaggio p : existingAbilita.getVisibileAPersonaggio()) {
+	                p.getAbilitaFruttoVisibileAPersonaggio().remove(existingAbilita);
+	            }
+	            existingAbilita.setNome(a.getNome());
+	            existingAbilita.setDescrizione(a.getDescrizione());
+	            List<Personaggio> newVisibleCharacters = a.getVisibileAPersonaggio();
+	            existingAbilita.setVisibileAPersonaggio(newVisibleCharacters);
+	            for (Personaggio p : newVisibleCharacters) {
+	                if (!p.getAbilitaFruttoVisibileAPersonaggio().contains(existingAbilita)) {
+	                    p.getAbilitaFruttoVisibileAPersonaggio().add(existingAbilita);
+	                }
+	            }
+	            em.merge(existingAbilita);
+	            em.flush();
+	        }
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
 	}
 
 	@Override
