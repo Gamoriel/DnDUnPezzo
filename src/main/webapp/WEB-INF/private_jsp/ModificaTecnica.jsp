@@ -81,6 +81,7 @@
 				<br>
 
 				<h3>Personaggi che possono vedere questa abilità:</h3>
+				<div class="checkboxes">
 				<%
 				for (Personaggio personaggio : listaPersonaggi) {
 					boolean isVisible = t.getVisibileAPersonaggio().contains(personaggio);
@@ -90,6 +91,7 @@
 				<%
 				}
 				%>
+				</div>
 				<br>
 				<button type="submit" class="btnSave">Salva Modifiche</button>
 			</form>

@@ -112,7 +112,7 @@
 					}
 					%>
 				</select><br> <label>Resistenze:</label>
-				<div>
+				<div class="checkboxes">
 					<%
 					for (Resistenza r : resistenze) {
 					%>
@@ -125,7 +125,7 @@
 				</div>
 
 				<label>Status Alterati:</label>
-				<div>
+				<div class="checkboxes">
 					<%
 					for (StatusAlterati s : status) {
 					%>
@@ -136,7 +136,7 @@
 					}
 					%>
 				</div>
-				<div>
+				<div class="checkboxes">
 					<label>Abilità Frutto:</label>
 					<%
 					List<AbilitaFrutto> listaAbilita = (List<AbilitaFrutto>) request.getAttribute("listaAbilita");

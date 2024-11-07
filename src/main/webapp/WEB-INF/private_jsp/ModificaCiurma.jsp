@@ -108,19 +108,17 @@
 				<br>
 
 				<h3>Personaggi nella Ciurma</h3>
-				<div>
+				<div class="checkboxes">
 					<%
 					List<Personaggio> personaggiCiurma = ciurma.getPersonaggi();
 					if (personaggiCiurma != null && !personaggiCiurma.isEmpty()) {
 						for (Personaggio p : personaggiCiurma) {
 					%>
-					<div>
 						<input type="checkbox" name="personaggiDaRimuovere"
 							value="<%=p.getId()%>">
 						<%=p.getNome()%>
 						(Soprannome:
 						<%=p.getSoprannome()%>)
-					</div>
 					<%
 					}
 					} else {
@@ -148,7 +146,7 @@
 
 							if (!isInCiurma) {
 					%>
-					<div>
+					<div class="checkboxes">
 						<input type="checkbox" name="personaggiDaAggiungere"
 							value="<%=p.getId()%>">
 						<%=p.getNome()%>

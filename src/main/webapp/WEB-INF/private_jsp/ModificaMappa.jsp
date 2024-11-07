@@ -113,9 +113,9 @@
 				</div>
 				<br>
 				<p>Immagine attuale:</p>
-				<img src="<%=mappa.getImmagine()%>" alt="Immagine della mappa"
-					width="200"><br> <br> <label for="personaggi">Personaggi
-					associati:</label><br>
+				<img src="<%=mappa.getImmagine()%>" alt="Immagine della mappa" width="200"><br>
+				<label for="personaggi">Personaggi associati:</label><br>
+				<div class="checkboxes">
 				<%
 				for (Personaggio p : personaggiDisponibili) {
 					boolean isChecked = personaggiAssociati.contains(p);
@@ -126,6 +126,7 @@
 				<%
 				}
 				%>
+				</div>
 
 				<label for="capitolo">Capitolo associato:</label> <select
 					name="capitolo">
@@ -138,7 +139,9 @@
 					<%
 					}
 					%>
-				</select><br> <br> <label for="mappe">Mappe associate:</label><br>
+				</select><br> 
+				<label for="mappe">Mappe associate:</label><br>
+				<div class="checkboxes">
 				<%
 				for (Mappa m : mappeDisponibili) {
 					boolean isChecked = mappa.getMappe().contains(m);
@@ -149,6 +152,7 @@
 				<%
 				}
 				%>
+				</div>
 				<div class="formGroup">
 					<label for="isVisibleToAll">Visibile a tutti:</label> <input
 						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">

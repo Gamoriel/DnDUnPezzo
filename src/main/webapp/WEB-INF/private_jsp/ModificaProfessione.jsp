@@ -94,8 +94,9 @@
 					id="carisma" name="carisma" value="<%=professione.getCarisma()%>"
 					required> <label for="hp">HP:</label> <input type="number"
 					id="hp" name="hp" value="<%=professione.getHp()%>" required>
-				<div>
+				<div class="Abilita">
 					<label>Abilità:</label>
+					<div class="checkboxes">
 					<%
 					List<AbilitaProfessione> listaAbilita = (List<AbilitaProfessione>) request.getAttribute("listaAbilita");
 					for (AbilitaProfessione abilita : listaAbilita) {
@@ -106,6 +107,7 @@
 					<%
 					}
 					%>
+					</div>
 				</div>
 				<button type="submit" class="btnSave">Salva Modifiche</button>
 			</form>

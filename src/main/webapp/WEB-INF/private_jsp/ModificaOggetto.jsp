@@ -103,7 +103,7 @@
 
 
 				<h2>Resistenze</h2>
-				<div>
+				<div class="checkboxes">
 					<%
 					List<Resistenza> resistenzeOggetto = oggetto.getResistenze();
 					List<Resistenza> tutteLeResistenze = (List<Resistenza>) request.getAttribute("resistenze");
@@ -120,7 +120,7 @@
 				</div>
 
 				<h2>Razze</h2>
-				<div>
+				<div class="checkboxes">
 					<%
 					List<Razza> razzeOggetto = oggetto.getRazze();
 					List<Razza> tutteLeRazze = (List<Razza>) request.getAttribute("razze");
@@ -136,7 +136,7 @@
 				</div>
 
 				<h2>Professioni</h2>
-				<div>
+				<div class="checkboxes">
 					<%
 					List<Professione> professioniOggetto = oggetto.getProfessioni();
 					List<Professione> tutteLeProfessioni = (List<Professione>) request.getAttribute("professioni");
@@ -153,7 +153,7 @@
 				</div>
 
 				<h2>Status Alterati</h2>
-				<div>
+				<div class="checkboxes">
 					<%
 					List<StatusAlterati> statusOggetto = oggetto.getStatus();
 					List<StatusAlterati> tuttiGliStatus = (List<StatusAlterati>) request.getAttribute("status");
