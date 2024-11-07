@@ -1,13 +1,13 @@
 <%@page import="java.util.List"%>
 <%@page import="org.prepuzy.model.Qualita"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
-<title>Qualità Frutti</title>
+<meta charset="UTF-8">
+<title>QualitÃ  Frutti</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
@@ -17,7 +17,7 @@
 			<form
 				action="${pageContext.request.contextPath}/master/AggiungiQualitaServlet"
 				method="get">
-				<button type="submit" class="btnAdd">Aggiungi Qualità</button>
+				<button type="submit" class="btnAdd">Aggiungi QualitÃ </button>
 			</form>
 		</div>
 		<div id="menuToggle">
@@ -43,7 +43,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità
+				<li><a href="${pageContext.request.contextPath}/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -84,7 +84,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità
+				<li><a href="${pageContext.request.contextPath}/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -101,7 +101,7 @@
 		</div>
 
 		<div class="centerBar">
-			<h1>Lista Qualità</h1>
+			<h1>Lista QualitÃ </h1>
 			<div class="cardContainerNoImg">
 				<%
 				List<Qualita> listaQualita = (List<Qualita>) request.getAttribute("listaQualita");
@@ -116,7 +116,7 @@
 							method="post">
 							<input type="hidden" name="idQualita"
 								value="<%=qualita.getId()%>">
-							<button class="buttonMod" type="submit">Elimina Qualità</button>
+							<button class="buttonMod" type="submit">Elimina QualitÃ </button>
 						</form>
 					</div>
 				</div>
@@ -124,7 +124,7 @@
 				}
 				} else {
 				%>
-				<p>Nessuna qualità trovata.</p>
+				<p>Nessuna qualitÃ  trovata.</p>
 				<%
 				}
 				%>

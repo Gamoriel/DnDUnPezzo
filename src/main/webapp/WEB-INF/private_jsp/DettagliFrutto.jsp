@@ -5,13 +5,13 @@
 <%@page import="org.prepuzy.model.Resistenza"%>
 <%@page import="org.prepuzy.model.Tipo"%>
 <%@page import="org.prepuzy.model.Qualita"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Dettagli Frutto</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -58,7 +58,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -76,7 +76,7 @@
 			<h2>Descrizione</h2>
 			<p><%=frutto.getDescrizione()%></p>
 
-			<h2>Altre Abilità</h2>
+			<h2>Altre AbilitÃ </h2>
 			<ul>
 				<%
 				List<AbilitaFrutto> abilitaVisibili = (List<AbilitaFrutto>) request.getAttribute("abilitaVisibili");
@@ -92,10 +92,10 @@
 				<strong>Tipo di frutto:</strong>
 				<%=frutto.getTipo() != null ? frutto.getTipo().getTipo() : "Nessun tipo associato"%></p>
 
-			<h2>Qualità</h2>
+			<h2>QualitÃ </h2>
 			<p>
-				<strong>Qualità del frutto:</strong>
-				<%=frutto.getQualita() != null ? frutto.getQualita().getQualita() : "Nessuna qualità associata"%></p>
+				<strong>QualitÃ  del frutto:</strong>
+				<%=frutto.getQualita() != null ? frutto.getQualita().getQualita() : "Nessuna qualitÃ  associata"%></p>
 
 			<h2>Status Alterati</h2>
 			<ul>

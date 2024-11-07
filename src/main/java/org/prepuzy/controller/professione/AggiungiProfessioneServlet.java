@@ -30,7 +30,7 @@ public class AggiungiProfessioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		int forza = Integer.parseInt(request.getParameter("forza"));
 		int destrezza = Integer.parseInt(request.getParameter("destrezza"));
 		int costituzione = Integer.parseInt(request.getParameter("costituzione"));

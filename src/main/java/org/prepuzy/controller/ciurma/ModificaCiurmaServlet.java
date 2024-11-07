@@ -42,7 +42,7 @@ public class ModificaCiurmaServlet extends HttpServlet {
 		
 		long idCiurma = Long.parseLong(request.getParameter("idCiurma"));
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 
 		Ciurma ciurma = new Ciurma();

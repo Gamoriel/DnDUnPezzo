@@ -21,7 +21,7 @@ public class AggiungiResistenzaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
         Resistenza resistenza = new Resistenza();
         resistenza.setNome(nome);

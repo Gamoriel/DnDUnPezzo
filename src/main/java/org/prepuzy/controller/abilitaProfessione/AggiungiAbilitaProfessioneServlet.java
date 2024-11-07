@@ -22,7 +22,7 @@ public class AggiungiAbilitaProfessioneServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
         if (nome == null || nome.isEmpty() || descrizione == null || descrizione.isEmpty()) {
             request.setAttribute("messaggio", "Nome e descrizione sono obbligatori.");

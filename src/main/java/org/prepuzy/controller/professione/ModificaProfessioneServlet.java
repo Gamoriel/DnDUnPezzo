@@ -36,7 +36,7 @@ public class ModificaProfessioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long idProfessione = Long.parseLong(request.getParameter("idProfessione"));
 	    String nome = request.getParameter("nome");
-	    String descrizione = request.getParameter("descrizione");
+	    String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
         String[] abilitaIds = request.getParameterValues("abilita");
 	    int forza = Integer.parseInt(request.getParameter("forza"));
 	    int destrezza = Integer.parseInt(request.getParameter("destrezza"));

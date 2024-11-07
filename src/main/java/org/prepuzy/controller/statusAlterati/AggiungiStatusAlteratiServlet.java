@@ -22,7 +22,7 @@ public class AggiungiStatusAlteratiServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
         StatusAlterati statusAlterato = new StatusAlterati();
         statusAlterato.setNome(nome);

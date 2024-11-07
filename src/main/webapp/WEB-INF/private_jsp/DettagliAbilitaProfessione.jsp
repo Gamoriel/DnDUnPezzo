@@ -1,12 +1,12 @@
 <%@page import="org.prepuzy.model.AbilitaProfessione"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
-<title>Dettaglio Abilità</title>
+<meta charset="UTF-8">
+<title>Dettaglio AbilitÃ </title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -50,7 +50,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -58,7 +58,7 @@
 			</ul>
 		</div>
 		<div class="centerBar">
-			<h1>Dettaglio Abilità</h1>
+			<h1>Dettaglio AbilitÃ </h1>
 			<%
 			AbilitaProfessione abilita = (AbilitaProfessione) request.getAttribute("abilita");
 			if (abilita != null) {
@@ -75,7 +75,7 @@
 			<div class="actionButtons">
 				<form action="${pageContext.request.contextPath}/master/ModificaAbilitaProfessioneServlet" method="get">
 					<input type="hidden" name="idAbilita" value="<%=abilita.getId()%>">
-					<button type="submit" class="buttonMod">Modifica Abilità</button>
+					<button type="submit" class="buttonMod">Modifica AbilitÃ </button>
 				</form>
 				<form action="${pageContext.request.contextPath}/master/EliminaAbilitaProfessioneServlet" method="post"
 					onsubmit="return confirm('Sei sicuro di voler eliminare questa abilita?');">
@@ -86,7 +86,7 @@
 			<%
 			} else {
 			%>
-			<p>Abilità non trovata.</p>
+			<p>AbilitÃ  non trovata.</p>
 			<%
 			}
 			%>

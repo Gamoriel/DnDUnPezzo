@@ -1,14 +1,14 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page import="org.prepuzy.model.AbilitaProfessione"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
-<title>Abilità Professione</title>
+<meta charset="UTF-8">
+<title>AbilitÃ  Professione</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
@@ -18,7 +18,7 @@
 			<form
 				action="${pageContext.request.contextPath}/master/AggiungiAbilitaProfessioneServlet"
 				method="get">
-				<button type="submit" class="btnAdd">Aggiungi Abilità
+				<button type="submit" class="btnAdd">Aggiungi AbilitÃ 
 					Professione</button>
 			</form>
 		</div>
@@ -45,7 +45,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità
+				<li><a href="${pageContext.request.contextPath}/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -86,7 +86,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/QualitaServlet">Qualità
+				<li><a href="${pageContext.request.contextPath}/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -103,7 +103,7 @@
 		</div>
 
 		<div class="centerBar">
-			<h1>Lista Abilità per Professione</h1>
+			<h1>Lista AbilitÃ  per Professione</h1>
 			<%
 			Map<String, List<AbilitaProfessione>> abilitaPerProfessione = (Map<String, List<AbilitaProfessione>>) request
 					.getAttribute("abilitaPerProfessione");
@@ -122,14 +122,11 @@
 				%>
 				<div class="listCard">
 					<h2><%=abilita.getNome()%></h2>
-					<p>
-						<strong>Descrizione:</strong>
-						<%=abilita.getDescrizione()%></p>
 					<div class="formContainer">
 						<form action="DettagliAbilitaProfessioneServlet" method="get">
 							<input type="hidden" name="idAbilita"
 								value="<%=abilita.getId()%>">
-							<button class="buttonMod" type="submit">Dettagli Abilità</button>
+							<button class="buttonMod" type="submit">Dettagli AbilitÃ </button>
 						</form>
 					</div>
 				</div>
@@ -141,7 +138,7 @@
 			}
 			} else {
 			%>
-			<p>Nessuna abilità trovata.</p>
+			<p>Nessuna abilitÃ  trovata.</p>
 			<%
 			}
 			%>

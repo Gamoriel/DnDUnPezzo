@@ -37,7 +37,7 @@ public class ModificaTecnicheServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long idTecnica = Long.parseLong(request.getParameter("idTecnica"));
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		String[] personaggiVisibiliIds = request.getParameterValues("personaggiVisibili");
 		
 		Tecniche t = BusinessLogic.tecnicaById(idTecnica);

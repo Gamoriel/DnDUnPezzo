@@ -36,7 +36,7 @@ public class ModificaRazzaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idRazzaParam = request.getParameter("idRazza");
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
 		if (idRazzaParam != null && !idRazzaParam.isEmpty()) {
 			long idRazza = Long.parseLong(idRazzaParam);

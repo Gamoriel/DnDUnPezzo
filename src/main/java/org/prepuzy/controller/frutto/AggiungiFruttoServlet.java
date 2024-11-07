@@ -42,7 +42,7 @@ public class AggiungiFruttoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
         int prezzo = Integer.parseInt(request.getParameter("prezzo"));
         int forza = Integer.parseInt(request.getParameter("forza"));
         int destrezza = Integer.parseInt(request.getParameter("destrezza"));

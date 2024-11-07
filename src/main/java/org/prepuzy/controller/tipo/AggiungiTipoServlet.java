@@ -21,7 +21,7 @@ public class AggiungiTipoServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipo = request.getParameter("tipo");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
         Tipo nuovoTipo = new Tipo();
         nuovoTipo.setTipo(tipo);

@@ -64,7 +64,7 @@ public class ModificaOggettoServlet extends HttpServlet {
             throws ServletException, IOException {
         String idOggettoStr = request.getParameter("idOggetto");
         String nome = request.getParameter("nome");
-        String descrizione = request.getParameter("descrizione");
+        String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
         String prezzoStr = request.getParameter("prezzo");
         String[] resistenzeIds = request.getParameterValues("resistenze");
         String[] razzeIds = request.getParameterValues("razze");

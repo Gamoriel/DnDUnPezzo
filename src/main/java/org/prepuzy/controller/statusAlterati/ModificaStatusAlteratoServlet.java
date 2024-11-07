@@ -43,7 +43,7 @@ public class ModificaStatusAlteratoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idParam = request.getParameter("idStatusAlterato");
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
 		if (idParam != null && nome != null && descrizione != null) {
 			try {

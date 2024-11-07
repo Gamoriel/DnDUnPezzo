@@ -38,7 +38,7 @@ public class ModificaNaveServlet extends HttpServlet {
 		
 		long idNave = Long.parseLong(request.getParameter("idNave"));
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 	    String hpParam = request.getParameter("hp");
 	    boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 

@@ -47,7 +47,7 @@ public class ModificaMappaServlet extends HttpServlet {
 		
 		long idMappa = Long.parseLong(request.getParameter("idMappa"));
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		Part immaginePart = request.getPart("immagine");
 		boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 

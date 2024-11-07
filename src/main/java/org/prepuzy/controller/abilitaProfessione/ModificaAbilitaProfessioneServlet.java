@@ -36,7 +36,7 @@ public class ModificaAbilitaProfessioneServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		long idAbilita = Long.parseLong(request.getParameter("idAbilita"));
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		String[] personaggiVisibiliIds = request.getParameterValues("personaggiVisibili");
 
 		AbilitaProfessione abilita = BusinessLogic.abilitaProfessioneById(idAbilita);

@@ -1,21 +1,21 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ page import="org.prepuzy.model.AbilitaFrutto"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
-<title>Abilità Frutto</title>
+<meta charset="UTF-8">
+<title>AbilitÃ  Frutto</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
 	<nav>
 		<div class="addNew">
 			<form action="${pageContext.request.contextPath}/master/AggiungiAbilitaFruttoServlet" method="get">
-				<button type="submit" class="btnAdd">Aggiungi Abilità Frutto</button>
+				<button type="submit" class="btnAdd">Aggiungi AbilitÃ  Frutto</button>
 			</form>
 		</div>
 		<div id="menuToggle">
@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -59,7 +59,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -68,7 +68,7 @@
 		</div>
 
 		<div class="centerBar">
-			<h1>Lista Abilità per Frutto</h1>
+			<h1>Lista AbilitÃ  per Frutto</h1>
 				<%
 				Map<String, List<AbilitaFrutto>> abilitaPerFrutto = (Map<String, List<AbilitaFrutto>>) request.getAttribute("abilitaPerFrutto");
 				if (abilitaPerFrutto != null && !abilitaPerFrutto.isEmpty()) {
@@ -83,15 +83,12 @@
 					%>
 					<div class="listCard">
 						<h2><%=abilita.getNome()%></h2>
-						<p>
-							<strong>Descrizione:</strong>
-							<%=abilita.getDescrizione()%></p>
 						<div class="formContainer">
 							<form action="DettagliAbilitaFruttoServlet" method="get">
 								<input type="hidden" name="idAbilita"
 									value="<%=abilita.getId()%>">
 								<button class="buttonMod" type="submit">Dettagli
-									Abilità</button>
+									AbilitÃ </button>
 							</form>
 						</div>
 					</div>
@@ -103,7 +100,7 @@
 				}
 				} else {
 				%>
-				<p>Nessuna abilità trovata.</p>
+				<p>Nessuna abilitÃ  trovata.</p>
 				<%
 				}
 				%>

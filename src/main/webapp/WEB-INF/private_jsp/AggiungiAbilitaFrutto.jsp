@@ -1,11 +1,11 @@
-<%@page contentType="text/html; charset=ISO-8859-1"%>
-<%@page pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html; charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
-<title>Aggiungi Abilità Frutto</title>
+<meta charset="UTF-8">
+<title>Aggiungi AbilitÃ  Frutto</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
@@ -26,7 +26,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -51,7 +51,7 @@
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ  Frutti</a></li>  
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
@@ -60,7 +60,7 @@
 		</div>
 
 		<div class="centerBar">
-			<h1>Aggiungi una nuova Abilità</h1>
+			<h1>Aggiungi una nuova AbilitÃ </h1>
 			<form action="${pageContext.request.contextPath}/master/AggiungiAbilitaFruttoServlet" method="post">
 				<div class="formGroup">
 					<label for="nome">Nome:</label> <input type="text" id="nome"
@@ -71,7 +71,7 @@
 					<textarea id="descrizione" name="descrizione" required></textarea>
 					<br>
 				</div>
-				<button type="submit" class="btnSave">Aggiungi Abilità</button>
+				<button type="submit" class="btnSave">Aggiungi AbilitÃ </button>
 			</form>
 		</div>
 	</div>

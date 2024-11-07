@@ -12,13 +12,13 @@
 <%@page import="org.prepuzy.model.Nave"%>
 <%@page import="org.prepuzy.model.Frutto"%>
 <%@page import="org.prepuzy.model.Mappa"%>
-<%@page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Dettagli Personaggio</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/Style.css">
@@ -50,7 +50,7 @@
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
+					href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -94,7 +94,7 @@
 					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
 						Frutti</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
+					href="${pageContext.request.contextPath}/master/QualitaServlet">QualitÃ 
 						Frutti</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
@@ -279,7 +279,7 @@
 				action="${pageContext.request.contextPath}/AggiornaDenaroServlet"
 				method="post">
 				<input type="hidden" name="idPersonaggio"
-					value="<%=personaggio.getId()%>"> <label for="denaro">Quantità
+					value="<%=personaggio.getId()%>"> <label for="denaro">QuantitÃ 
 					di Denaro:</label> <input type="number" name="denaro"
 					value="<%=inventario != null ? inventario.getBerry() : 0%>" min="0"
 					required>

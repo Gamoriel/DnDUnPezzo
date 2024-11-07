@@ -238,11 +238,13 @@ label {
 .cardContainer {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-evenly
 }
 
 .cardContainerNoImg {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-evenly
 }
 
 .cardContainer>div {
@@ -383,12 +385,14 @@ input[type="submit"]:hover {
 	place-items: center;
 	overflow: hidden;
 	border-radius: 20px;
+	margin: 0 10px 10px 10px;
 }
 
 .listCard h2 {
 	z-index: 1;
 	color: white;
 	font-size: 2em;
+	text-align: center
 }
 
 .listCard::before {

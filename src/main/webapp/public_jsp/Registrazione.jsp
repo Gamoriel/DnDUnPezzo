@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Registrazione</title>
 <link rel="stylesheet"
@@ -46,7 +46,7 @@
 					<button type="button" class="btnRegister"
 						onclick="submitForm('registrati')">Registrati</button>
 					<button type="button" class="btnLogin"
-						onclick="submitForm('login')">Ho già un account</button>
+						onclick="submitForm('login')">Ho giÃ  un account</button>
 				</div>
 				<%
 				String message = (String) request.getAttribute("errorMsg");

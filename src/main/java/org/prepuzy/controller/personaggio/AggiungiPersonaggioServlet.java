@@ -46,7 +46,7 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 
 		String nome = request.getParameter("nome");
 		String soprannome = request.getParameter("soprannome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		int forza = Integer.parseInt(request.getParameter("forza"));
 		int destrezza = Integer.parseInt(request.getParameter("destrezza"));
 		int costituzione = Integer.parseInt(request.getParameter("costituzione"));

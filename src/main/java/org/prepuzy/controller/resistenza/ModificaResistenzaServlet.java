@@ -45,7 +45,7 @@ public class ModificaResistenzaServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idResistenzaParam = request.getParameter("idResistenza");
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 
 		if (idResistenzaParam != null && !idResistenzaParam.isEmpty()) {
 			try {

@@ -65,7 +65,7 @@ public class ModificaFruttoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String idFruttoStr = request.getParameter("idFrutto");
 		String nome = request.getParameter("nome");
-		String descrizione = request.getParameter("descrizione");
+		String descrizione = request.getParameter("descrizione");descrizione = descrizione.replace("\n", "<br>");
 		String prezzoStr = request.getParameter("prezzo");
 		String tipoIdStr = request.getParameter("tipo");
 		String qualitaIdStr = request.getParameter("qualita");
