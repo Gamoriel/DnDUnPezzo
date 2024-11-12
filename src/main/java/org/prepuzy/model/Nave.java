@@ -18,17 +18,19 @@ public class Nave {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome;
+	private String nome, immagine;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String descrizione;
-	@OneToOne( fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	private Ciurma ciurma;
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Inventario deposito;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private Equipaggiamento equip;
 	@OneToMany(mappedBy = "nave")
 	private List<Personaggio> personaggi;
-	private int hp;
+	private int hp, classeArmatura;
 	private boolean isVisibleToAll;
 	
 	public Nave() {
@@ -99,5 +101,28 @@ public class Nave {
 	public void setVisibleToAll(boolean isVisibleToAll) {
 		this.isVisibleToAll = isVisibleToAll;
 	}
-	
+
+	public Equipaggiamento getEquip() {
+		return equip;
+	}
+
+	public void setEquip(Equipaggiamento equip) {
+		this.equip = equip;
+	}
+
+	public int getClasseArmatura() {
+		return classeArmatura;
+	}
+
+	public void setClasseArmatura(int classeArmatura) {
+		this.classeArmatura = classeArmatura;
+	}
+
+	public String getImmagine() {
+		return immagine;
+	}
+
+	public void setImmagine(String immagine) {
+		this.immagine = immagine;
+	}
 }

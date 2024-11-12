@@ -25,7 +25,7 @@ public class EliminaRazzaServlet extends HttpServlet {
 
 				if (razza != null) {
 					BusinessLogic.eliminaRazza(idRazza);
-					request.getRequestDispatcher("/RazzaServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/RazzaServlet");
 				} else {
 					request.setAttribute("messaggio", " Razza non trovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 					return;

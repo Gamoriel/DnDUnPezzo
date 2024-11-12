@@ -15,6 +15,6 @@ public interface DaoUtenti {
 	Utente selectByUsernamePassword(Utente u);
 	Personaggio personaggioByIdUtente(long id);
 	List<Personaggio> personaggiUtente(long id);
-	List<AbilitaFrutto> abilitaFruttoUtente(long id);
-	List<AbilitaProfessione> abilitaProfessioneUtente(long id);
+	List<AbilitaFrutto> abilitaFruttoUtente(long idUtente, long idProfessione);
+	List<AbilitaProfessione> abilitaProfessioneUtente(long idUtente, long idProfessione);
 }

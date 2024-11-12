@@ -57,8 +57,7 @@ public class ModificaResistenzaServlet extends HttpServlet {
 					resistenza.setDescrizione(descrizione);
 
 					BusinessLogic.modificaResistenza(resistenza);
-					request.setAttribute("idResistenza", idResistenza);
-					request.getRequestDispatcher("/DettagliResistenzaServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/DettagliResistenzaServlet?idResistenza=" + idResistenza);
 				} else {
 					request.setAttribute("messaggio", "Resistenza non trovata");
 					request.getRequestDispatcher("/ErrorServlet").forward(request, response);

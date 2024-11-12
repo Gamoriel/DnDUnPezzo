@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
@@ -21,17 +22,22 @@ public class Personaggio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nome, soprannome, urlImmagine;
+	private String nome, soprannome;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String descrizione;
-	private List<Integer> taglia;
+	private List<String> taglia, urlImmagine;
     @OneToMany(mappedBy = "mercante", cascade = CascadeType.ALL)
     private List<OggettiMercante> oggettiMercante;
 	@ManyToOne (fetch = FetchType.EAGER)
 	private Razza razza;
-	@ManyToOne
-	private Professione professione;
+    @ManyToMany
+    @JoinTable(
+        name = "personaggio_professione",
+        joinColumns = @JoinColumn(name = "personaggio_id"),
+        inverseJoinColumns = @JoinColumn(name = "professione_id")
+    )
+	private List<Professione> professioni;
 	@OneToOne(mappedBy = "personaggio", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Inventario inventario;
 	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -42,8 +48,13 @@ public class Personaggio {
 	private Nave nave;
 	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER)
 	private Frutto frutto;
-	@ManyToOne
-	private Mappa mappa;
+    @ManyToMany
+    @JoinTable(
+        name = "personaggio_mappa",
+        joinColumns = @JoinColumn(name = "personaggio_id"),
+        inverseJoinColumns = @JoinColumn(name = "mappa_id")
+    )
+    private List<Mappa> mappe;
     @ManyToOne
     @JoinColumn(name = "utente_id")
     private Utente utente;
@@ -100,28 +111,12 @@ public class Personaggio {
 		this.descrizione = descrizione;
 	}
 
-	public List<Integer> getTaglia() {
-		return taglia;
-	}
-
-	public void setTaglia(List<Integer> taglia) {
-		this.taglia = taglia;
-	}
-
 	public Razza getRazza() {
 		return razza;
 	}
 
 	public void setRazza(Razza razza) {
 		this.razza = razza;
-	}
-
-	public Professione getProfessione() {
-		return professione;
-	}
-
-	public void setProfessione(Professione professione) {
-		this.professione = professione;
 	}
 
 	public Inventario getInventario() {
@@ -164,12 +159,20 @@ public class Personaggio {
 		this.frutto = frutto;
 	}
 
-	public Mappa getMappa() {
-		return mappa;
+	public List<Professione> getProfessioni() {
+		return professioni;
 	}
 
-	public void setMappa(Mappa mappa) {
-		this.mappa = mappa;
+	public void setProfessioni(List<Professione> professioni) {
+		this.professioni = professioni;
+	}
+
+	public List<Mappa> getMappe() {
+		return mappe;
+	}
+
+	public void setMappe(List<Mappa> mappe) {
+		this.mappe = mappe;
 	}
 
 	public Utente getUtente() {
@@ -178,14 +181,6 @@ public class Personaggio {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
-	}
-
-	public String getUrlImmagine() {
-		return urlImmagine;
-	}
-
-	public void setUrlImmagine(String urlImmagine) {
-		this.urlImmagine = urlImmagine;
 	}
 
 	public int getForza() {
@@ -291,5 +286,20 @@ public class Personaggio {
 	public void setTecnichePersonaggio(List<Tecniche> tecnichePersonaggio) {
 		this.tecnichePersonaggio = tecnichePersonaggio;
 	}
-	
+
+	public List<String> getTaglia() {
+		return taglia;
+	}
+
+	public void setTaglia(List<String> taglia) {
+		this.taglia = taglia;
+	}
+
+	public List<String> getUrlImmagine() {
+		return urlImmagine;
+	}
+
+	public void setUrlImmagine(List<String> urlImmagine) {
+		this.urlImmagine = urlImmagine;
+	}	
 }

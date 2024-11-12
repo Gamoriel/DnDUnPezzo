@@ -20,6 +20,8 @@ public class Equipaggiamento {
 	private List<Oggetto> oggetti;
 	@OneToOne( fetch = FetchType.EAGER)
 	private Personaggio personaggio;
+    @OneToOne 
+    private Nave nave;
 	
 	public Equipaggiamento() {
 		super();
@@ -48,4 +50,13 @@ public class Equipaggiamento {
 	public void setPersonaggio(Personaggio personaggio) {
 		this.personaggio = personaggio;
 	}
+
+	public Nave getNave() {
+		return nave;
+	}
+
+	public void setNave(Nave nave) {
+		this.nave = nave;
+	}
+	
 }

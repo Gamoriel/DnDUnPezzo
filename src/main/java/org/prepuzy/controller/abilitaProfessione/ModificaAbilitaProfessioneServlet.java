@@ -48,7 +48,7 @@ public class ModificaAbilitaProfessioneServlet extends HttpServlet {
 
 		BusinessLogic.modificaAbilitaProfessione(abilita);
 
-		request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/master/AbilitaProfessioneServlet");
 	}
 
 }

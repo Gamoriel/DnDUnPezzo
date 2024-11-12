@@ -47,7 +47,7 @@ public class ModificaTecnicheServlet extends HttpServlet {
 		t.setVisibileAPersonaggio(personaggiVisibili);
 		
 		BusinessLogic.modificaTecnica(t);
-		request.getRequestDispatcher("/master/TecnicheServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/master/DettagliTecnicheServlet?idTecnica=" + idTecnica);
 		
 	}
 

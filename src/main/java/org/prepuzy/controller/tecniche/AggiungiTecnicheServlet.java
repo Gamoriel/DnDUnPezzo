@@ -35,7 +35,7 @@ public class AggiungiTecnicheServlet extends HttpServlet {
         t.setDescrizione(descrizione);
         
         BusinessLogic.aggiungiTecnica(t);
-       request.getRequestDispatcher("/master/TecnicheServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/master/TecnicheServlet");
 	}
 
 }

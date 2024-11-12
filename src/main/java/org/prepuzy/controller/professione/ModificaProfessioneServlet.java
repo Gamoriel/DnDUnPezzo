@@ -61,7 +61,7 @@ public class ModificaProfessioneServlet extends HttpServlet {
 
 	    BusinessLogic.modificaProfessione(professione);
 
-	   request.getRequestDispatcher("/ProfessioniServlet").forward(request, response);
+	    response.sendRedirect(request.getContextPath() + "/ProfessioniServlet?idProfessione=" + idProfessione);
 	}
 
 }

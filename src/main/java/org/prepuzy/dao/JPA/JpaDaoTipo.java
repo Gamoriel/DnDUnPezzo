@@ -46,7 +46,7 @@ public class JpaDaoTipo implements DaoTipo {
 
 	@Override
 	public void update(Tipo t) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

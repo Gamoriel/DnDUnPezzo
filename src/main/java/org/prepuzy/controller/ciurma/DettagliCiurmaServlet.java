@@ -27,12 +27,13 @@ public class DettagliCiurmaServlet extends HttpServlet {
             request.setAttribute("membri", membri);
             request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliCiurma.jsp").forward(request, response);
         } else {
-           request.getRequestDispatcher("/CiurmaServlet").forward(request, response);
+        	request.setAttribute("messaggio", "Ciurma non trovata");
+           request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

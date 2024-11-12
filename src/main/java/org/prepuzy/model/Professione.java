@@ -21,7 +21,7 @@ public class Professione {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String descrizione;
-	@OneToMany(mappedBy = "professione", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "professioni")
 	private List<Personaggio> personaggi;
 	@ManyToMany(mappedBy = "professioni", fetch = FetchType.EAGER)
     private List<Oggetto> oggetto;

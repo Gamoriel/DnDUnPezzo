@@ -8,6 +8,7 @@ import org.prepuzy.model.AbilitaProfessione;
 import org.prepuzy.model.Equipaggiamento;
 import org.prepuzy.model.Frutto;
 import org.prepuzy.model.Inventario;
+import org.prepuzy.model.Mappa;
 import org.prepuzy.model.OggettiMercante;
 import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Tecniche;
@@ -143,9 +144,11 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 					em.merge(personaggio.getNave());
 				}
 
-				if (personaggio.getMappa() != null) {
-					personaggio.getMappa().getPersonaggi().remove(personaggio);
-					em.merge(personaggio.getMappa());
+				if (personaggio.getMappe() != null) {
+					for (Mappa mappa : personaggio.getMappe()) {
+						mappa.getPersonaggi().remove(personaggio);
+						em.merge(mappa);
+					}
 				}
 				em.remove(personaggio);
 				t.commit();

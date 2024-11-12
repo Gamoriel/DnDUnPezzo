@@ -50,7 +50,7 @@ public class DettagliMercanteServlet extends HttpServlet {
 	    }
 
 	    BusinessLogic.aggiornaPrezzo(oggettiDaAggiornare);
-	    response.sendRedirect("DettagliMercanteServlet?idMercante=" + idMercante);
+	    response.sendRedirect(request.getContextPath() + "/DettagliMercanteServlet?idMercante=" + idMercante);
 	}
 
 }

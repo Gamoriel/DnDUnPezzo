@@ -65,7 +65,6 @@
 		<div class="centerBar">
 			<h1>Modifica Professione</h1>
 			<%
-			// Recupera l'oggetto Professione passato dal servlet
 			Professione professione = (Professione) request.getAttribute("professione");
 			%>
 

@@ -52,8 +52,7 @@ public class AggiungiCiurmaServlet extends HttpServlet {
 				nuovaCiurma.setVisibleToAll(isVisibleToAll);
 				nuovaCiurma.setJollyRoger("uploads/" + jollyRogerFileName);
 			} catch (IOException e) {
-				request.setAttribute("errorMessage",
-						"Errore durante il caricamento, controlla di aver popolato tutti i campi.");
+				request.setAttribute("errorMessage","Errore durante il caricamento, controlla di aver popolato tutti i campi.");
 				request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiCiurma.jsp").forward(request, response);
 				return;
 			}
@@ -61,7 +60,7 @@ public class AggiungiCiurmaServlet extends HttpServlet {
 
 		BusinessLogic.inserisciCiurma(nuovaCiurma);
 
-		request.getRequestDispatcher("/CiurmaServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/CiurmaServlet");
 	}
 
 }

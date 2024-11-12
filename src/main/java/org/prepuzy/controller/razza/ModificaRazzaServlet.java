@@ -45,8 +45,7 @@ public class ModificaRazzaServlet extends HttpServlet {
 				razza.setNome(nome);
 				razza.setDescrizione(descrizione);
 				BusinessLogic.modificaRazza(razza);
-				request.setAttribute("idRazza", idRazza);
-				request.getRequestDispatcher("/DettagliRazzaServlet").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/DettagliRazzaServlet?idRazza=" + idRazza);
 			} else {
 				request.setAttribute("messaggio", "RazzaNonTrovata"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 			}

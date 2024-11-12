@@ -14,8 +14,8 @@ p {
 }
 
 .overflow {
-    overflow-wrap: break-word;
-    white-space: normal;
+	overflow-wrap: break-word;
+	white-space: normal;
 }
 
 button {
@@ -88,6 +88,27 @@ nav {
 	width: 80%;
 	padding: 20px;
 	box-sizing: border-box;
+}
+
+.dettagliOggetto a {
+	font-size: 1.5rem;
+	text-decoration: none;
+	background-image: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+	background-size: 200% 100%;
+	background-position: 100% 0;
+	color: transparent;
+	display: inline-block;
+	-webkit-background-clip: text;
+	animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
 }
 
 h1 {
@@ -391,7 +412,7 @@ input[type="submit"]:hover {
 .listCard h2 {
 	z-index: 1;
 	color: white;
-	font-size: 2em;
+	font-size: 1em;
 	text-align: center
 }
 
@@ -406,17 +427,25 @@ input[type="submit"]:hover {
 }
 
 .listCard::after {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    border-radius: 15px;
-    background-size: cover;
-    background-position: center;
-    background-image: var(--bg-image, nonne);
-    background-color: var(--bg-color, #07182E);
+	content: '';
+	position: absolute;
+	inset: 5px;
+	border-radius: 15px;
+	background-size: cover;
+	background-position: center;
+	background-image: var(--bg-image, nonne);
+	background-color: var(--bg-color, #07182E);
 }
 
-@keyframes rotBGimg {from { transform:rotate(0deg);
+.checkboxes {
+	display: flex;
+	margin-top: 15px;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+@
+keyframes rotBGimg {from { transform:rotate(0deg);
 	
 }
 
@@ -425,8 +454,6 @@ to {
 }
 
 }
-
-
 .formContainer {
 	align-self: center;
 	z-index: 2;
@@ -653,7 +680,6 @@ td:nth-child(3) {
 		width: 100%;
 		padding: 8px;
 	}
-	
 	table {
 		display: block;
 		width: 100%;

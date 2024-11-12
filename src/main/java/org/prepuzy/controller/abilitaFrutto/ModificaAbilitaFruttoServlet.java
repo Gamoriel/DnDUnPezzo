@@ -49,7 +49,7 @@ public class ModificaAbilitaFruttoServlet extends HttpServlet {
 
 		BusinessLogic.modificaAbilitaFrutto(abilita);
 
-		request.getRequestDispatcher("/master/AbilitaFruttoServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/master/AbilitaFruttoServlet");
 	}
 
 }

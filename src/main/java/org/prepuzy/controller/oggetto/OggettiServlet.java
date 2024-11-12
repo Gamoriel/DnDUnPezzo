@@ -1,8 +1,9 @@
 package org.prepuzy.controller.oggetto;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,27 +26,28 @@ public class OggettiServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 	    Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 	    
-	    List<Oggetto> oggetti = new ArrayList<>();
+	    List<Oggetto> listaOggetti;
 	    
 	    if(loggedUser != null) {
 	    	
 	    	if(loggedUser.getRole() == Role.MASTER) {	    	
-	    		oggetti = BusinessLogic.listaOggetti();
+	    		listaOggetti = BusinessLogic.listaOggetti();
+	    		Map<String, List<Oggetto>> oggettoPerTipologia = listaOggetti.stream() .collect(Collectors.groupingBy(oggetto -> oggetto.getTipologia() != null ? oggetto.getTipologia().getNome() : "Senza Professione"));
+	    		request.setAttribute("oggetti", oggettoPerTipologia);
 	    	} else {
-	    		oggetti = BusinessLogic.mostraOggettiVisibilitaUtenteBase();
+	    		listaOggetti = BusinessLogic.mostraOggettiVisibilitaUtenteBase();
+	    		Map<String, List<Oggetto>> oggettoPerTipologia = listaOggetti.stream() .collect(Collectors.groupingBy(oggetto -> oggetto.getTipologia() != null ? oggetto.getTipologia().getNome() : "Senza Professione"));
+	    		request.setAttribute("oggetti", oggettoPerTipologia);
 	    	}
 	    } else {
 	    	request.getRequestDispatcher("/Login").forward(request, response);
 	    }
-
-		request.setAttribute("oggetti", oggetti);
-
 		request.getRequestDispatcher("/WEB-INF/private_jsp/Oggetto.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

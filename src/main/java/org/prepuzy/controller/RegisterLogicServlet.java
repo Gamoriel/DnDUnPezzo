@@ -21,7 +21,7 @@ public class RegisterLogicServlet extends HttpServlet {
 	    String action = request.getParameter("action");
 	    
 	    if("login".equals(action)) {
-	        response.sendRedirect("Login");
+	        response.sendRedirect(request.getContextPath() + "/Login");
 	        return;
 	    }
 	    
@@ -37,7 +37,7 @@ public class RegisterLogicServlet extends HttpServlet {
 	    u.setRole(Role.BASE);
 	    
 	    BusinessLogic.registrazione(u);
-	    response.sendRedirect("Login");
+	    response.sendRedirect(request.getContextPath() + "/Login");
 	}
 
 }

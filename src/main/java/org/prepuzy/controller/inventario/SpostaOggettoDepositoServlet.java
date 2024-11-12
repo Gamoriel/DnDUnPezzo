@@ -52,8 +52,7 @@ public class SpostaOggettoDepositoServlet extends HttpServlet {
 
 		            BusinessLogic.modificaPersonaggio(personaggio);
 		            BusinessLogic.modificaNave(nave);
-		            request.setAttribute("idPersonaggio", idPersonaggio);
-		            request.getRequestDispatcher("DettagliPersonaggioServlet").forward(request, response);
+		            response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio" + idPersonaggio);
 		        } else {
 		            request.setAttribute("messaggio", "Oggetto non trovato o deposito pieno");
 		            request.getRequestDispatcher("/ErrorServlet").forward(request, response);  

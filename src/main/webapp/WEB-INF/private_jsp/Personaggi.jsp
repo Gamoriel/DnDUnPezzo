@@ -73,7 +73,7 @@
 				if (personaggi != null && !personaggi.isEmpty()) {
 					for (Personaggio personaggio : personaggi) {
 				%>
-				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + personaggio.getUrlImmagine() %>')">
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + personaggio.getUrlImmagine().get(0) %>')">
 					<h2><%=personaggio.getNome()%></h2>
 					<div class="formContainer">
 						<form action="${pageContext.request.contextPath}/DettagliPersonaggioServlet" method="get">

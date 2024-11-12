@@ -107,7 +107,7 @@ public class AggiungiFruttoServlet extends HttpServlet {
 
         BusinessLogic.aggiungiFrutto(frutto);
 
-       request.getRequestDispatcher("/FruttiServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/FruttiServlet");
 	}
 
 }

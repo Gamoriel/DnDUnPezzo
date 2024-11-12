@@ -19,13 +19,13 @@ public class EliminaProfessioneServlet extends HttpServlet {
         boolean professione = BusinessLogic.eliminaProfessione(id);
 
         if (professione) {
-           request.getRequestDispatcher("/ProfessioniServlet").forward(request, response);
+        	response.sendRedirect(request.getContextPath() + "/ProfessioniServlet");
         } else {
             request.setAttribute("messaggio", "Errore durante l'eliminazione della professione."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

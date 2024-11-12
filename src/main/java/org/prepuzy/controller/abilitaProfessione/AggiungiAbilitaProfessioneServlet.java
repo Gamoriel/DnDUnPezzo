@@ -36,6 +36,6 @@ public class AggiungiAbilitaProfessioneServlet extends HttpServlet {
         
         BusinessLogic.aggiungiAbilitaProfessione(abilita);
         
-       request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
+       response.sendRedirect(request.getContextPath() + "/master/AbilitaProfessioneServlet");
 	}
 }

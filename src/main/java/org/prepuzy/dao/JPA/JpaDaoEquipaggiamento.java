@@ -2,6 +2,7 @@ package org.prepuzy.dao.JPA;
 
 import org.prepuzy.dao.DaoEquipaggiamento;
 import org.prepuzy.model.Equipaggiamento;
+import org.prepuzy.model.Nave;
 import org.prepuzy.model.Oggetto;
 import org.prepuzy.model.Personaggio;
 
@@ -102,8 +103,28 @@ public class JpaDaoEquipaggiamento implements DaoEquipaggiamento {
 	    try {
 	        t.begin();
 	        em.merge(equip);
-	        em.merge(oggetto);
 	        em.merge(personaggio);
+	        em.merge(oggetto);
+	        t.commit();
+	    } catch (Exception e) {
+	        if (t.isActive()) {
+	            t.rollback();
+	        }
+	        throw new RuntimeException("Errore durante l'aggiornamento dell'equipaggiamento e dell'inventario", e);
+	    } finally {
+	        em.close();
+	    }
+	}
+
+	@Override
+	public void updateEquipNaveInv(Equipaggiamento equip, Nave nave, Oggetto oggetto) {
+	    EntityManager em = JpaDaoFactory.getEntityManager();
+	    EntityTransaction t = em.getTransaction();
+	    try {
+	        t.begin();
+	        em.merge(equip);
+	        em.merge(nave);
+	        em.merge(oggetto);
 	        t.commit();
 	    } catch (Exception e) {
 	        if (t.isActive()) {

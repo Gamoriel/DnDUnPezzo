@@ -257,4 +257,15 @@ public class JpaDaoFrutto implements DaoFrutto {
 	    }
 	}
 
+	@Override
+	public List<AbilitaFrutto> selectAllAblitaFruttoByFrutto(long id) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+		try {
+			String jpql = "select a from AbilitaFrutto a where a.frutto.id = :id";
+			return (em.createQuery(jpql, AbilitaFrutto.class).setParameter("id", id).getResultList());
+		} finally {
+			em.close();
+		}
+	}
+
 }

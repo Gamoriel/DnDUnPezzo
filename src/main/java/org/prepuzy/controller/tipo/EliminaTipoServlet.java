@@ -24,7 +24,7 @@ public class EliminaTipoServlet extends HttpServlet {
 				boolean isDeleted = BusinessLogic.eliminaTipo(idTipo);
 
 				if (isDeleted) {
-					request.getRequestDispatcher("/master/TipiServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/master/TipiServlet");
 				} else {
 					request.setAttribute("messaggio", "Impossibile eliminare il tipo. Forse è associato ad altri dati");
 					request.getRequestDispatcher("/ErrorServlet").forward(request, response);

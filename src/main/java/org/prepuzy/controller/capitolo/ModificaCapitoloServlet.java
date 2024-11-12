@@ -55,7 +55,7 @@ public class ModificaCapitoloServlet extends HttpServlet {
         	c.setVisibleToAll(isVisibleToAll);
             try {
                 BusinessLogic.modificaCapitoloConMappa(c, m);
-               request.getRequestDispatcher("/MasterPageServlet?message=Capitolo modificato con successo").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/MasterPageServlet");
             } catch (Exception e) {
                request.getRequestDispatcher("/ErrorServlet?messaggio=Errore nella modifica del capitolo").forward(request, response);
             }

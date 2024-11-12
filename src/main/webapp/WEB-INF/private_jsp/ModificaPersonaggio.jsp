@@ -1,3 +1,4 @@
+<%@page import="org.prepuzy.model.Mappa"%>
 <%@page import="org.prepuzy.model.Role"%>
 <%@page import="org.prepuzy.model.Utente"%>
 <%@page import="org.prepuzy.controller.frutto.FruttiServlet"%>
@@ -16,34 +17,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Modifica Personaggio</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
-		<%		
-			HttpSession s = request.getSession();
-			Utente utenteLoggato = (Utente) s.getAttribute("loggedUser"); 
-		%>
+	<%
+	HttpSession s = request.getSession();
+	Utente utenteLoggato = (Utente) s.getAttribute("loggedUser");
+	%>
 	<nav>
 		<div id="menuToggle">
 			<input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
-				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
 				<li><a href="${pageContext.request.contextPath}/FruttiServlet">Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
-				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
-				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
-				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
-				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
-				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status
+						Alterati</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
+						Equipaggiamento</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita
+						Professioni</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -52,23 +73,42 @@
 		<div class="leftBar">
 			<h2>Collegamenti</h2>
 			<ul>
-				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
 				<li><a href="${pageContext.request.contextPath}/FruttiServlet">Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
-				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
-				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
-				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
-				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
-				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status
+						Alterati</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
+						Equipaggiamento</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita
+						Frutti</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita
+						Professioni</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 			</ul>
 		</div>
 
@@ -84,22 +124,20 @@
 			List<Frutto> frutti = (List<Frutto>) request.getAttribute("frutti");
 			%>
 
-			<form action="${pageContext.request.contextPath}/ModificaPersonaggioServlet" method="post"
-				enctype="multipart/form-data">
-				<input type="hidden" name="idPersonaggio" value="<%=personaggio.getId()%>">
-
-				<label for="nome">Nome:</label> <input type="text" id="nome"
-					name="nome" value="<%=personaggio.getNome()%>" required><br>
-
-				<label for="soprannome">Soprannome:</label> <input type="text"
+			<form
+				action="${pageContext.request.contextPath}/ModificaPersonaggioServlet"
+				method="post" enctype="multipart/form-data">
+				<input type="hidden" name="idPersonaggio"
+					value="<%=personaggio.getId()%>"> <label for="nome">Nome:</label>
+				<input type="text" id="nome" name="nome"
+					value="<%=personaggio.getNome()%>" required><br> <label
+					for="soprannome">Soprannome:</label> <input type="text"
 					id="soprannome" name="soprannome"
 					value="<%=personaggio.getSoprannome()%>" required><br>
 				<label for="descrizione">Descrizione:</label>
 				<textarea id="descrizione" name="descrizione" required><%=personaggio.getDescrizione()%></textarea>
-				<br> <label for="taglia">Taglia:</label> <input type="number"
-					id="taglia" name="taglia"
-					value="<%=personaggio.getTaglia() != null ? personaggio.getTaglia().toString() : ""%>"><br>
-
+				<br>
+				
 				<label for="razza">Razza:</label> <select id="razza" name="razza">
 					<option value="">Seleziona Razza</option>
 					<%
@@ -112,24 +150,8 @@
 					<%
 					}
 					%>
-				</select><br> <label for="professione">Professione:</label> <select
-					id="professione" name="professione">
-					<option value="">Seleziona Professione</option>
-					<%
-					for (Professione professione : professioni) {
-					%>
-					<option value="<%=professione.getId()%>"
-						<%=personaggio.getProfessione() != null && personaggio.getProfessione().getId() == professione.getId()
-		? "selected"
-		: ""%>>
-						<%=professione.getNome()%>
-					</option>
-					<%
-					}
-					%>
-				</select><br> 
-				<label for="ciurma">Ciurma:</label> 
-				<select id="ciurma" name="ciurma">
+				</select><br> <label for="ciurma">Ciurma:</label> <select id="ciurma"
+					name="ciurma">
 					<option value="">Seleziona Ciurma</option>
 					<%
 					for (Ciurma ciurma : ciurme) {
@@ -141,8 +163,7 @@
 					<%
 					}
 					%>
-				</select><br> 
-				<label for="nave">Nave:</label> <select id="nave"
+				</select><br> <label for="nave">Nave:</label> <select id="nave"
 					name="nave">
 					<option value="">Seleziona Nave</option>
 					<%
@@ -155,7 +176,7 @@
 					<%
 					}
 					%>
-				</select><br> <label for="nave">Frutto:</label> <select id="nave"
+				</select><br> <label for="nave">Nave:</label> <select id="nave"
 					name="nave">
 					<option value="">Seleziona Nave</option>
 					<%
@@ -182,15 +203,72 @@
 					}
 					%>
 				</select><br>
-				<div class="upload-container">
-					<label for="immagine">Carica Immagine:</label> <input type="file"
-						id="immagine" name="immagine" accept="image/*" required>
-					<button type="button" class="upload-button"
-						onclick="document.getElementById('immagine').click();">
-						Seleziona Immagine</button>
-					<div class="file-name" id="fileName">Nessun file selezionato</div>
+				<div>
+					<label>Seleziona Professione:</label>
+					<div class="checkboxes">
+						<%
+						List<Professione> listaProfessioni = (List<Professione>) request.getAttribute("listaProfessioni");
+						List<Professione> professioniSelezionate = personaggio != null ? personaggio.getProfessioni() : null;
+						if (listaProfessioni != null && !listaProfessioni.isEmpty()) {
+							for (Professione professione : listaProfessioni) {
+								boolean isChecked = professioniSelezionate != null && professioniSelezionate.contains(professione);
+						%>
+						<label> <input type="checkbox" name="professione"
+							value="<%=professione.getId()%>"
+							<%=isChecked ? "checked" : ""%>> <%=professione.getNome()%>
+						</label><br>
+						<%
+						}
+						} else {
+						%>
+						<p>Nessuna professione disponibile</p>
+						<%
+						}
+						%>
+					</div>
 				</div>
 
+				<div>
+					<label>Seleziona Mappa:</label>
+					<div class="checkboxes">
+						<%
+						List<Mappa> listaMappe = (List<Mappa>) request.getAttribute("listaMappe");
+						List<Mappa> mappeSelezionate = personaggio != null ? personaggio.getMappe() : null;
+						if (listaMappe != null && !listaMappe.isEmpty()) {
+							for (Mappa mappa : listaMappe) {
+								boolean isChecked = mappeSelezionate != null && mappeSelezionate.contains(mappa);
+						%>
+						<label> <input type="checkbox" name="mappa"
+							value="<%=mappa.getId()%>"> <%=isChecked ? "checked" : ""%>> <%=mappa.getNome()%>
+						</label><br>
+						<%
+						}
+						} else {
+						%>
+						<p>Nessuna mappa disponibile</p>
+						<%
+						}
+						%>
+					</div>
+				</div>
+				<div class="upload-container">
+					<label for="immagine">Carica Immagini Personaggio:</label> <input type="file"
+						id="immagine" name="immagine" accept="image/*" multiple
+						style="display: none;" onchange="showFileNames()">
+					<button type="button" class="upload-button"
+						onclick="document.getElementById('immagine').click();">
+						Seleziona Immagini</button>
+					<div class="file-name" id="fileName">Nessun file selezionato</div>
+				</div>
+				<div class="upload-container">
+					<label for="taglia">Carica Taglie:</label> <input type="file"
+						id="taglia" name="taglia" accept="image/*" multiple
+						style="display: none;" onchange="showFileNames()">
+					<button type="button" class="upload-button"
+						onclick="document.getElementById('immagine').click();">
+						Seleziona Immagini</button>
+					<div class="file-name" id="fileName">Nessun file selezionato</div>
+				</div>
 				<h2>Statistiche</h2>
 				<label for="forza">Forza:</label> <input type="number" id="forza"
 					name="forza" value="<%=personaggio.getForza()%>" required><br>
@@ -219,11 +297,13 @@
 					id="classeArmatura" name="classeArmatura"
 					value="<%=personaggio.getClasseArmatura()%>" required><br>
 
-				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
+				<div class="formGroup"
+					<%=(utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'")%>>
 					<label for="isVisibleToAll">Visibile a tutti:</label> <input
 						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">
 				</div>
-				<div class="formGroup" <%= (utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'") %>>
+				<div class="formGroup"
+					<%=(utenteLoggato.getRole().equals(Role.MASTER) ? "" : "style='display:none;'")%>>
 					<label for="isMercante">Mercante:</label> <input type="checkbox"
 						id="isMercante" name="isMercante">
 				</div>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.AbilitaFrutto;
 import org.prepuzy.model.Frutto;
+import org.prepuzy.model.Role;
 import org.prepuzy.model.Utente;
 
 @WebServlet("/DettagliFruttoServlet")
@@ -21,7 +22,7 @@ public class DettagliFruttoServlet extends HttpServlet {
 
 	 protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	            throws ServletException, IOException {
-
+		 List<AbilitaFrutto> abilitaFruttoUtente;
 	        String idFruttoStr = request.getParameter("idFrutto");
 
 	        if (idFruttoStr != null && !idFruttoStr.isEmpty()) {
@@ -33,8 +34,11 @@ public class DettagliFruttoServlet extends HttpServlet {
 	                	HttpSession session = request.getSession();
 	                    Utente utenteLoggato = (Utente) session.getAttribute("loggedUser");
 	                    
-	                    List<AbilitaFrutto> abilitaFruttoUtente = BusinessLogic.abilitaFruttoUtente(utenteLoggato.getId());
-	                	
+	                    if(utenteLoggato.getRole().equals(Role.BASE)) {	                    	
+	                    	abilitaFruttoUtente = BusinessLogic.abilitaFruttoUtente(utenteLoggato.getId(), frutto.getId());
+	                    } else {
+	                    	abilitaFruttoUtente = BusinessLogic.listaAbilitaFruttoByFrutto(frutto.getId());
+	                    }
 	                    request.setAttribute("abilitaVisibili", abilitaFruttoUtente);
 	                	request.setAttribute("frutto", frutto);
 	                    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliFrutto.jsp").forward(request, response);
@@ -53,7 +57,7 @@ public class DettagliFruttoServlet extends HttpServlet {
 	    }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

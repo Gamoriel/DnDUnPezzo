@@ -22,7 +22,7 @@ public class ResistenzeServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/private_jsp/Resistenze.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

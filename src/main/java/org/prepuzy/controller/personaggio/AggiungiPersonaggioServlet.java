@@ -62,27 +62,55 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 		Utente utenteLoggato = (Utente) session.getAttribute("loggedUser");
 
 		Personaggio personaggio = new Personaggio();
-		Part immaginePart = request.getPart("immagine");
-		if (immaginePart != null && immaginePart.getSize() > 0) {
-			String immagineFileName = System.currentTimeMillis() + "_"
-					+ Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
-			String uploadDir = getServletContext().getRealPath("/uploads");
-			File uploadDirFile = new File(uploadDir);
-			if (!uploadDirFile.exists()) {
-				uploadDirFile.mkdir();
-			}
+		List<String> urlImmagineList = new ArrayList<>();
+		List<String> tagliaImg = new ArrayList<>();
 
-			File file = new File(uploadDir + File.separator + immagineFileName);
-			try {
-				immaginePart.write(file.getAbsolutePath());
-				personaggio.setUrlImmagine("uploads/" + immagineFileName);
-			} catch (IOException e) {
-				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-				request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
-				return;
-			}
-		}
+	    for (Part immaginePart : request.getParts()) {
+	        if (immaginePart.getName().equals("immagine") && immaginePart.getSize() > 0) {
+	            String immagineFileName = System.currentTimeMillis() + "_"
+	                    + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+	            String uploadDir = getServletContext().getRealPath("/uploads");
+	            File uploadDirFile = new File(uploadDir);
+	            if (!uploadDirFile.exists()) {
+	                uploadDirFile.mkdir();
+	            }
 
+	            File file = new File(uploadDir + File.separator + immagineFileName);
+	            try {
+	                immaginePart.write(file.getAbsolutePath());
+	                urlImmagineList.add("uploads/" + immagineFileName);
+	            } catch (IOException e) {
+	                request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
+	                request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+	                return;
+	            }
+	        }
+	    }
+	    personaggio.setUrlImmagine(urlImmagineList);
+	    
+	    for (Part immaginePart : request.getParts()) {
+	        if (immaginePart.getName().equals("taglia") && immaginePart.getSize() > 0) {
+	            String immagineFileName = System.currentTimeMillis() + "_"
+	                    + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+	            String uploadDir = getServletContext().getRealPath("/uploads");
+	            File uploadDirFile = new File(uploadDir);
+	            if (!uploadDirFile.exists()) {
+	                uploadDirFile.mkdir();
+	            }
+
+	            File file = new File(uploadDir + File.separator + immagineFileName);
+	            try {
+	                immaginePart.write(file.getAbsolutePath());
+	                tagliaImg.add("uploads/" + immagineFileName);
+	            } catch (IOException e) {
+	                request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
+	                request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+	                return;
+	            }
+	        }
+	    }
+	    personaggio.setTaglia(tagliaImg);
+	    
 		if (nome != null && descrizione != null && !nome.isEmpty() && !descrizione.isEmpty() && soprannome != null
 				&& !soprannome.isEmpty()) {
 			personaggio.setNome(nome);
@@ -110,12 +138,18 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 			personaggio.setRazza(razza);
 		}
 
-		String professioneStr = request.getParameter("professione");
-		if (professioneStr != null & !professioneStr.isEmpty()) {
-			long professioneId = Long.parseLong(professioneStr);
-			Professione professione = BusinessLogic.professioneById(professioneId);
-			personaggio.setProfessione(professione);
-		}
+	    String[] professioneIds = request.getParameterValues("professione");
+	    if (professioneIds != null && professioneIds.length > 0) {
+	        List<Professione> professioniSelezionate = new ArrayList<>();
+	        for (String professioneIdStr : professioneIds) {
+	            long professioneId = Long.parseLong(professioneIdStr);
+	            Professione professione = BusinessLogic.professioneById(professioneId);
+	            if (professione != null) {
+	                professioniSelezionate.add(professione);
+	            }
+	        }
+	        personaggio.setProfessioni(professioniSelezionate);
+	    }
 
 		String ciurmaStr = request.getParameter("ciurma");
 		if (ciurmaStr != null && !ciurmaStr.isEmpty()) {
@@ -131,12 +165,18 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 			personaggio.setNave(nave);
 		}
 
-		String mappaStr = request.getParameter("mappa");
-		if (mappaStr != null & !mappaStr.isEmpty()) {
-			long mappaId = Long.parseLong(mappaStr);
-			Mappa mappa = BusinessLogic.cercaMappaConId(mappaId);
-			personaggio.setMappa(mappa);
-		}
+	    String[] mappaIds = request.getParameterValues("mappa");
+	    if (mappaIds != null && mappaIds.length > 0) {
+	        List<Mappa> mappeSelezionate = new ArrayList<>();
+	        for (String mappaIdStr : mappaIds) {
+	            long mappaId = Long.parseLong(mappaIdStr);
+	            Mappa mappa = BusinessLogic.cercaMappaConId(mappaId);
+	            if (mappa != null) {
+	                mappeSelezionate.add(mappa);
+	            }
+	        }
+	        personaggio.setMappe(mappeSelezionate);
+	    }
 
 		BusinessLogic.aggiungiPersonaggio(personaggio);
 
@@ -160,6 +200,6 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 				return;
 			}
 		}
-		request.getRequestDispatcher("/PersonaggiServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/PersonaggiServlet");
 	}
 }

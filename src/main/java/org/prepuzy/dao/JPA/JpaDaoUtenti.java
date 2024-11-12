@@ -85,13 +85,11 @@ public class JpaDaoUtenti implements DaoUtenti {
 	}
 
 	@Override
-	public List<AbilitaFrutto> abilitaFruttoUtente(long id) {
+	public List<AbilitaFrutto> abilitaFruttoUtente(long idUtente, long idFrutto) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
+		Personaggio personaggio = personaggioByIdUtente(idUtente);
 		try {
-			TypedQuery<AbilitaFrutto> query = em
-					.createQuery("SELECT a FROM AbilitaFrutto a JOIN a.visibileAPersonaggio p WHERE p.utente.id = :id",
-							AbilitaFrutto.class)
-					.setParameter("id", id);
+			TypedQuery<AbilitaFrutto> query = em.createQuery("SELECT a FROM AbilitaFrutto a JOIN a.visibileAPersonaggio p JOIN a.frutto fr WHERE p.id = :idPersonaggio AND fr.id = idFrutto", AbilitaFrutto.class).setParameter("ididPersonaggio", personaggio.getId()).setParameter("idFrutto", idFrutto);
 			return query.getResultList();
 		} finally {
 			em.close();
@@ -99,12 +97,12 @@ public class JpaDaoUtenti implements DaoUtenti {
 	}
 
 	@Override
-	public List<AbilitaProfessione> abilitaProfessioneUtente(long id) {
+	public List<AbilitaProfessione> abilitaProfessioneUtente(long idUtente, long idProfessione) {
 		EntityManager em = JpaDaoFactory.getEntityManager();
 	    try {
-	        Personaggio personaggio = personaggioByIdUtente(id);
+	        Personaggio personaggio = personaggioByIdUtente(idUtente);
 	        if (personaggio != null) {
-	            TypedQuery<AbilitaProfessione> query = em.createQuery("SELECT a FROM AbilitaProfessione a JOIN a.visibileAPersonaggio p WHERE p.id = :idPersonaggio", AbilitaProfessione.class).setParameter("idPersonaggio", personaggio.getId());
+	            TypedQuery<AbilitaProfessione> query = em.createQuery("SELECT a FROM AbilitaProfessione a JOIN a.visibileAPersonaggio p JOIN a.professione pr WHERE p.id = :idPersonaggio AND pr.id = :idProfessione", AbilitaProfessione.class).setParameter("idPersonaggio", personaggio.getId()).setParameter("idProfessione", idProfessione);
 	            return query.getResultList();
 	        } else {
 	            return Collections.emptyList();

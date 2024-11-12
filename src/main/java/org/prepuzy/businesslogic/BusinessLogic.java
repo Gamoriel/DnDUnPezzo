@@ -126,6 +126,10 @@ public class BusinessLogic {
 		DaoFactory.getInstance(DATABASE).getJpaDaoEquipaggiamento().updateEquipPersoInv(equip, personaggio, oggetto);
 	}
 	
+	public static void modificaEquipaggiamentoNave(Equipaggiamento equip, Nave nave, Oggetto oggetto) {
+		DaoFactory.getInstance(DATABASE).getJpaDaoEquipaggiamento().updateEquipNaveInv(equip, nave, oggetto);
+	}
+	
 	// SEZIONE FRUTTO
 	
 	public static void aggiungiFrutto(Frutto f) {
@@ -166,6 +170,10 @@ public class BusinessLogic {
 	
 	public static List<AbilitaFrutto> listaAbilitaFrutto(){
 		return DaoFactory.getInstance(DATABASE).getJpaDaoFrutto().selectAllAblitaFrutto();
+	}
+	
+	public static List<AbilitaFrutto> listaAbilitaFruttoByFrutto(long id){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoFrutto().selectAllAblitaFruttoByFrutto(id);
 	}
 	
 	public static void modificaAbilitaFrutto(AbilitaFrutto a) {
@@ -334,6 +342,10 @@ public class BusinessLogic {
 	
 	public static List<AbilitaProfessione> listaAbilitaProfessione(){
 		return DaoFactory.getInstance(DATABASE).getJpaDaoProfessione().selectAllAblitaProfessione();
+	}
+	
+	public static List<AbilitaProfessione> listaAbilitaProfessioneByProfessione(long id){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoProfessione().selectAllAblitaProfessioneByProfessione(id);
 	}
 	
 	public static void aggiungiAbilitaProfessione(AbilitaProfessione a) {
@@ -505,12 +517,12 @@ public class BusinessLogic {
 		return DaoFactory.getInstance(DATABASE).getJpaDaoUtenti().personaggiUtente(id);
 	}
 
-	public static List<AbilitaFrutto> abilitaFruttoUtente(long id){
-		return DaoFactory.getInstance(DATABASE).getJpaDaoUtenti().abilitaFruttoUtente(id);
+	public static List<AbilitaFrutto> abilitaFruttoUtente(long idUtente, long idFrutto){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoUtenti().abilitaFruttoUtente(idUtente, idFrutto);
 	}
 	
-	public static List<AbilitaProfessione> abilitaProfessioneUtente(long id){
-		return DaoFactory.getInstance(DATABASE).getJpaDaoUtenti().abilitaProfessioneUtente(id);
+	public static List<AbilitaProfessione> abilitaProfessioneUtente(long idUtente, long idProfessione){
+		return DaoFactory.getInstance(DATABASE).getJpaDaoUtenti().abilitaProfessioneUtente(idUtente, idProfessione);
 	}
 	
 	public static void modificaUtente(Utente u) {

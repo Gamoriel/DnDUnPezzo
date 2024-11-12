@@ -19,7 +19,7 @@ public class EliminaStatusAlteratoServlet extends HttpServlet {
             try {
                 long id = Long.parseLong(idParam);
                 BusinessLogic.eliminaStatus(id);
-               request.getRequestDispatcher("/StatusAlteratiServlet").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/StatusAlteratiServlet");
             } catch (NumberFormatException e) {
             	request.setAttribute("messaggio", "Errore durante l'eliminzione"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
@@ -29,7 +29,7 @@ public class EliminaStatusAlteratoServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

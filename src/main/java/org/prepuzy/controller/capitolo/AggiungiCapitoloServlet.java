@@ -40,9 +40,8 @@ public class AggiungiCapitoloServlet extends HttpServlet {
 					nuovoCapitolo.setVisibleToAll(isVisibleToAll);
 
 					BusinessLogic.inserisciCapitolo(nuovoCapitolo);
-					;
 
-					request.getRequestDispatcher("/MasterPageServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/MasterPageServlet");
 				} else {
 					request.setAttribute("messaggio", "Capitolo non trovato");
 					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  

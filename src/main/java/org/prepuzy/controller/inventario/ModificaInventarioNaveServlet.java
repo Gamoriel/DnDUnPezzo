@@ -9,39 +9,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Inventario;
-import org.prepuzy.model.Personaggio;
+import org.prepuzy.model.Nave;
 
 
-@WebServlet("/AggiornaDenaroServlet")
-public class AggiornaDenaroServlet extends HttpServlet {
+@WebServlet("/ModificaBerryNaveServlet")
+public class ModificaInventarioNaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idPersonaggioStr = request.getParameter("idPersonaggio");
+		String idNaveStr = request.getParameter("idNave");
         String denaroStr = request.getParameter("denaro").trim();
-
-        if (idPersonaggioStr != null && denaroStr != null) {
-            long idPersonaggio = Long.parseLong(idPersonaggioStr);
-            int denaro = Integer.parseInt(denaroStr);
-
-            Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
-            if (personaggio != null) {
-                Inventario inventario = personaggio.getInventario();
-                if (inventario != null) {
-                    inventario.setBerry(denaro);
-                    BusinessLogic.modificaPersonaggio(personaggio);
-                    response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
-                } else {
+        
+        if(idNaveStr != null && denaroStr != null) {
+        	long idNave = Long.parseLong(idNaveStr);
+        	int denaro = Integer.parseInt(denaroStr);
+        	Nave nave = BusinessLogic.naveById(idNave);
+        	
+        	if(nave != null) {
+        		Inventario inventario = nave.getDeposito();
+        		if(inventario != null) {
+        			inventario.setBerry(denaro);
+        			BusinessLogic.modificaNave(nave);
+        			response.sendRedirect(request.getContextPath() + "/DettagliNaveServlet?idNave=" + idNave);
+        		} else {
     				request.setAttribute("messaggio", "Inventario non trovato");
     				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
                 }
-            } else {
+        	} else {
 				request.setAttribute("messaggio", "Personaggio non trovato");
 				request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
         } else {
-			request.setAttribute("messaggio", "Personaggio non valido");
+			request.setAttribute("messaggio", "Nave non valida");
 			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
         }
 	}
+
 }

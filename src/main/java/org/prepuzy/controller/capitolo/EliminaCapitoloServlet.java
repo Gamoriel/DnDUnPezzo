@@ -25,7 +25,7 @@ public class EliminaCapitoloServlet extends HttpServlet {
 
 				if (capitoloEliminato) {
 
-					request.getRequestDispatcher("MasterPageServlet?message=Capitolo eliminato con successo").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/MasterPageServlet");
 				} else {
 
 					request.setAttribute("messaggio", "Errore nell'eliminazione del capitolo"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);

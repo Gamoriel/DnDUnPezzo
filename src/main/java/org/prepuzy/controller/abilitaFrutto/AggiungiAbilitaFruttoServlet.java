@@ -35,6 +35,6 @@ public class AggiungiAbilitaFruttoServlet extends HttpServlet {
 
         BusinessLogic.aggiungiAbilitaFrutto(nuovaAbilita);
 
-       request.getRequestDispatcher("/master/AbilitaFruttoServlet").forward(request, response);
+       response.sendRedirect(request.getContextPath() + "/master/AbilitaFruttoServlet");
 	}
 }

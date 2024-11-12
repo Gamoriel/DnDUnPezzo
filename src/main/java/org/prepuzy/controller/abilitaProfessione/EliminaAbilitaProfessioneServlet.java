@@ -27,12 +27,12 @@ public class EliminaAbilitaProfessioneServlet extends HttpServlet {
             request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
             return;
         }
-        request.getRequestDispatcher("/master/AbilitaProfessioneServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/master/AbilitaProfessioneServlet");
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

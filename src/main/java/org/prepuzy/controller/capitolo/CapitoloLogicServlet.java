@@ -24,7 +24,7 @@ public class CapitoloLogicServlet extends HttpServlet {
                 Capitolo capitolo = BusinessLogic.cercaConId(capitoloId);
                 if (capitolo != null) {
                     request.setAttribute("capitoloSelezionato", capitolo);
-                    request.getRequestDispatcher("CapitoloPageServlet").forward(request, response);
+                    request.getRequestDispatcher("/CapitoloPageServlet").forward(request, response);
                 } else {
                    request.getRequestDispatcher("/ErrorServlet?messaggio=Capitolo non trovato").forward(request, response);
                 }

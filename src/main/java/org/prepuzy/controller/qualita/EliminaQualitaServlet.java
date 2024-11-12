@@ -23,7 +23,7 @@ public class EliminaQualitaServlet extends HttpServlet {
 				boolean eliminato = BusinessLogic.eliminaQualita(idQualita);
 
 				if (eliminato) {
-					request.getRequestDispatcher("/master/QualitaServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/master/QualitaServlet");
 				} else {
 					request.setAttribute("messaggio", "Impossibile eliminare la qualità.");
 					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  

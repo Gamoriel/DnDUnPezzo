@@ -63,8 +63,7 @@ public class ModificaMappaServlet extends HttpServlet {
 		gestisciPersonaggiEMappe(mappa, request);
 
 		BusinessLogic.modificaMappa(mappa);
-		request.setAttribute("idMappa", idMappa);
-		request.getRequestDispatcher("/DettagliMappaServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/DettagliMappaServlet?idMappa=" + idMappa);
 	}
 
 	private void aggiornaMappa(Mappa mappa, String nome, String descrizione, boolean isVisibleToAll, Part immaginePart,

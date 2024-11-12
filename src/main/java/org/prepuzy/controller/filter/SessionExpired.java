@@ -30,7 +30,7 @@ public class SessionExpired extends HttpFilter implements Filter {
         }
         
         if (session == null || session.getAttribute("loggedUser") == null) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/Login");
+        	httpResponse.sendRedirect(httpRequest.getContextPath() + "/Login");
             return; 
         }
         

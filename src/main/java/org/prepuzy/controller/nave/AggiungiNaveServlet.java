@@ -1,6 +1,8 @@
 package org.prepuzy.controller.nave;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Ciurma;
@@ -52,9 +55,26 @@ public class AggiungiNaveServlet extends HttpServlet {
 	        Ciurma ciurma = BusinessLogic.cercaCiurmaConId(ciurmaId);
 	        nave.setCiurma(ciurma);
 	    }
+	    
+		Part navePart = request.getPart("imgNave");
+		if (navePart != null && navePart.getSize() > 0) {
+			String naveFileName = System.currentTimeMillis() + "_"
+					+ Paths.get(navePart.getSubmittedFileName()).getFileName().toString();
+			String uploadDir = getServletContext().getRealPath("/uploads");
+			File uploadDirFile = new File(uploadDir);
+			if (!uploadDirFile.exists()) {
+				uploadDirFile.mkdir();
+			}
 
+			File file = new File(uploadDir + File.separator + naveFileName);
+			navePart.write(file.getAbsolutePath());
+			nave.setImmagine("uploads/" + naveFileName);
+		} else {
+			request.setAttribute("messaggio", "Immagine non valida");
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+		}
 	    BusinessLogic.aggiungiNave(nave);
-	   request.getRequestDispatcher("/NaviServlet").forward(request, response);
+	    response.sendRedirect(request.getContextPath() + "/NaviServlet");
 	}
 
 }

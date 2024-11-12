@@ -24,7 +24,7 @@ public class EliminaOggettoServlet extends HttpServlet {
 				boolean success = BusinessLogic.deleteOggetto(id);
 
 				if (success) {
-					request.getRequestDispatcher("/OggettiServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/OggettiServlet");
 					return;
 				} else {
 					request.setAttribute("messaggio", "Oggetto non trovato"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);

@@ -19,7 +19,7 @@ public class EliminaResistenzaServlet extends HttpServlet {
             try {
                 long idResistenza = Long.parseLong(idResistenzaParam);
                 BusinessLogic.eliminaResistenza(idResistenza);
-               request.getRequestDispatcher("/ResistenzeServlet").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/ResistenzeServlet");
             } catch (NumberFormatException e) {
             	request.setAttribute("messaggio", "Errore nell'eliminazione"); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             }
@@ -29,7 +29,7 @@ public class EliminaResistenzaServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

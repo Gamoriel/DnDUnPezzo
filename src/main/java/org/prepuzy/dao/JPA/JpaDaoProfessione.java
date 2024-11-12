@@ -99,7 +99,7 @@ public class JpaDaoProfessione implements DaoProfessione {
 	                em.merge(abilita);
 	            }
 	            for (Personaggio p : professione.getPersonaggi()) {
-	            	p.setProfessione(null);
+	            	p.setProfessioni(null);
 	            	em.merge(p);
 	            }
 	            for (Oggetto o : professione.getOggetto()) {
@@ -241,5 +241,16 @@ public class JpaDaoProfessione implements DaoProfessione {
 	    } finally {
 	        em.close();
 	    }
+	}
+
+	@Override
+	public List<AbilitaProfessione> selectAllAblitaProfessioneByProfessione(long id) {
+		EntityManager em = JpaDaoFactory.getEntityManager();
+		try {
+			String jpql = "select a from AbilitaProfessione a where a.professione.id = :id";
+			return (em.createQuery(jpql, AbilitaProfessione.class).setParameter("id", id).getResultList());
+		} finally {
+			em.close();
+		}
 	}
 }

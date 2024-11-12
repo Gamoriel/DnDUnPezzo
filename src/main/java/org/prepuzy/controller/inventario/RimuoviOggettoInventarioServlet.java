@@ -35,8 +35,7 @@ public class RimuoviOggettoInventarioServlet extends HttpServlet {
 	    		if (oggettoDaRimuovere != null) {
 	    			inventario.getOggetti().remove(oggettoDaRimuovere);
 	    			BusinessLogic.modificaPersonaggio(personaggio);
-	    			request.setAttribute("idPersonaggio", idPersonaggio);
-	    			request.getRequestDispatcher("DettagliPersonaggioServlet").forward(request, response);
+	    			response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
 	    		} else {
 	    			request.setAttribute("messaggio", "Oggetto non trovato nell'inventario");
 	    			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  

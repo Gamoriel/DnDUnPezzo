@@ -26,7 +26,7 @@ public class AggiungiQualitaServlet extends HttpServlet {
         qualita.setQualita(qualitaNome);
 
         BusinessLogic.aggiungiQualita(qualita);
-       request.getRequestDispatcher("/master/QualitaServlet").forward(request, response);;
+        response.sendRedirect(request.getContextPath() + "/master/QualitaServlet");
 	}
 
 }

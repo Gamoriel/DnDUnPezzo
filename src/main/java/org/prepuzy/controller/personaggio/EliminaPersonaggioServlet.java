@@ -22,7 +22,7 @@ public class EliminaPersonaggioServlet extends HttpServlet {
 				boolean eliminato = BusinessLogic.eliminaPersonaggio(id);
 
 				if (eliminato) {
-					request.getRequestDispatcher("/PersonaggiServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/PersonaggiServlet");
 				} else {
 					request.setAttribute("messaggio", "Impossibile eliminare il personaggio."); request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 				}

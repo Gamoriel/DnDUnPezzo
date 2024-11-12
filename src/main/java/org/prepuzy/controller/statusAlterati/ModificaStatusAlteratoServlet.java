@@ -55,8 +55,7 @@ public class ModificaStatusAlteratoServlet extends HttpServlet {
 					statusAlterato.setNome(nome);
 					statusAlterato.setDescrizione(descrizione);
 					BusinessLogic.modificaStatus(statusAlterato);
-					request.setAttribute("idStatusAlterato", id);
-					request.getRequestDispatcher("/DettagliStatusAlteratiServlet").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/DettagliStatusAlteratiServlet?idStatusAlterato=" + id);
 				} else {
 					request.setAttribute("messaggio", "Status Alterato non trovato");
 					request.getRequestDispatcher("/ErrorServlet").forward(request, response);

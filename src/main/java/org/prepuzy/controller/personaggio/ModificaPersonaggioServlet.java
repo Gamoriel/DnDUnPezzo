@@ -3,6 +3,7 @@ package org.prepuzy.controller.personaggio;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import javax.servlet.http.Part;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Ciurma;
 import org.prepuzy.model.Frutto;
+import org.prepuzy.model.Mappa;
 import org.prepuzy.model.Nave;
 import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Professione;
@@ -40,6 +42,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		List<Ciurma> ciurme = BusinessLogic.listaCiurme();
 		List<Nave> navi = BusinessLogic.listaNavi();
 		List<Frutto> frutti = BusinessLogic.listaFrutti();
+		List<Mappa> mappe = BusinessLogic.listaMappe();
 
 		HttpSession session = request.getSession();
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
@@ -51,6 +54,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			request.setAttribute("ciurme", ciurme);
 			request.setAttribute("navi", navi);
 			request.setAttribute("frutti", frutti);
+			request.setAttribute("mappe", mappe);
 			request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
 		} else {
 			request.setAttribute("messaggio", "Non puoi modificare il personaggio di qualcun'altro, biricchino. Porcaccioddio!");
@@ -63,7 +67,6 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 
 		long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
 		String razzaStr = request.getParameter("razza");
-		String professioneStr = request.getParameter("professione");
 		String naveStr = request.getParameter("nave");
 		String fruttoStr = request.getParameter("frutto");
 		String nome = request.getParameter("nome");
@@ -79,10 +82,10 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		int classeArmatura = Integer.parseInt(request.getParameter("classeArmatura"));
 		boolean isVisibleToAll = request.getParameter("isVisibleToAll") != null;
 		boolean isMercante = request.getParameter("isMercante") != null;
+		List<String> urlImmagineList = new ArrayList<>();
+		List<String> tagliaImg = new ArrayList<>();
 
 		Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
-
-		Part filePart = request.getPart("urlImmagine");
 
 		if (razzaStr != null && !razzaStr.isEmpty()) {
 			Razza razza = BusinessLogic.razzaById(Long.parseLong(razzaStr));
@@ -91,11 +94,32 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 			personaggio.setRazza(null);
 		}
 
-		if (professioneStr != null && !professioneStr.isEmpty()) {
-			Professione professione = BusinessLogic.professioneById(Long.parseLong(professioneStr));
-			personaggio.setProfessione(professione);
+		String[] professioneStrArray = request.getParameterValues("professione");
+		if (professioneStrArray != null && professioneStrArray.length > 0) {
+		    List<Professione> professioni = new ArrayList<>();
+		    for (String professioneStr : professioneStrArray) {
+		        Professione professione = BusinessLogic.professioneById(Long.parseLong(professioneStr));
+		        if (professione != null) {
+		            professioni.add(professione);
+		        }
+		    }
+		    personaggio.setProfessioni(professioni);
 		} else {
-			personaggio.setProfessione(null);
+		    personaggio.setProfessioni(null);
+		}
+		
+		String[] mappeStrArray = request.getParameterValues("mappa");
+		if (mappeStrArray != null && mappeStrArray.length > 0) {
+		    List<Mappa> mappe = new ArrayList<>();
+		    for (String mappaStr : mappeStrArray) {
+		        Mappa mappa = BusinessLogic.cercaMappaConId(Long.parseLong(mappaStr));
+		        if (mappa != null) {
+		            mappe.add(mappa);
+		        }
+		    }
+		    personaggio.setMappe(mappe);
+		} else {
+		    personaggio.setMappe(null);
 		}
 
 		if (naveStr != null && !naveStr.isEmpty()) {
@@ -111,26 +135,52 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		} else {
 			personaggio.setFrutto(null);
 		}
+		
+	    for (Part immaginePart : request.getParts()) {
+	        if (immaginePart.getName().equals("immagine") && immaginePart.getSize() > 0) {
+	            String immagineFileName = System.currentTimeMillis() + "_"
+	                    + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+	            String uploadDir = getServletContext().getRealPath("/uploads");
+	            File uploadDirFile = new File(uploadDir);
+	            if (!uploadDirFile.exists()) {
+	                uploadDirFile.mkdir();
+	            }
 
-		if (filePart != null && filePart.getSize() > 0) {
-			String immagineFileName = System.currentTimeMillis() + "_"
-					+ Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-			String uploadDir = getServletContext().getRealPath("/uploads");
-			File uploadDirFile = new File(uploadDir);
-			if (!uploadDirFile.exists()) {
-				uploadDirFile.mkdir();
-			}
+	            File file = new File(uploadDir + File.separator + immagineFileName);
+	            try {
+	                immaginePart.write(file.getAbsolutePath());
+	                urlImmagineList.add("uploads/" + immagineFileName);
+	            } catch (IOException e) {
+	                request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
+	                request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+	                return;
+	            }
+	        }
+	    }
+	    personaggio.setUrlImmagine(urlImmagineList);
+	    
+	    for (Part immaginePart : request.getParts()) {
+	        if (immaginePart.getName().equals("taglia") && immaginePart.getSize() > 0) {
+	            String immagineFileName = System.currentTimeMillis() + "_"
+	                    + Paths.get(immaginePart.getSubmittedFileName()).getFileName().toString();
+	            String uploadDir = getServletContext().getRealPath("/uploads");
+	            File uploadDirFile = new File(uploadDir);
+	            if (!uploadDirFile.exists()) {
+	                uploadDirFile.mkdir();
+	            }
 
-			File file = new File(uploadDir + File.separator + immagineFileName);
-			try {
-				filePart.write(file.getAbsolutePath());
-				personaggio.setUrlImmagine("uploads/" + immagineFileName);
-			} catch (IOException e) {
-				request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
-				request.getRequestDispatcher("/WEB-INF/private_jsp/ModificaPersonaggio.jsp").forward(request, response);
-				return;
-			}
-		}
+	            File file = new File(uploadDir + File.separator + immagineFileName);
+	            try {
+	                immaginePart.write(file.getAbsolutePath());
+	                tagliaImg.add("uploads/" + immagineFileName);
+	            } catch (IOException e) {
+	                request.setAttribute("errorMessage", "Errore durante il caricamento dell'immagine.");
+	                request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
+	                return;
+	            }
+	        }
+	    }
+	    personaggio.setTaglia(tagliaImg);
 
 		personaggio.setNome(nome);
 		personaggio.setSoprannome(soprannome);
@@ -146,8 +196,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 		personaggio.setHp(hp);
 		personaggio.setClasseArmatura(classeArmatura);
 		BusinessLogic.modificaPersonaggio(personaggio);
-		request.setAttribute("idPersonaggio", idPersonaggio);
-		request.getRequestDispatcher("/DettagliPersonaggioServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio" + idPersonaggio);
 	}
 
 }

@@ -87,7 +87,7 @@ public class AggiungiMappaServlet extends HttpServlet {
 		}
 
 		BusinessLogic.aggiungiMappa(mappa);
-		request.getRequestDispatcher("/MappeServlet").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/MappeServlet");
 	}
 
 }

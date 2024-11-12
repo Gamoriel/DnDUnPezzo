@@ -119,8 +119,7 @@ public class ModificaFruttoServlet extends HttpServlet {
 					frutto.setVisibleToAll(isVisibleToAll);
 
 					BusinessLogic.modificaFrutto(frutto);
-					request.setAttribute("idFrutto", idFrutto);
-					request.getRequestDispatcher("/DettagliFruttoServlet").forward(request,response);
+					response.sendRedirect(request.getContextPath() + "/DettagliFruttoServlet?idFrutto=" + idFrutto);
 				} else {
 					request.setAttribute("messaggio", "Frutto non trovato");
 					request.getRequestDispatcher("/ErrorServlet").forward(request,response);

@@ -23,7 +23,7 @@ public class EliminaFruttoServlet extends HttpServlet {
 			try {
 				long idFrutto = Long.parseLong(idFruttoStr);
 				BusinessLogic.eliminaFrutto(idFrutto);
-				request.getRequestDispatcher("/FruttiServlet").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/FruttiServlet");
 			} catch (NumberFormatException e) {
 				request.setAttribute("messaggio", "ID Frutto non valido");
 				request.getRequestDispatcher("/ErrorServlet").forward(request, response);

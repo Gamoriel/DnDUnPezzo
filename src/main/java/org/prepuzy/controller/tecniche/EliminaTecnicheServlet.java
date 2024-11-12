@@ -26,12 +26,12 @@ public class EliminaTecnicheServlet extends HttpServlet {
             request.getRequestDispatcher("/ErrorServlet").forward(request, response);
             return;
         }
-        request.getRequestDispatcher("/master/TecnicheServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/master/TecnicheServlet");
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
 

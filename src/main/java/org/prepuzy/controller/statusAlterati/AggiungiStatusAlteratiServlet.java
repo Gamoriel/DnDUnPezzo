@@ -30,7 +30,7 @@ public class AggiungiStatusAlteratiServlet extends HttpServlet {
 
         BusinessLogic.aggiungiStatusAlterati(statusAlterato);
 
-       request.getRequestDispatcher("/StatusAlteratiServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/StatusAlteratiServlet");
 	}
 
 }

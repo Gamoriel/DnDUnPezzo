@@ -17,11 +17,11 @@ public class RegisterPageServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		
         if ("login".equals(action)) {
-        	response.sendRedirect("LoginPageServlet");
+        	response.sendRedirect(request.getContextPath() + "/LoginPageServlet");
             return;
         }
 		
-		response.sendRedirect("public_jsp/Registrazione.jsp");
+		response.sendRedirect(request.getContextPath() + "/public_jsp/Registrazione.jsp");
 	}
 
 }

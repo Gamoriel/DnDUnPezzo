@@ -82,7 +82,7 @@ public class JpaDaoNave implements DaoNave {
 			Nave nave = em.find(Nave.class, id);
 			if (nave != null) {
 				for (Personaggio p : nave.getPersonaggi()) {
-					p.setMappa(null);
+					p.setNave(null);
 					em.merge(p);
 				}
 				em.remove(nave);

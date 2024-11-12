@@ -1,7 +1,6 @@
 package org.prepuzy.controller.oggetto;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.prepuzy.businesslogic.BusinessLogic;
-import org.prepuzy.dao.JPA.JpaDaoFactory;
 import org.prepuzy.model.Oggetto;
 import org.prepuzy.model.Professione;
 import org.prepuzy.model.Razza;
 import org.prepuzy.model.Resistenza;
 import org.prepuzy.model.StatusAlterati;
 import org.prepuzy.model.Tipologia;
-
-import jakarta.persistence.EntityManager;
 
 @WebServlet("/master/ModificaOggettoServlet")
 public class ModificaOggettoServlet extends HttpServlet {
@@ -110,10 +106,10 @@ public class ModificaOggettoServlet extends HttpServlet {
                     oggetto.setCarisma(carisma);
                     oggetto.setHp(hp);
                     oggetto.setPeso(peso);
-                    oggetto.setResistenze(getEntitiesByIds(Resistenza.class, resistenzeIds));
-                    oggetto.setRazze(getEntitiesByIds(Razza.class, razzeIds));
-                    oggetto.setProfessioni(getEntitiesByIds(Professione.class, professioniIds));
-                    oggetto.setStatus(getEntitiesByIds(StatusAlterati.class, statusIds));
+                    oggetto.setResistenze(BusinessLogic.getEntitiesByIds(Resistenza.class, resistenzeIds));
+                    oggetto.setRazze(BusinessLogic.getEntitiesByIds(Razza.class, razzeIds));
+                    oggetto.setProfessioni(BusinessLogic.getEntitiesByIds(Professione.class, professioniIds));
+                    oggetto.setStatus(BusinessLogic.getEntitiesByIds(StatusAlterati.class, statusIds));
                     oggetto.setClasseArmatura(classeArmatura);
                     oggetto.setVisibleToAll(isVisibleToAll);
 
@@ -124,7 +120,7 @@ public class ModificaOggettoServlet extends HttpServlet {
                     }
 
                     BusinessLogic.aggiornaOggetto(oggetto);
-                   request.getRequestDispatcher("/DettagliOggettoServlet?id=" + idOggetto).forward(request, response);
+                   response.sendRedirect(request.getContextPath() + "/DettagliOggettoServlet?id=" + idOggetto);
                 } else {
                    request.getRequestDispatcher("/ErrorServlet?messaggio=Oggetto non trovato").forward(request, response);
                 }
@@ -133,32 +129,6 @@ public class ModificaOggettoServlet extends HttpServlet {
             }
         } else {
            request.getRequestDispatcher("/ErrorServlet?messaggio=Parametri mancanti o non validi").forward(request, response);
-        }
-    }
-
-    private <T> List<T> getEntitiesByIds(Class<T> clazz, String[] ids) {
-        if (ids == null || ids.length == 0) {
-            return new ArrayList<>();
-        }
-
-        EntityManager em = JpaDaoFactory.getEntityManager();
-        try {
-            List<T> entities = new ArrayList<>(); 
-            for (String idStr : ids) {
-                try {
-                    long id = Long.parseLong(idStr);
-                    T entity = em.find(clazz, id);
-                    if (entity != null) {
-                        entities.add(entity); 
-                    }
-                } catch (NumberFormatException e) {
-                    
-                    System.err.println("ID non valido: " + idStr);
-                }
-            }
-            return entities; 
-        } finally {
-            em.close();
         }
     }
 }

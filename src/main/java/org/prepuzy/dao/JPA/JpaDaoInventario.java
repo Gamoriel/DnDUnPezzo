@@ -18,7 +18,7 @@ public class JpaDaoInventario implements DaoInventario{
 
 	@Override
 	public Inventario selectById(long id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -42,13 +42,13 @@ public class JpaDaoInventario implements DaoInventario{
 
 	@Override
 	public void update(Inventario i) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public boolean delete(long id) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 }

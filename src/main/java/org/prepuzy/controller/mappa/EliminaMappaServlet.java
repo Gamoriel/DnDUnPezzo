@@ -22,7 +22,7 @@ public class EliminaMappaServlet extends HttpServlet {
 		try {
 			long idMappa = Long.parseLong(request.getParameter("idMappa"));
 			BusinessLogic.eliminaMappa(idMappa);
-			request.getRequestDispatcher("/MappeServlet").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/MappeServlet");
 		} catch (NumberFormatException e) {
 
 			request.setAttribute("messaggio", "ID della mappa non valido.");

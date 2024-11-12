@@ -56,7 +56,7 @@ public class AggiungiOggettoInventarioServlet extends HttpServlet {
 							BusinessLogic.aggiungiOggettoMercante(oggettiMercante);
 						}
 
-						request.getRequestDispatcher("DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio).forward(request, response);
+						response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
 					} else {
 						request.setAttribute("messaggio", "Capacità massima dell'inventario raggiunta. Non puoi aggiungere " + oggetto.getNome());
 						request.getRequestDispatcher("/ErrorServlet").forward(request, response);  

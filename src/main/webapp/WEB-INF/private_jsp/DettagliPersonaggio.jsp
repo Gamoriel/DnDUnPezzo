@@ -122,8 +122,10 @@
 			Inventario inventario = personaggio.getInventario();
 			Equipaggiamento equipaggiamento = personaggio.getEquip();
 			%>
-			<img class="mappaImage" src="<%=personaggio.getUrlImmagine()%>"
-				alt="<%=personaggio.getNome()%>" class="personaggioImage" />
+			<div class="">
+			<img  src="<%=personaggio.getUrlImmagine()%>"
+				alt="<%=personaggio.getNome()%>"/>
+			</div>
 			<p>
 				<strong>Nome:</strong>
 				<%=personaggio.getNome()%></p>
@@ -135,18 +137,23 @@
 				<%=personaggio.getDescrizione()%></p>
 			<p>
 				<strong>Taglia:</strong>
-				<%=personaggio.getTaglia() != null ? personaggio.getTaglia().toString() : "N/A"%></p>
+				<%=personaggio.getTaglia() != null ? personaggio.getTaglia().toString() : ""%></p>
 			<p>
 				<strong>Razza:</strong> <a
 					href=" ${pageContext.request.contextPath}/DettagliRazzaServlet?idRazza=<%=personaggio.getRazza() != null ? personaggio.getRazza().getId() : -1%>">
-					<%=personaggio.getRazza() != null ? personaggio.getRazza().getNome() : "N/A"%>
+					<%=personaggio.getRazza() != null ? personaggio.getRazza().getNome() : ""%>
 				</a>
 			</p>
 			<p>
-				<strong>Professione:</strong> <a
-					href="${pageContext.request.contextPath}/DettagliProfessioneServlet?idProfessione=<%=personaggio.getProfessione() != null ? personaggio.getProfessione().getId() : -1%>">
-					<%=personaggio.getProfessione() != null ? personaggio.getProfessione().getNome() : "N/A"%>
-				</a>
+				<strong>Professioni:</strong>
+				<%
+					for(Professione professione : personaggio.getProfessioni()){
+						
+				%>
+				<a
+					href="${pageContext.request.contextPath}/DettagliProfessioneServlet?idProfessione=<%=professione.getId() %>">
+					<%= professione.getNome() %>
+				</a><br>
 			</p>
 
 			<h2>Statistiche</h2>
@@ -358,11 +365,8 @@
 			</form>
 
 			<h3>Aggiungi Oggetto all'Equipaggiamento</h3>
-			<form
-				action="${pageContext.request.contextPath}/EquipaggiaOggettoServlet"
-				method="post">
-				<input type="hidden" name="idPersonaggio"
-					value="<%=personaggio.getId()%>"> <select name="idOggetto">
+			<form action="${pageContext.request.contextPath}/EquipaggiaOggettoServlet" method="post">
+				<input type="hidden" name="idPersonaggio" value="<%=personaggio.getId()%>"> <select name="idOggetto">
 					<option value="">Seleziona un oggetto dall'inventario</option>
 					<%
 					if (inventario != null && inventario.getOggetti() != null) {
@@ -374,8 +378,7 @@
 					}
 					%>
 				</select>
-				<button type="submit" class="btnAdd">Aggiungi
-					all'Equipaggiamento</button>
+				<button type="submit" class="btnAdd">Aggiungi all'Equipaggiamento</button>
 			</form>
 
 			<h3>Rimuovi Oggetto dall'Equipaggiamento</h3>
@@ -395,8 +398,7 @@
 					}
 					%>
 				</select>
-				<button type="submit" class="btnAdd">Rimuovi
-					dall'Equipaggiamento</button>
+				<button type="submit" class="btnAdd">Rimuovi dall'Equipaggiamento</button>
 			</form>
 
 			<h2>Tecniche Personaggio</h2>
@@ -472,13 +474,15 @@
 			<h2>Mappa di appartenenza</h2>
 			<p>
 				<%
-				if (personaggio.getCiurma() != null) {
+				if (personaggio.getMappe() != null && !personaggio.getMappe().isEmpty()) {
+					for (Mappa mappa : personaggio.getMappe()){
 				%>
 				<a
-					href="${pageContext.request.contextPath}/DettagliMappaServlet?idMappa=<%=personaggio.getMappa() != null ? personaggio.getMappa().getId() : -1%>">
-					<%=personaggio.getMappa() != null ? personaggio.getMappa().getNome() : "Nessuna mappa"%>
-				</a>
+					href="${pageContext.request.contextPath}/DettagliMappaServlet?idMappa=<%=mappa.getId() %>">
+					<%= mappa.getNome() %>
+				</a><br>
 				<%
+					}
 				} else {
 				%>
 				<span>Nessuna mappa associata</span>
@@ -554,6 +558,7 @@
 			%>
 			<p>Non hai oggetti equipaggiati</p>
 			<%
+			}
 			}
 			%>
 			<div class="actionButtons">

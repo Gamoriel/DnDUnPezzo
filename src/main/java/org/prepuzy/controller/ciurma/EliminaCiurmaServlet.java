@@ -17,6 +17,6 @@ public class EliminaCiurmaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long idCiurma = Long.parseLong(request.getParameter("idCiurma"));
         BusinessLogic.eliminaCiurma(idCiurma);  
-       request.getRequestDispatcher("/CiurmaServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/CiurmaServlet");
 	}
 }

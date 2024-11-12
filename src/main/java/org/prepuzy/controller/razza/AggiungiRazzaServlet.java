@@ -29,7 +29,7 @@ public class AggiungiRazzaServlet extends HttpServlet {
         razza.setDescrizione(descrizione);
         
         BusinessLogic.aggiungiRazza(razza);
-       request.getRequestDispatcher("/RazzaServlet").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/RazzaServlet");
 	}
 
 }

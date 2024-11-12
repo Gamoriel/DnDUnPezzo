@@ -14,6 +14,7 @@ public interface DaoProfessione {
 	Professione selectbyId(long id);
 	AbilitaProfessione abilitaById(long id);
 	List<AbilitaProfessione> selectAllAblitaProfessione();
+	List<AbilitaProfessione> selectAllAblitaProfessioneByProfessione(long id);
 	void update(Professione p);
 	void updateAbilita(AbilitaProfessione a);
 	boolean delete(long id);

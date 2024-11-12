@@ -13,6 +13,7 @@ public interface DaoFrutto {
 	Frutto selectById(long id);
 	AbilitaFrutto abilitaById(long id);
 	List<AbilitaFrutto> selectAllAblitaFrutto();
+	List<AbilitaFrutto> selectAllAblitaFruttoByFrutto(long id);
 	void update(Frutto f);
 	boolean deleteAbilita(long id);
 	void updateAbilita(AbilitaFrutto a);
