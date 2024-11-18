@@ -17,61 +17,66 @@ import org.prepuzy.model.Personaggio;
 
 @WebServlet("/AggiungiOggettoInventarioServlet")
 public class AggiungiOggettoInventarioServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String idPersonaggioStr = request.getParameter("idPersonaggio");
-		String idOggettoStr = request.getParameter("idOggetto");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	String idPersonaggioStr = request.getParameter("idPersonaggio");
+	String idOggettoStr = request.getParameter("idOggetto");
 
-		if (idPersonaggioStr != null && !idPersonaggioStr.isEmpty() && idOggettoStr != null && !idOggettoStr.isEmpty()) {
-			try {
-				long idPersonaggio = Long.parseLong(idPersonaggioStr);
-				long idOggetto = Long.parseLong(idOggettoStr);
+	if (idPersonaggioStr != null && !idPersonaggioStr.isEmpty() && idOggettoStr != null
+		&& !idOggettoStr.isEmpty()) {
+	    try {
+		long idPersonaggio = Long.parseLong(idPersonaggioStr);
+		long idOggetto = Long.parseLong(idOggettoStr);
 
-				Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
-				Oggetto oggetto = BusinessLogic.oggettoById(idOggetto);
+		Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
+		Oggetto oggetto = BusinessLogic.oggettoById(idOggetto);
 
-				if (personaggio != null && oggetto != null) {
-					Inventario inventario = personaggio.getInventario();
-					if (inventario == null) {
-						inventario = new Inventario();
-						personaggio.setInventario(inventario);
-						inventario.setPersonaggio(personaggio);
-						BusinessLogic.aggiungiInventario(inventario);
-					}
+		if (personaggio != null && oggetto != null) {
+		    Inventario inventario = BusinessLogic.inventarioByPersonaggioId(personaggio.getId());
+		    if (inventario == null) {
+			inventario = new Inventario();
+			personaggio.setInventario(inventario);
+			inventario.setPersonaggio(personaggio);
+			BusinessLogic.aggiungiInventario(inventario);
+		    }
 
-					if (inventario.getOggetti() == null) {
-						inventario.setOggetti(new ArrayList<>());
-					}
-					int pesoAttuale = inventario.getOggetti().stream().mapToInt(Oggetto::getPeso).sum();
+		    if (inventario.getOggetti() == null) {
+			inventario.setOggetti(new ArrayList<>());
+		    }
+		    int pesoAttuale = inventario.getOggetti().stream().mapToInt(Oggetto::getPeso).sum();
 
-					if (pesoAttuale + oggetto.getPeso() <= inventario.getMaxCapienza()) {
-						inventario.getOggetti().add(oggetto);
-						BusinessLogic.modificaPersonaggio(personaggio);
-						if (personaggio.isMercante()) { 
-							OggettiMercante oggettiMercante = new OggettiMercante();
-							oggettiMercante.setMercante(personaggio);
-							oggettiMercante.setOggetto(oggetto);
-							BusinessLogic.aggiungiOggettoMercante(oggettiMercante);
-						}
-
-						response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio=" + idPersonaggio);
-					} else {
-						request.setAttribute("messaggio", "Capacità massima dell'inventario raggiunta. Non puoi aggiungere " + oggetto.getNome());
-						request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
-					}
-				} else {
-					request.setAttribute("messaggio", "Personaggio o Oggetto non trovati.");
-					request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
-				}
-			} catch (NumberFormatException e) {
-				request.setAttribute("messaggio", "ID non valido. Assicurati di aver selezionato un personaggio e un oggetto correttamente.");
-				request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
+		    if (pesoAttuale + oggetto.getPeso() <= inventario.getMaxCapienza()) {
+			inventario.getOggetti().add(oggetto);
+			BusinessLogic.modificaInventario(inventario);
+			BusinessLogic.modificaPersonaggio(personaggio);
+			if (personaggio.isMercante()) {
+			    OggettiMercante oggettiMercante = new OggettiMercante();
+			    oggettiMercante.setMercante(personaggio);
+			    oggettiMercante.setOggetto(oggetto);
+			    BusinessLogic.aggiungiOggettoMercante(oggettiMercante);
 			}
+
+			response.sendRedirect(request.getContextPath() + "/DettagliPersonaggioServlet?idPersonaggio="
+				+ idPersonaggio);
+		    } else {
+			request.setAttribute("messaggio",
+				"Capacità massima dell'inventario raggiunta. Non puoi aggiungere " + oggetto.getNome());
+			request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+		    }
 		} else {
-			request.setAttribute("messaggio", "ID del personaggio o dell'oggetto mancante.");
-			request.getRequestDispatcher("/ErrorServlet").forward(request, response);  
+		    request.setAttribute("messaggio", "Personaggio o Oggetto non trovati.");
+		    request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 		}
+	    } catch (NumberFormatException e) {
+		request.setAttribute("messaggio",
+			"ID non valido. Assicurati di aver selezionato un personaggio e un oggetto correttamente.");
+		request.getRequestDispatcher("/ErrorServlet").forward(request, response);
+	    }
+	} else {
+	    request.setAttribute("messaggio", "ID del personaggio o dell'oggetto mancante.");
+	    request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 	}
+    }
 }

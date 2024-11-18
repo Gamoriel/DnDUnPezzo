@@ -12,4 +12,5 @@ public interface DaoEquipaggiamento {
 	void updateEquipPersoInv(Equipaggiamento equip, Personaggio personaggio, Oggetto oggetto);
 	void updateEquipNaveInv(Equipaggiamento equip, Nave nave, Oggetto oggetto);
 	Equipaggiamento equipByIdPersonaggio(long id);
+	Equipaggiamento equipByIdNave(long id);
 }

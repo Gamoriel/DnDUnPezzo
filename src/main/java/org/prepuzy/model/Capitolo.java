@@ -1,6 +1,8 @@
 package org.prepuzy.model;
 
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -57,6 +59,21 @@ public class Capitolo {
 	}
 	public void setVisibleToAll(boolean isVisibleToAll) {
 		this.isVisibleToAll = isVisibleToAll;
+	}
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+		return true;
+	    if (obj == null)
+		return false;
+	    if (getClass() != obj.getClass())
+		return false;
+	    Capitolo other = (Capitolo) obj;
+	    return id == other.id;
 	}
 	
 }

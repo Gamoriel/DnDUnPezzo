@@ -234,7 +234,7 @@
 						for (StatusAlterati status : oggetto.getStatus()) {
 					%>
 					<li><a
-						href="DettagliStatusAlteratiServlet?idStatus=<%=status.getId()%>"><%=status.getNome()%></a></li>
+						href="DettagliStatusAlteratiServlet?idStatusAlterato=<%=status.getId()%>"><%=status.getNome()%></a></li>
 					<%
 					}
 					} else {

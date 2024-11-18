@@ -1,7 +1,6 @@
 <%@page import="org.prepuzy.model.Personaggio"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +11,7 @@
 </head>
 <body>
 	<nav>
-		<div id="menuToggle">
-			<input type="checkbox" /> <span></span> <span></span> <span></span>
+		<div id="menuToggle"><input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
 				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
@@ -22,19 +20,20 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
-	</nav>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul></div>
+</nav>
 
 	<div class="container">
 		<div class="leftBar">
@@ -47,18 +46,20 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul>
+	</div>
 
 		<div class="centerBar">
 			<h1>Lista Mercanti</h1>
@@ -66,28 +67,32 @@
 				<%
 				List<Personaggio> listaMercanti = (List<Personaggio>) request.getAttribute("mercanti");
 				if (listaMercanti != null && !listaMercanti.isEmpty()) {
-					for (Personaggio mercante : listaMercanti) {
+				    for (Personaggio mercante : listaMercanti) {
+					if (mercante.getUrlImmagine() != null && mercante.getUrlImmagine().size() > 0) {
 				%>
-				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + mercante.getUrlImmagine() %>')">
-					<h2><%=mercante.getNome()%></h2>
-					<div class="formContainer">
-						<form action="DettagliMercanteServlet" method="get">
-							<input type="hidden" name="idMercante"
-								value="<%=mercante.getId()%>">
-							<button class="buttonMod" type="submit">Cosa Vende</button>
-						</form>
+				<div class="listCard" style="--bg-image: url('<%=pageContext.getServletContext().getContextPath() + "/" + mercante.getUrlImmagine().get(0)%>')">
+					<%
+					} else {
+					%>
+					<div class="listCard" style="background-color: black">
+						<%
+						}
+						%>
+						<h2><%=mercante.getNome()%></h2>
+						<div class="formContainer">
+							<form action="DettagliMercanteServlet" method="get"><input type="hidden" name="idMercante" value="<%=mercante.getId()%>">
+								<button class="buttonMod" type="submit">Cosa Vende</button></form>
 					</div>
-				</div>
-				<%
-				}
-				} else {
-				%>
-				<p>Nessun mercante trovato.</p>
-				<%
-				}
-				%>
+				</div> <%
+ }
+ } else {
+ %>
+					<p>Nessun mercante trovato.</p> <%
+ }
+ %>
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>

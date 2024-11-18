@@ -18,31 +18,33 @@ import org.prepuzy.model.Utente;
 
 @WebServlet("/PersonaggiServlet")
 public class PersonaggiServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-	    Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-	    
-	    List<Personaggio> personaggi = new ArrayList<>();
-	    if(loggedUser != null) {
-	    	
-	    	if(loggedUser.getRole() == Role.MASTER) {	    	
-	    		personaggi = BusinessLogic.listaPersonaggi();
-	    	} else {
-	    		personaggi = BusinessLogic.mostraPersonaggiVisibilitaUtenteBase();
-	    	}
+    private static final long serialVersionUID = 1L;
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+	HttpSession session = request.getSession();
+	Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+
+	List<Personaggio> personaggi = new ArrayList<>();
+	if (loggedUser != null) {
+
+	    if (loggedUser.getRole() == Role.MASTER) {
+		personaggi = BusinessLogic.listaPersonaggi();
 	    } else {
-	    	 request.getRequestDispatcher("/Login").forward(request, response);
+		personaggi = BusinessLogic.mostraPersonaggiVisibilitaUtenteBase();
 	    }
-
-        request.setAttribute("personaggi", personaggi);
-        request.getRequestDispatcher("/WEB-INF/private_jsp/Personaggi.jsp").forward(request, response);
+	} else {
+	    request.getRequestDispatcher("/Login").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		doGet(request, response);
-	}
+	request.setAttribute("personaggi", personaggi);
+	request.getRequestDispatcher("/WEB-INF/private_jsp/Personaggi.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	    throws ServletException, IOException {
+
+	doGet(request, response);
+    }
 
 }

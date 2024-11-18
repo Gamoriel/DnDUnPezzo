@@ -1,6 +1,7 @@
 package org.prepuzy.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -240,10 +241,20 @@ public class Oggetto {
 		this.frutti = frutti;
 	}
 
-	public boolean equals(Object o) {
-	    if (this == o) return true;
-	    if (o == null || getClass() != o.getClass()) return false;
-	    Oggetto oggetto = (Oggetto) o;
-	    return id == oggetto.id;
+	@Override
+	public int hashCode() {
+	    return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+		return true;
+	    if (obj == null)
+		return false;
+	    if (getClass() != obj.getClass())
+		return false;
+	    Oggetto other = (Oggetto) obj;
+	    return id == other.id;
 	}
 }

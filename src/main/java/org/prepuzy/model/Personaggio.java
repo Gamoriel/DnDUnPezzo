@@ -1,6 +1,7 @@
 package org.prepuzy.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,43 +20,35 @@ import jakarta.persistence.OneToOne;
 
 @Entity
 public class Personaggio {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	private String nome, soprannome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String nome, soprannome;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String descrizione;
-	private List<String> taglia, urlImmagine;
+    private List<String> taglia, urlImmagine;
     @OneToMany(mappedBy = "mercante", cascade = CascadeType.ALL)
     private List<OggettiMercante> oggettiMercante;
-	@ManyToOne (fetch = FetchType.EAGER)
-	private Razza razza;
-    @ManyToMany
-    @JoinTable(
-        name = "personaggio_professione",
-        joinColumns = @JoinColumn(name = "personaggio_id"),
-        inverseJoinColumns = @JoinColumn(name = "professione_id")
-    )
-	private List<Professione> professioni;
-	@OneToOne(mappedBy = "personaggio", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Inventario inventario;
-	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Equipaggiamento equip;
-	@ManyToOne (fetch = FetchType.EAGER)
-	private Ciurma ciurma;
-	@ManyToOne (fetch = FetchType.EAGER)
-	private Nave nave;
-	@OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER)
-	private Frutto frutto;
-    @ManyToMany
-    @JoinTable(
-        name = "personaggio_mappa",
-        joinColumns = @JoinColumn(name = "personaggio_id"),
-        inverseJoinColumns = @JoinColumn(name = "mappa_id")
-    )
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Razza razza;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "personaggio_professione", joinColumns = @JoinColumn(name = "personaggio_id"), inverseJoinColumns = @JoinColumn(name = "professione_id"))
+    private List<Professione> professioni;
+    @OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Inventario inventario;
+    @OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Equipaggiamento equip;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Ciurma ciurma;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Nave nave;
+    @OneToOne(mappedBy = "personaggio", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Frutto frutto;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "personaggio_mappa", joinColumns = @JoinColumn(name = "personaggio_id"), inverseJoinColumns = @JoinColumn(name = "mappa_id"))
     private List<Mappa> mappe;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "utente_id")
     private Utente utente;
     @ManyToMany(mappedBy = "visibileAPersonaggio", fetch = FetchType.EAGER)
@@ -64,242 +57,261 @@ public class Personaggio {
     private List<AbilitaProfessione> abilitaProfessioneVisibileAPersonaggio;
     @ManyToMany(mappedBy = "visibileAPersonaggio", fetch = FetchType.EAGER)
     private List<Tecniche> tecnichePersonaggio;
-    private int forza,destrezza,costituzione,intelligenza,saggezza,carisma,hp,classeArmatura;
+    private int forza, destrezza, costituzione, intelligenza, saggezza, carisma, hp, classeArmatura;
     private boolean isVisibleToAll, isMercante;
-	
-	public Personaggio() {
-		super();
-	}
 
-	public List<OggettiMercante> getOggettiMercante() {
-		return oggettiMercante;
-	}
+    public Personaggio() {
+	super();
+    }
 
-	public void setOggettiMercante(List<OggettiMercante> oggettiMercante) {
-		this.oggettiMercante = oggettiMercante;
-	}
+    public List<OggettiMercante> getOggettiMercante() {
+	return oggettiMercante;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public void setOggettiMercante(List<OggettiMercante> oggettiMercante) {
+	this.oggettiMercante = oggettiMercante;
+    }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+	return id;
+    }
 
-	public String getNome() {
-		return nome;
-	}
+    public void setId(long id) {
+	this.id = id;
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+	return nome;
+    }
 
-	public String getSoprannome() {
-		return soprannome;
-	}
+    public void setNome(String nome) {
+	this.nome = nome;
+    }
 
-	public void setSoprannome(String soprannome) {
-		this.soprannome = soprannome;
-	}
+    public String getSoprannome() {
+	return soprannome;
+    }
 
-	public String getDescrizione() {
-		return descrizione;
-	}
+    public void setSoprannome(String soprannome) {
+	this.soprannome = soprannome;
+    }
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
+    public String getDescrizione() {
+	return descrizione;
+    }
 
-	public Razza getRazza() {
-		return razza;
-	}
+    public void setDescrizione(String descrizione) {
+	this.descrizione = descrizione;
+    }
 
-	public void setRazza(Razza razza) {
-		this.razza = razza;
-	}
+    public Razza getRazza() {
+	return razza;
+    }
 
-	public Inventario getInventario() {
-		return inventario;
-	}
+    public void setRazza(Razza razza) {
+	this.razza = razza;
+    }
 
-	public void setInventario(Inventario inventario) {
-		this.inventario = inventario;
-	}
+    public Inventario getInventario() {
+	return inventario;
+    }
 
-	public Equipaggiamento getEquip() {
-		return equip;
-	}
+    public void setInventario(Inventario inventario) {
+	this.inventario = inventario;
+    }
 
-	public void setEquip(Equipaggiamento equip) {
-		this.equip = equip;
-	}
+    public Equipaggiamento getEquip() {
+	return equip;
+    }
 
-	public Ciurma getCiurma() {
-		return ciurma;
-	}
+    public void setEquip(Equipaggiamento equip) {
+	this.equip = equip;
+    }
 
-	public void setCiurma(Ciurma ciurma) {
-		this.ciurma = ciurma;
-	}
+    public Ciurma getCiurma() {
+	return ciurma;
+    }
 
-	public Nave getNave() {
-		return nave;
-	}
+    public void setCiurma(Ciurma ciurma) {
+	this.ciurma = ciurma;
+    }
 
-	public void setNave(Nave nave) {
-		this.nave = nave;
-	}
+    public Nave getNave() {
+	return nave;
+    }
 
-	public Frutto getFrutto() {
-		return frutto;
-	}
+    public void setNave(Nave nave) {
+	this.nave = nave;
+    }
 
-	public void setFrutto(Frutto frutto) {
-		this.frutto = frutto;
-	}
+    public Frutto getFrutto() {
+	return frutto;
+    }
 
-	public List<Professione> getProfessioni() {
-		return professioni;
-	}
+    public void setFrutto(Frutto frutto) {
+	this.frutto = frutto;
+    }
 
-	public void setProfessioni(List<Professione> professioni) {
-		this.professioni = professioni;
-	}
+    public List<Professione> getProfessioni() {
+	return professioni;
+    }
 
-	public List<Mappa> getMappe() {
-		return mappe;
-	}
+    public void setProfessioni(List<Professione> professioni) {
+	this.professioni = professioni;
+    }
 
-	public void setMappe(List<Mappa> mappe) {
-		this.mappe = mappe;
-	}
+    public List<Mappa> getMappe() {
+	return mappe;
+    }
 
-	public Utente getUtente() {
-		return utente;
-	}
+    public void setMappe(List<Mappa> mappe) {
+	this.mappe = mappe;
+    }
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
+    public Utente getUtente() {
+	return utente;
+    }
 
-	public int getForza() {
-		return forza;
-	}
+    public void setUtente(Utente utente) {
+	this.utente = utente;
+    }
 
-	public void setForza(int forza) {
-		this.forza = forza;
-	}
+    public int getForza() {
+	return forza;
+    }
 
-	public int getDestrezza() {
-		return destrezza;
-	}
+    public void setForza(int forza) {
+	this.forza = forza;
+    }
 
-	public void setDestrezza(int destrezza) {
-		this.destrezza = destrezza;
-	}
+    public int getDestrezza() {
+	return destrezza;
+    }
 
-	public int getCostituzione() {
-		return costituzione;
-	}
+    public void setDestrezza(int destrezza) {
+	this.destrezza = destrezza;
+    }
 
-	public void setCostituzione(int costituzione) {
-		this.costituzione = costituzione;
-	}
+    public int getCostituzione() {
+	return costituzione;
+    }
 
-	public int getIntelligenza() {
-		return intelligenza;
-	}
+    public void setCostituzione(int costituzione) {
+	this.costituzione = costituzione;
+    }
 
-	public void setIntelligenza(int intelligenza) {
-		this.intelligenza = intelligenza;
-	}
+    public int getIntelligenza() {
+	return intelligenza;
+    }
 
-	public int getSaggezza() {
-		return saggezza;
-	}
+    public void setIntelligenza(int intelligenza) {
+	this.intelligenza = intelligenza;
+    }
 
-	public void setSaggezza(int saggezza) {
-		this.saggezza = saggezza;
-	}
+    public int getSaggezza() {
+	return saggezza;
+    }
 
-	public int getCarisma() {
-		return carisma;
-	}
+    public void setSaggezza(int saggezza) {
+	this.saggezza = saggezza;
+    }
 
-	public void setCarisma(int carisma) {
-		this.carisma = carisma;
-	}
+    public int getCarisma() {
+	return carisma;
+    }
 
-	public int getHp() {
-		return hp;
-	}
+    public void setCarisma(int carisma) {
+	this.carisma = carisma;
+    }
 
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
+    public int getHp() {
+	return hp;
+    }
 
-	public boolean isVisibleToAll() {
-		return isVisibleToAll;
-	}
+    public void setHp(int hp) {
+	this.hp = hp;
+    }
 
-	public void setVisibleToAll(boolean isVisibleToAll) {
-		this.isVisibleToAll = isVisibleToAll;
-	}
+    public boolean isVisibleToAll() {
+	return isVisibleToAll;
+    }
 
-	public int getClasseArmatura() {
-		return classeArmatura;
-	}
+    public void setVisibleToAll(boolean isVisibleToAll) {
+	this.isVisibleToAll = isVisibleToAll;
+    }
 
-	public void setClasseArmatura(int classeArmatura) {
-		this.classeArmatura = classeArmatura;
-	}
+    public int getClasseArmatura() {
+	return classeArmatura;
+    }
 
-	public boolean isMercante() {
-		return isMercante;
-	}
+    public void setClasseArmatura(int classeArmatura) {
+	this.classeArmatura = classeArmatura;
+    }
 
-	public void setMercante(boolean isMercante) {
-		this.isMercante = isMercante;
-	}
+    public boolean isMercante() {
+	return isMercante;
+    }
 
-	public List<AbilitaFrutto> getAbilitaFruttoVisibileAPersonaggio() {
-		return abilitaFruttoVisibileAPersonaggio;
-	}
+    public void setMercante(boolean isMercante) {
+	this.isMercante = isMercante;
+    }
 
-	public void setAbilitaFruttoVisibileAPersonaggio(List<AbilitaFrutto> abilitaFruttoVisibileAPersonaggio) {
-		this.abilitaFruttoVisibileAPersonaggio = abilitaFruttoVisibileAPersonaggio;
-	}
+    public List<AbilitaFrutto> getAbilitaFruttoVisibileAPersonaggio() {
+	return abilitaFruttoVisibileAPersonaggio;
+    }
 
-	public List<AbilitaProfessione> getAbilitaProfessioneVisibileAPersonaggio() {
-		return abilitaProfessioneVisibileAPersonaggio;
-	}
+    public void setAbilitaFruttoVisibileAPersonaggio(List<AbilitaFrutto> abilitaFruttoVisibileAPersonaggio) {
+	this.abilitaFruttoVisibileAPersonaggio = abilitaFruttoVisibileAPersonaggio;
+    }
 
-	public void setAbilitaProfessioneVisibileAPersonaggio(List<AbilitaProfessione> abilitaProfessioneVisibileAPersonaggio) {
-		this.abilitaProfessioneVisibileAPersonaggio = abilitaProfessioneVisibileAPersonaggio;
-	}
+    public List<AbilitaProfessione> getAbilitaProfessioneVisibileAPersonaggio() {
+	return abilitaProfessioneVisibileAPersonaggio;
+    }
 
-	public List<Tecniche> getTecnichePersonaggio() {
-		return tecnichePersonaggio;
-	}
+    public void setAbilitaProfessioneVisibileAPersonaggio(
+	    List<AbilitaProfessione> abilitaProfessioneVisibileAPersonaggio) {
+	this.abilitaProfessioneVisibileAPersonaggio = abilitaProfessioneVisibileAPersonaggio;
+    }
 
-	public void setTecnichePersonaggio(List<Tecniche> tecnichePersonaggio) {
-		this.tecnichePersonaggio = tecnichePersonaggio;
-	}
+    public List<Tecniche> getTecnichePersonaggio() {
+	return tecnichePersonaggio;
+    }
 
-	public List<String> getTaglia() {
-		return taglia;
-	}
+    public void setTecnichePersonaggio(List<Tecniche> tecnichePersonaggio) {
+	this.tecnichePersonaggio = tecnichePersonaggio;
+    }
 
-	public void setTaglia(List<String> taglia) {
-		this.taglia = taglia;
-	}
+    public List<String> getTaglia() {
+	return taglia;
+    }
 
-	public List<String> getUrlImmagine() {
-		return urlImmagine;
-	}
+    public void setTaglia(List<String> taglia) {
+	this.taglia = taglia;
+    }
 
-	public void setUrlImmagine(List<String> urlImmagine) {
-		this.urlImmagine = urlImmagine;
-	}	
+    public List<String> getUrlImmagine() {
+	return urlImmagine;
+    }
+
+    public void setUrlImmagine(List<String> urlImmagine) {
+	this.urlImmagine = urlImmagine;
+    }
+
+    @Override
+    public int hashCode() {
+	return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (this == obj)
+	    return true;
+	if (obj == null)
+	    return false;
+	if (getClass() != obj.getClass())
+	    return false;
+	Personaggio other = (Personaggio) obj;
+	return id == other.id;
+    }
+
 }

@@ -29,7 +29,7 @@ public class ModificaEquipaggiamentoNaveServlet extends HttpServlet {
 			return;
 		}
 		Nave nave = BusinessLogic.naveById(idNave);
-		Oggetto oggetto = BusinessLogic.oggettoById(idNave);
+		Oggetto oggetto = BusinessLogic.oggettoById(Long.parseLong(idOggetto));
 		
 		if (nave != null && oggetto != null) {
 			if (nave.getDeposito().getOggetti().contains(oggetto)) {
@@ -37,20 +37,21 @@ public class ModificaEquipaggiamentoNaveServlet extends HttpServlet {
 
 				Equipaggiamento equip = nave.getEquip();
 				if (equip == null) {
-					equip = new Equipaggiamento();
-					equip.setOggetti(new ArrayList<>());
-					equip.setNave(nave);
-					BusinessLogic.aggiungiEquipaggiamento(equip);
-					nave.setEquip(equip);
+				    equip = new Equipaggiamento();
+				    equip.setOggetti(new ArrayList<>());
+				    equip.setNave(nave);
+				    BusinessLogic.aggiungiEquipaggiamento(equip);
+				    nave.setEquip(equip);
 				}
 				
 				equip.getOggetti().add(oggetto);
 				oggetto.setEquipaggiamento(equip);
-
+				
+				BusinessLogic.aggiornaOggetto(oggetto);
 				BusinessLogic.modificaEquipaggiamento(equip);
 				BusinessLogic.modificaNave(nave);
 
-				response.sendRedirect(request.getContextPath() + "/DettaglinaveServlet?idnave=" + idNave);
+				response.sendRedirect(request.getContextPath() + "/DettagliNaveServlet?idNave=" + idNave);
 			} else {
 				request.setAttribute("messaggio", "Oggetto non presente nell'inventario");
 				request.getRequestDispatcher("/ErrorServlet").forward(request, response);

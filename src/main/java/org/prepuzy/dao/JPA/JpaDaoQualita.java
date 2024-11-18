@@ -40,8 +40,6 @@ public class JpaDaoQualita implements DaoQualita{
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	        return null;
-	    } finally {
-	        em.close();
 	    }
 	}
 

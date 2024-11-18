@@ -19,6 +19,7 @@ public interface DaoPersonaggio {
 	List<Personaggio> listaPersonaggiUtente();
 	List<Personaggio> filtroSelectAll();
 	List<Personaggio> listaMercanti();
+	List<Personaggio> listaPersonaggiConTaglia();
 	void aggiornaPrezzi(List<OggettiMercante> oggettiDaAggiornare);
 	void insertOggettoMercante(OggettiMercante o);
 	void insertTecniche(Tecniche t);

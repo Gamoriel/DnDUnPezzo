@@ -36,18 +36,21 @@ public class EquipaggiaOggettoServlet extends HttpServlet {
 			if (personaggio.getInventario().getOggetti().contains(oggetto)) {
 				personaggio.getInventario().getOggetti().remove(oggetto);
 
-				Equipaggiamento equip = personaggio.getEquip();
+				Equipaggiamento equip = BusinessLogic.equipByPersonaggioId(personaggio.getId());
 				if (equip == null) {
+				    System.out.println("Hola");
 					equip = new Equipaggiamento();
 					equip.setOggetti(new ArrayList<>());
 					equip.setPersonaggio(personaggio);
 					BusinessLogic.aggiungiEquipaggiamento(equip);
 					personaggio.setEquip(equip);
 				}
+				System.out.println(equip.getId());
 				
 				equip.getOggetti().add(oggetto);
 				oggetto.setEquipaggiamento(equip);
-
+				
+				BusinessLogic.aggiornaOggetto(oggetto);
 				BusinessLogic.modificaEquipaggiamento(equip);
 				BusinessLogic.modificaPersonaggio(personaggio);
 

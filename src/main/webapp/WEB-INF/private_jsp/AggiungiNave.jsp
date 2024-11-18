@@ -6,9 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <title>Aggiungi Nave</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/Style.css">
-	<script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
+<script>
 	function updateFileName() {
 		const fileInput = document.getElementById('imgNave');
 		const fileNameDisplay = document.getElementById('fileName');
@@ -28,128 +27,72 @@
 <body>
 	<nav>
 
-		<div id="menuToggle">
-			<input type="checkbox" /> <span></span> <span></span> <span></span>
+		<div id="menuToggle"><input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
-				<li><a
-					href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
+				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
 				<li><a href="${pageContext.request.contextPath}/FruttiServlet">Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status
-						Alterati</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
-						Equipaggiamento</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita
-						Professioni</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
-	</nav>
+				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
+				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
+				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul></div>
+</nav>
 
 	<div class="container">
 		<div class="leftBar">
 			<h2>Collegamenti</h2>
 			<ul>
-				<li><a
-					href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
+				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
 				<li><a href="${pageContext.request.contextPath}/FruttiServlet">Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/PersonaggiServlet">Personaggi</a></li>
+				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status
-						Alterati</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TipiServlet">Tipo
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie
-						Equipaggiamento</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita
-						Frutti</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita
-						Professioni</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
+				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
+				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
+				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul>
+	</div>
 
 		<div class="centerBar">
 			<h1>Aggiungi Nuova Nave</h1>
 
-			<form
-				action="${pageContext.request.contextPath}/master/AggiungiNaveServlet"
-				method="post">
-				<div class="formGroup">
-					<label for="nome">Nome:</label> <input type="text" id="nome"
-						name="nome" required>
-				</div>
-				<div class="formGroup">
-					<label for="descrizione">Descrizione:</label>
-					<textarea id="descrizione" name="descrizione" rows="4" required></textarea>
-				</div>
-				<div class="formGroup">
-					<label for="hp">HP:</label> <input type="number" id="hp" name="hp"
-						required>
-				</div>
+			<form action="${pageContext.request.contextPath}/master/AggiungiNaveServlet" method="post" enctype="multipart/form-data">
+				<div class="formGroup"><label for="nome">Nome:</label> <input type="text" id="nome" name="nome" required></div>
+				<div class="formGroup"><label for="descrizione">Descrizione:</label> <textarea id="descrizione" name="descrizione" rows="4" required></textarea></div>
+				<div class="formGroup"><label for="hp">HP:</label> <input type="number" id="hp" name="hp" required></div>
+				<div class="formGroup"><label for="classeArmatura">Classe Armatura:</label> <input type="number" id="classeArmatura" name="classeArmatura" required></div>
 
-				<div class="upload-container">
-					<label for="imgNave" class="upload-label">Carica
-						Immagine:</label> <input type="file" id="imgNave" name="imgNave"
-						accept="image/*" onchange="updateFileName()">
-					<button type="button" class="upload-button"
-						onclick="document.getElementById('imgNave').click();">
-						Seleziona Immagine</button>
-					<div class="file-name" id="fileName">Nessun file selezionato</div>
-				</div>
+				<div class="upload-container"><label for="imgNave" class="upload-label">Carica Immagine:</label> <input type="file" id="imgNave" name="imgNave" accept="image/*" onchange="updateFileName()">
+					<button type="button" class="upload-button" onclick="document.getElementById('imgNave').click();">Seleziona Immagine</button>
+					<div class="file-name" id="fileName">Nessun file selezionato</div></div>
 
-				<div>
-					<label for="ciurma">Seleziona Ciurma:</label> <select id="ciurma"
-						name="ciurma">
+				<div><label for="ciurma">Seleziona Ciurma:</label> <select id="ciurma" name="ciurma">
 						<%
 						List<Ciurma> listaCiurme = (List<Ciurma>) request.getAttribute("listaCiurme");
 						if (listaCiurme != null && !listaCiurme.isEmpty()) {
-							for (Ciurma ciurma : listaCiurme) {
+						    for (Ciurma ciurma : listaCiurme) {
 						%>
 						<option value="<%=ciurma.getId()%>"><%=ciurma.getNome()%></option>
 						<%
@@ -160,17 +103,13 @@
 						<%
 						}
 						%>
-					</select>
-				</div>
-				<div class="formGroup">
-					<label for="isVisibleToAll">Visibile a tutti:</label> <input
-						type="checkbox" id="isVisibleToAll" name="isVisibleToAll">
-				</div>
+				</select></div>
+				<div class="formGroup"><label for="isVisibleToAll">Visibile a tutti:</label> <input type="checkbox" id="isVisibleToAll" name="isVisibleToAll"></div>
 				<div class="formGroup">
 					<button type="submit" class="btnAdd">Aggiungi Nave</button>
-				</div>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
+</div>
 </body>
 </html>

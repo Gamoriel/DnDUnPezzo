@@ -135,7 +135,8 @@ label {
 	justify-content: space-between;
 }
 
-.btnLogin, .btnRegister {
+.btnLogin,
+.btnRegister {
 	background-color: #ffcc00;
 	border: none;
 	border-radius: 4px;
@@ -145,7 +146,8 @@ label {
 	font-size: 16px;
 }
 
-.btnLogin:hover, .btnRegister:hover {
+.btnLogin:hover,
+.btnRegister:hover {
 	background-color: #f39c12;
 }
 
@@ -197,7 +199,8 @@ label {
 	margin: 0 5px;
 }
 
-.btnRegister:hover, .btnLogin:hover {
+.btnRegister:hover,
+.btnLogin:hover {
 	background-color: #f39c12;
 }
 
@@ -258,7 +261,10 @@ label {
 	margin: 5px 0;
 }
 
-input[type="text"], input[type="number"], textarea, select {
+input[type="text"],
+input[type="number"],
+textarea,
+select {
 	width: calc(100% - 20px);
 	padding: 10px;
 	border: 2px solid #ccc;
@@ -267,8 +273,10 @@ input[type="text"], input[type="number"], textarea, select {
 	font-size: 16px;
 }
 
-input[type="text"]:focus, input[type="number"]:focus, textarea:focus,
-	select:focus {
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
 	border-color: #ff0000;
 	box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
 }
@@ -303,42 +311,58 @@ input[type="submit"]:hover {
 
 /* Contenitore per il caricamento dell'immagine */
 .upload-container {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px; /* Spazio tra gli elementi */
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+	/* Spazio tra gli elementi */
 }
 
 /* Etichetta per il caricamento */
 .upload-container label {
-    font-size: 1.2em; /* Dimensione del font */
-    margin-bottom: 5px; /* Spazio sotto l'etichetta */
-    color: #333; /* Colore del testo */
+	font-size: 1.2em;
+	/* Dimensione del font */
+	margin-bottom: 5px;
+	/* Spazio sotto l'etichetta */
+	color: #333;
+	/* Colore del testo */
 }
 
 /* Stile per il campo di input del file */
 .upload-container input[type="file"] {
-    display: none; /* Nascondi l'input originale */
+	display: none;
+	/* Nascondi l'input originale */
 }
 
 /* Pulsante personalizzato per caricare l'immagine */
 .upload-button {
-    background-color: #ffcc00; /* Colore di sfondo */
-    color: #fff; /* Colore del testo */
-    border: none; /* Rimuovi il bordo */
-    border-radius: 5px; /* Angoli arrotondati */
-    padding: 10px 20px; /* Spaziatura interna */
-    cursor: pointer; /* Cambia il cursore al passaggio del mouse */
-    transition: background-color 0.3s; /* Transizione del colore */
+	background-color: #ffcc00;
+	/* Colore di sfondo */
+	color: #fff;
+	/* Colore del testo */
+	border: none;
+	/* Rimuovi il bordo */
+	border-radius: 5px;
+	/* Angoli arrotondati */
+	padding: 10px 20px;
+	/* Spaziatura interna */
+	cursor: pointer;
+	/* Cambia il cursore al passaggio del mouse */
+	transition: background-color 0.3s;
+	/* Transizione del colore */
 }
 
 /* Effetto hover sul pulsante */
 .upload-button:hover {
-    background-color: #e6b800; /* Colore di sfondo al passaggio del mouse */
+	background-color: #e6b800;
+	/* Colore di sfondo al passaggio del mouse */
 }
 
 /* Mostra il nome del file selezionato */
 .file-name {
-    margin-top: 10px; /* Spazio sopra il nome del file */
-    font-size: 1em; /* Dimensione del font */
-    color: #555; /* Colore del testo */
+	margin-top: 10px;
+	/* Spazio sopra il nome del file */
+	font-size: 1em;
+	/* Dimensione del font */
+	color: #555;
+	/* Colore del testo */
 }
