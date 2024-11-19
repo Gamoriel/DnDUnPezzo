@@ -42,7 +42,7 @@ public class ModificaPersonaggioServlet extends HttpServlet {
 	List<Ciurma> ciurme = BusinessLogic.listaCiurme();
 	List<Nave> navi = BusinessLogic.listaNavi();
 	List<Frutto> frutti = BusinessLogic.listaFrutti();
-	List<Mappa> mappe = BusinessLogic.listaMappe();
+	List<Mappa> mappe = BusinessLogic.listaMappePadre();
 
 	HttpSession session = request.getSession();
 	Utente loggedUser = (Utente) session.getAttribute("loggedUser");

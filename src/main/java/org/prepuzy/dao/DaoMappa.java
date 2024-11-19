@@ -10,6 +10,7 @@ public interface DaoMappa {
 	Mappa selectById(long id);
 	List<Mappa> listaMappe();
 	List<Mappa> filtroSelectAll();
+	List<Mappa> mappePadre();
 	void update(Mappa m);
 	void delete(long id);
 }

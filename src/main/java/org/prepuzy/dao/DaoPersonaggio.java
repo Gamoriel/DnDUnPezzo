@@ -13,11 +13,12 @@ public interface DaoPersonaggio {
 	void update (Personaggio p);
 	boolean delete (long id);
 	Personaggio selectById(long id);
-	Personaggio PersonaggioConTuttiElementi(long id);
 	List<OggettiMercante> inventarioMercante(Personaggio p);
 	List<Personaggio> listaPersonaggi();
 	List<Personaggio> listaPersonaggiUtente();
+	List<Personaggio> listaPersonaggiNPC();
 	List<Personaggio> filtroSelectAll();
+	List<Personaggio> selectNPCVisibileToUtenti();
 	List<Personaggio> listaMercanti();
 	List<Personaggio> listaPersonaggiConTaglia();
 	void aggiornaPrezzi(List<OggettiMercante> oggettiDaAggiornare);

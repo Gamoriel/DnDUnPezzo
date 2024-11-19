@@ -18,7 +18,7 @@ public class TagliaPersonaggioServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
-        Personaggio personaggio = BusinessLogic.personaggioConAllInfoById(idPersonaggio);
+        Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
         		
         if (personaggio != null) {
             request.setAttribute("personaggio", personaggio);

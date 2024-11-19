@@ -19,7 +19,7 @@ public class DettagliPersonaggioServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
-        Personaggio personaggio = BusinessLogic.personaggioConAllInfoById(idPersonaggio);
+        Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
         List<Oggetto> tuttiOggetti = BusinessLogic.listaOggetti();
         		
         if (personaggio != null) {

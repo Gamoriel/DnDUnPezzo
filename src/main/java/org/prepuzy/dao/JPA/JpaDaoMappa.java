@@ -42,7 +42,6 @@ public class JpaDaoMappa implements DaoMappa {
 	} finally {
 	    em.close();
 	}
-
     }
 
     @Override
@@ -124,5 +123,16 @@ public class JpaDaoMappa implements DaoMappa {
 	    em.close();
 	}
 
+    }
+
+    @Override
+    public List<Mappa> mappePadre() {
+	EntityManager em = JpaDaoFactory.getEntityManager();
+	try {
+	    TypedQuery<Mappa> q = em.createQuery("select m from Mappa m where m.mappaPadre.id is null", Mappa.class);
+	    return (q.getResultList());
+	} finally {
+	    em.close();
+	}
     }
 }

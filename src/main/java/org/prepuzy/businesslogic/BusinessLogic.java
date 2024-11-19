@@ -220,6 +220,10 @@ public class BusinessLogic {
     public static List<Mappa> listaMappe() {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().listaMappe();
     }
+    
+    public static List<Mappa> listaMappePadre(){
+	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().mappePadre();
+    }
 
     public static List<Mappa> mostraMappeVisibilitaUtenteBase() {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().filtroSelectAll();
@@ -298,9 +302,17 @@ public class BusinessLogic {
     public static List<Personaggio> listaPersonaggiUtente() {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().listaPersonaggiUtente();
     }
+    
+    public static List<Personaggio> listaNPC(){
+	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().listaPersonaggiNPC();
+    }
 
     public static List<Personaggio> mostraPersonaggiVisibilitaUtenteBase() {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().filtroSelectAll();
+    }
+    
+    public static List<Personaggio> npcVisibiliAUtente(){
+	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().selectNPCVisibileToUtenti();
     }
 
     public static List<Personaggio> listaPersonaggiConTaglia() {
@@ -309,10 +321,6 @@ public class BusinessLogic {
 
     public static Personaggio personaggioById(long id) {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().selectById(id);
-    }
-
-    public static Personaggio personaggioConAllInfoById(long id) {
-	return DaoFactory.getInstance(DATABASE).getJpaDaoPersonaggio().PersonaggioConTuttiElementi(id);
     }
 
     public static void modificaPersonaggio(Personaggio p) {

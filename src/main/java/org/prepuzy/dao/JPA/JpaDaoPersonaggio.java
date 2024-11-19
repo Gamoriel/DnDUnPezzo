@@ -121,27 +121,6 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
     }
 
     @Override
-    public Personaggio PersonaggioConTuttiElementi(long id) {
-	EntityManager em = JpaDaoFactory.getEntityManager();
-	Personaggio personaggio = null;
-	try {
-	    em.getTransaction().begin();
-	    String query = "SELECT p FROM Personaggio p WHERE p.id = :id";
-	    personaggio = em.createQuery(query, Personaggio.class).setParameter("id", id).getSingleResult();
-
-	    em.getTransaction().commit();
-	} catch (Exception e) {
-	    if (em.getTransaction().isActive()) {
-		em.getTransaction().rollback();
-	    }
-	    throw new RuntimeException("Errore durante il recupero del personaggio: " + e.getMessage(), e);
-	} finally {
-	    em.close();
-	}
-	return personaggio;
-    }
-
-    @Override
     public Personaggio selectById(long id) {
 	EntityManager em = JpaDaoFactory.getEntityManager();
 	EntityTransaction t = em.getTransaction();
@@ -245,7 +224,7 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
     public List<Personaggio> listaPersonaggiUtente() {
 	EntityManager em = JpaDaoFactory.getEntityManager();
 	try {
-	    String query = "select p from Personaggio p where p.utente is not null";
+	    String query = "select p from Personaggio p where p.utente.id > 1";
 	    return em.createQuery(query, Personaggio.class).getResultList();
 	} finally {
 	    em.close();
@@ -336,7 +315,6 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 	} finally {
 	    em.close();
 	}
-
     }
 
     @Override
@@ -368,6 +346,28 @@ public class JpaDaoPersonaggio implements DaoPersonaggio {
 	    TypedQuery<Personaggio> q = em.createQuery("select p from Personaggio p where p.taglia is not null",
 		    Personaggio.class);
 	    return q.getResultList();
+	} finally {
+	    em.close();
+	}
+    }
+
+    @Override
+    public List<Personaggio> listaPersonaggiNPC() {
+	EntityManager em = JpaDaoFactory.getEntityManager();
+	try {
+	    String query = "select p from Personaggio p where p.utente.id = 1";
+	    return em.createQuery(query, Personaggio.class).getResultList();
+	} finally {
+	    em.close();
+	}
+    }
+
+    @Override
+    public List<Personaggio> selectNPCVisibileToUtenti() {
+	EntityManager em = JpaDaoFactory.getEntityManager();
+	try {
+	    String query = "select p from Personaggio p where p.utente.id = 1 and p.isVisibleToAll = true";
+	    return em.createQuery(query, Personaggio.class).getResultList();
 	} finally {
 	    em.close();
 	}
