@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import org.prepuzy.businesslogic.BusinessLogic;
+import org.prepuzy.model.Ciurma;
 import org.prepuzy.model.Mappa;
+import org.prepuzy.model.Nave;
 import org.prepuzy.model.Personaggio;
 import org.prepuzy.model.Professione;
+import org.prepuzy.model.Razza;
 import org.prepuzy.model.Role;
 import org.prepuzy.model.Utente;
 
@@ -29,12 +33,23 @@ public class AggiungiPersonaggioServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
+	
+	List<Razza> razze = BusinessLogic.listaRazze();
+	razze.sort(Comparator.comparing(Razza::getNome));
+	List<Professione> professioni = BusinessLogic.listaProfessioni();
+	professioni.sort(Comparator.comparing(Professione::getNome));
+	List<Ciurma> ciurme = BusinessLogic.listaCiurme();
+	ciurme.sort(Comparator.comparing(Ciurma::getNome));
+	List<Nave> navi = BusinessLogic.listaNavi();
+	navi.sort(Comparator.comparing(Nave::getNome));
+	List<Mappa> mappe = BusinessLogic.listaMappe();
+	mappe.sort(Comparator.comparing(Mappa::getNome));
 
-	request.setAttribute("listaRazze", BusinessLogic.listaRazze());
-	request.setAttribute("listaProfessioni", BusinessLogic.listaProfessioni());
-	request.setAttribute("listaCiurme", BusinessLogic.listaCiurme());
-	request.setAttribute("listaNavi", BusinessLogic.listaNavi());
-	request.setAttribute("listaMappe", BusinessLogic.listaMappe());
+	request.setAttribute("listaRazze", razze);
+	request.setAttribute("listaProfessioni", professioni);
+	request.setAttribute("listaCiurme", ciurme);	
+	request.setAttribute("listaNavi", navi);
+	request.setAttribute("listaMappe", mappe);
 	request.getRequestDispatcher("/WEB-INF/private_jsp/AggiungiPersonaggio.jsp").forward(request, response);
     }
 

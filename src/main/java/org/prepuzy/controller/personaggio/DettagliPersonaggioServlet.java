@@ -1,6 +1,7 @@
 package org.prepuzy.controller.personaggio;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ public class DettagliPersonaggioServlet extends HttpServlet {
         long idPersonaggio = Long.parseLong(request.getParameter("idPersonaggio"));
         Personaggio personaggio = BusinessLogic.personaggioById(idPersonaggio);
         List<Oggetto> tuttiOggetti = BusinessLogic.listaOggetti();
+        tuttiOggetti.sort(Comparator.comparing(Oggetto::getNome));
         		
         if (personaggio != null) {
         	if(!tuttiOggetti.isEmpty()) {
