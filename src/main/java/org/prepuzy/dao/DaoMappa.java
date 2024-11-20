@@ -9,6 +9,7 @@ public interface DaoMappa {
 	void insert(Mappa m);
 	Mappa selectById(long id);
 	List<Mappa> listaMappe();
+	List<Mappa> mappePadreVisibileUtenti();
 	List<Mappa> filtroSelectAll();
 	List<Mappa> mappePadre();
 	void update(Mappa m);

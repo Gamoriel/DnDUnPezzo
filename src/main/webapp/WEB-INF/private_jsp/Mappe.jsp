@@ -1,7 +1,6 @@
 <%@page import="org.prepuzy.model.Mappa"%>
 <%@page import="java.util.List"%>
-<%@page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,10 +14,9 @@
 		<div class="addNew">
 			<form action="${pageContext.request.contextPath}/master/AggiungiMappaServlet" method="get">
 				<button type="submit" class="btnAdd">Aggiungi Mappa</button>
-			</form>
-		</div>
-		<div id="menuToggle">
-			<input type="checkbox" /> <span></span> <span></span> <span></span>
+		</form>
+	</div>
+		<div id="menuToggle"><input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
 				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
 				<li><a href="${pageContext.request.contextPath}/CiurmaServlet">Ciurma</a></li>
@@ -26,20 +24,21 @@
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li><li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
+				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
+			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
-	</nav>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul></div>
+</nav>
 
 	<div class="container">
 		<div class="leftBar">
@@ -51,19 +50,21 @@
 				<li><a href="${pageContext.request.contextPath}/MappeServlet">Mappe</a></li>
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
-				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li><li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
+				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
+			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
 				<li><a href="${pageContext.request.contextPath}/StatusAlteratiServlet">Status Alterati</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipiServlet">Tipo Frutti</a></li>
-				 <li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>  
+				<li><a href="${pageContext.request.contextPath}/master/QualitaServlet">Qualità Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/TipologieServlet">Tipologie Equipaggiamento</a></li>
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
-				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li><li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
-			</ul>
-		</div>
+				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
+			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+		</ul>
+	</div>
 
 		<div class="centerBar">
 			<h1>Lista delle Mappe</h1>
@@ -71,30 +72,25 @@
 				<%
 				List<Mappa> listaMappe = (List<Mappa>) request.getAttribute("listaMappe");
 				if (listaMappe != null && !listaMappe.isEmpty()) {
-				%>
-				<%
-				for (Mappa mappa : listaMappe) {
-				%>
-				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath()+ "/" + mappa.getImmagine() %>')">
-					<h2><%=mappa.getNome()%></h2>
+				%> <%
+ for (Mappa mappa : listaMappe) {
+ %>
+				<div class="listCard" style="--bg-image: url('<%=pageContext.getServletContext().getContextPath() + "/" + mappa.getImmagine()%>')">
+					<h2>Mappa dell'<%=mappa.getCapitolo().getTitolo()%></h2>
 					<p>
-					<div class="formContainer">
-						<form action="${pageContext.request.contextPath}/DettagliMappaServlet" method="get">
-							<input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
-							<button type="submit" class="buttonMod">Visualizza Dettagli</button>
-						</form>
-					</div>
+				<div class="formContainer">
+						<form action="${pageContext.request.contextPath}/DettagliMappaServlet" method="get"><input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
+							<button type="submit" class="buttonMod">Visualizza Mappe</button></form>
 				</div>
-				<%
-				}
-				} else {
-				%>
-				<p>Nessuna mappa disponibile.</p>
-				<%
-				}
-				%>
-			</div>
+			</div> <%
+ }
+ } else {
+ %>
+				<p>Nessuna mappa disponibile.</p> <%
+ }
+ %>
 		</div>
 	</div>
+</div>
 </body>
 </html>

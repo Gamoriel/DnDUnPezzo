@@ -1,23 +1,18 @@
-<%@page import="java.util.Map"%>
 <%@page import="java.util.List"%>
-<%@page import="org.prepuzy.model.Oggetto"%>
+<%@page import="org.prepuzy.model.Mappa"%>
+<%@page import="org.prepuzy.model.Personaggio"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
-<title>Lista Oggetti</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<title>Dettagli Mappa</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/Style.css">
 </head>
 <body>
 	<nav>
-		<div class="addNew">
-			<form action="${pageContext.request.contextPath}/master/AggiungiOggettoServlet" method="get">
-				<button type="submit" class="btnAdd">Aggiungi Oggetto</button>
-		</form>
-	</div>
+
 		<div id="menuToggle"><input type="checkbox" /> <span></span> <span></span> <span></span>
 			<ul id="menu">
 				<li><a href="${pageContext.request.contextPath}/MasterPageServlet">Capitoli</a></li>
@@ -27,6 +22,7 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
+				<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
@@ -52,6 +48,7 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
+				<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
@@ -65,58 +62,31 @@
 				<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 		</ul>
 	</div>
-
 		<div class="centerBar">
-			<h1>Lista Oggetti</h1> <%
- Map<String, List<Oggetto>> oggettoPerTipologia = (Map<String, List<Oggetto>>) request.getAttribute("oggetti");
- if (oggettoPerTipologia != null && !oggettoPerTipologia.isEmpty()) {
- %>
-			<div id="accordionOggetti">
+			<h1>Lista delle Mappe</h1>
+			<div class="cardContainer">
 				<%
-				int counter = 0;
-				for (Map.Entry<String, List<Oggetto>> entry : oggettoPerTipologia.entrySet()) {
-				    String tipologia = entry.getKey();
-				    List<Oggetto> listaOggetti = entry.getValue();
+				List<Mappa> listaMappe = (List<Mappa>) request.getAttribute("mappe");
+				if (listaMappe != null && !listaMappe.isEmpty()) {
+
+				    for (Mappa mappa : listaMappe) {
 				%>
-				<div class="card">
-					<div class="card-header" id="heading<%=counter%>">
-						<h2 class="mb-0">
-							<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%=counter%>" aria-expanded="true" aria-controls="collapse<%=counter%>">Tipologia: <%=tipologia%>
-						</button>
-					</h2>
-				</div>
-					<div id="collapse<%=counter%>" class="collapse" aria-labelledby="heading<%=counter%>" data-parent="#accordionOggetti">
-						<div class="card-body">
-							<div class="cardContainer">
-								<%
-								for (Oggetto oggetto : listaOggetti) {
-								%>
-								<div class="listCard">
-									<h2><%=oggetto.getNome()%></h2>
-									<div class="formContainer">
-										<form action="${pageContext.request.contextPath}/DettagliOggettoServlet" method="get"><input type="hidden" name="id" value="<%=oggetto.getId()%>">
-											<button type="submit" class="buttonMod">Visualizza Dettagli</button></form>
-								</div>
-							</div> <%
- }
- %>
-						</div>
-					</div>
+				<div class="listCard" style="--bg-image: url('<%=pageContext.getServletContext().getContextPath() + "/" + mappa.getImmagine()%>')">
+					<h2><%=mappa.getNome()%></h2>
+					<p>
+				<div class="formContainer">
+						<form action="${pageContext.request.contextPath}/DettagliSingolaMappaServlet" method="get"><input type="hidden" name="idMappa" value="<%=mappa.getId()%>">
+							<button type="submit" class="buttonMod">Dettagli Mappa</button></form>
 				</div>
 			</div> <%
- counter++;
  }
- %>
-		</div> <%
  } else {
  %>
-			<p>Nessun Oggetto trovato.</p> <%
+				<p>Nessuna mappa disponibile.</p> <%
  }
  %>
+		</div>
 	</div>
 </div>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

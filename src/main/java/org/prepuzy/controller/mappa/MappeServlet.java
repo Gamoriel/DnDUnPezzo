@@ -31,9 +31,9 @@ public class MappeServlet extends HttpServlet {
 			if(loggedUser != null) {
 				
 				if(loggedUser.getRole() == Role.MASTER) {
-					listaMappe = BusinessLogic.listaMappe();	
+					listaMappe = BusinessLogic.listaMappePadre();	
 				} else {
-					listaMappe = BusinessLogic.mostraMappeVisibilitaUtenteBase();
+					listaMappe = BusinessLogic.mappePadreVisibiliUtente();
 				}
 			} else {
 				request.getRequestDispatcher("/Login").forward(request, response);

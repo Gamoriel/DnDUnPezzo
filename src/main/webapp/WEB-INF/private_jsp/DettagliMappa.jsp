@@ -22,7 +22,7 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
-			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
+				<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
@@ -33,7 +33,7 @@
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
-			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 		</ul></div>
 </nav>
 
@@ -48,7 +48,7 @@
 				<li><a href="${pageContext.request.contextPath}/NaviServlet">Navi</a></li>
 				<li><a href="${pageContext.request.contextPath}/OggettiServlet">Oggetti</a></li>
 				<li><a href="${pageContext.request.contextPath}/NPCorGiocatoreServlet">Personaggi</a></li>
-			<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
+				<li><a href="${pageContext.request.contextPath}/TaglieServlet">Taglie</a></li>
 				<li><a href="${pageContext.request.contextPath}/ProfessioniServlet">Professioni</a></li>
 				<li><a href="${pageContext.request.contextPath}/RazzaServlet">Razze</a></li>
 				<li><a href="${pageContext.request.contextPath}/ResistenzeServlet">Resistenze</a></li>
@@ -59,7 +59,7 @@
 				<li><a href="${pageContext.request.contextPath}/MercantiServlet">Mercanti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaFruttoServlet">Abilita Frutti</a></li>
 				<li><a href="${pageContext.request.contextPath}/master/AbilitaProfessioneServlet">Abilita Professioni</a></li>
-			<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
+				<li><a href="${pageContext.request.contextPath}/master/TecnicheServlet">Tecniche</a></li>
 		</ul>
 	</div>
 		<div class="centerBar">

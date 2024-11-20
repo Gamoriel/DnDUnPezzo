@@ -1,8 +1,6 @@
 package org.prepuzy.controller.mappa;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.prepuzy.businesslogic.BusinessLogic;
 import org.prepuzy.model.Mappa;
 
-@WebServlet("/DettagliMappaServlet")
-public class DettagliMappaServlet extends HttpServlet {
+@WebServlet("/DettagliSingolaMappaServlet")
+public class DettagliSingolaMappaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,20 +38,14 @@ public class DettagliMappaServlet extends HttpServlet {
 	    request.getRequestDispatcher("/ErrorServlet").forward(request, response);
 	    return;
 	}
-	List<Mappa> mappe = mappa.getMappe();
-	mappe.add(mappa);
-	if (mappe != null && !mappe.isEmpty()) {
-	    request.setAttribute("mappe", mappe);
-	    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMappe.jsp").forward(request, response);
-	} else {
-	    request.setAttribute("mappa", mappa);
-	    request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMappa.jsp").forward(request, response);
-	}
+
+	request.setAttribute("mappa", mappa);
+	request.getRequestDispatcher("/WEB-INF/private_jsp/DettagliMappa.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	    throws ServletException, IOException {
-
+	// TODO Auto-generated method stub
 	doGet(request, response);
     }
 

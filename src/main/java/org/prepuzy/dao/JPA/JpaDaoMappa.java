@@ -135,4 +135,15 @@ public class JpaDaoMappa implements DaoMappa {
 	    em.close();
 	}
     }
+
+    @Override
+    public List<Mappa> mappePadreVisibileUtenti() {
+	EntityManager em = JpaDaoFactory.getEntityManager();
+	try {
+	    TypedQuery<Mappa> q = em.createQuery("select m from Mappa m where m.mappaPadre.id is null and m.isVisibleToAll = true", Mappa.class);
+	    return (q.getResultList());
+	} finally {
+	    em.close();
+	}
+    }
 }

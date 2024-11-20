@@ -224,6 +224,10 @@ public class BusinessLogic {
     public static List<Mappa> listaMappePadre(){
 	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().mappePadre();
     }
+    
+    public static List<Mappa> mappePadreVisibiliUtente(){
+	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().mappePadreVisibileUtenti();
+    }
 
     public static List<Mappa> mostraMappeVisibilitaUtenteBase() {
 	return DaoFactory.getInstance(DATABASE).getJpaDaoMappa().filtroSelectAll();

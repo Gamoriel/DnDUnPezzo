@@ -65,19 +65,21 @@
 		</ul>
 	</div>
 
-	<div class="centerBar">
-		<h1>Selezione Tipo Personaggi</h1>
-		<div class="cardContainer">
-			<div class="listCard" style="background-color: black">
-				<div class="formContainer">
-					<form action="${pageContext.request.contextPath}/PersonaggiServlet" method="get">
-						<button class="buttonMod" type="submit">NPC</button></form>
+		<div class="centerBar">
+			<h1>Selezione Tipo Personaggi</h1>
+			<div class="cardContainer">
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath() %>/resources/img/ezio.jpg')">
+					<div class="formContainer">
+						<form action="${pageContext.request.contextPath}/PersonaggiServlet" method="get">
+							<button class="buttonMod" type="submit">NPC</button>
+					</form>
 				</div>
 			</div>
-			<div class="listCard" style="background-color: black">
-				<div class="formContainer">
-					<form action="${pageContext.request.contextPath}/PersonaggiUtenteServlet" method="get">
-						<button class="buttonMod" type="submit">Personaggi</button></form>
+				<div class="listCard" style="--bg-image: url('<%= pageContext.getServletContext().getContextPath() %>/resources/img/default.webp')">
+					<div class="formContainer">
+						<form action="${pageContext.request.contextPath}/PersonaggiUtenteServlet" method="get">
+							<button class="buttonMod" type="submit">Personaggi</button>
+					</form>
 				</div>
 			</div>
 		</div>
